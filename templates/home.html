@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header_block %} 
+<h1> Welcome to Pathfinder (something something) </h1>
+{% if user.is_authenticated %}
+You are currently logged in as {{ user.username }}
+{% else %}
+You are not logged in
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+{% if not user.is_authenticated %}
+<p> This project was created for me to learn Django and because I want to create a tool to help my Pathfinder campaign. And also because all of the online character sheets I've found are retarded and I think I can do better </p>
+{% else %}
+	{% if games %}
+	<h3> Your current games are:</h3>
+	<ul>
+		{% for game in games %}
+			<li>{{ game.name }}</li>
+		{% endfor %}
+	</ul>
+		{% if characters %}
+		<br /><br />
+		{% endif %}
+	{% endif %}
+	{% if characters %}
+	<h3> Your characters are: </h3>
+	<ul>
+		{% for character in characters %}
+			<li>{{ character.name }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% if not games or characters %}
+	<p> you don't have any active games or characters. That's probably because I haven't created a way for you to make those yet </p>
+	{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block footer_block %}
+{% if user.is_authenticated %}
+<a href='logout.html'>Logout</a>
+{% else %}
+<a href='login.html'>Login</a> or <a href='register.html'>Register</a>
+{% endif %} 
+{% endblock %}
