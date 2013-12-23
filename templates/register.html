@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block header_block %}
+	<h2>Register, bitch.</h2>
+{% endblock %}
+{% block body_block %}
+	{% if registered %}
+		You are registered as {{ user.username }}
+	{% else %}
+		<form id='user_form' method='post' action='/register/' enctype='multipart/form-data'>
+			{% csrf_token %}
+			{{ user_form.as_p }}
+			<br />
+			{{ profile_form.as_p }}
+			<br />
+			<input type='submit' name='submit' value='register' />
+		</form>
+	{% endif %}
+{% endblock %}

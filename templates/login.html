@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+<h2>Login, bitch.</h2>
+{% endblock %}
+{% block body_block %}
+<form id='login_form' method='post' action='/login/'>
+	{% csrf_token %}
+	Username: <input type='text' name='username' value'' size'50' />
+	<br />
+	Password: <input type='password' name='password' value='' size='50' />
+	<br />
+
+	<input type='submit' value='sumbit' />
+</form>
+{% endblock %}
+
+
