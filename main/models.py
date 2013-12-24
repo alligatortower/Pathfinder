@@ -29,16 +29,16 @@ class Character(models.Model):
 		return self.name
 
 class Game(models.Model):
-	name = models.CharField(max_length=128)
-	gm = models.ForeignKey(UserProfile)
+	name = models.CharField(max_length=128,unique=True)
+	gm = models.OneToOneField(User)
 	characters = models.ManyToManyField(Character)
-	last_updated = models.DateTimeField(blank=True)
+	#last_updated = models.DateTimeField(blank=True)
 
 	def __unicode__(self):
 		return self.name
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.ForeignKey(User)
 	
 	def __unicode__(self):
 		return self.user.username

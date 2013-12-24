@@ -3,13 +3,15 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from main.models import Character, Game
-from main.forms import UserForm, UserProfileForm
+from main.forms import UserForm, UserProfileForm, CreateGameForm
+from datetime import datetime
+
 
 def home(request):
 	context = RequestContext(request)
 	
 	character_list = Character.objects.order_by('level')
-	game_list = Game.objects.order_by('last_updated')
+	game_list = Game.objects.all()
 	context_dict = {'characters':character_list,"games":game_list}
 
 	return render_to_response("home.html", context_dict, context)
@@ -68,3 +70,22 @@ def register(request):
 
 	return render_to_response(
 		'register.html',{'user_form':user_form, 'profile_form':profile_form,'registered':registered}, context)
+
+def create_game(request):
+	context = RequestContext(request)
+	if request.method == 'POST':
+		create_game_form = CreateGameForm(data=request.POST)
+		
+		if create_game_form.is_valid():
+			new_game = create_game_form.save(commit=False)
+			gm = request.user
+			new_game.gm = gm
+			#new_game.last_updated = datetime.now
+			create_game_form.save()
+			return HttpResponseRedirect('/')
+		else:
+			print create_game_form.errors
+	else:
+		create_game_form = CreateGameForm()
+	return render_to_response(
+		'create_game.html',{'create_game_form':create_game_form}, context)
