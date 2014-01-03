@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+	<h2> {{ character.name }} the {{ character.base_class_1 }} (level: {{ character.level }}) </h2>
+{% endblock %}
+{% block body_block %}
+	<h3> abilities </h3>
+	str: {{ character.ability_str }} <br />
+	dex: {{ character.ability_dex }} <br />
+	con: {{ character.ability_con }} <br />
+	wis: {{ character.ability_wis }} <br />
+	int: {{ character.ability_int }} <br />
+	cha: {{ character.ability_cha }} <br /> 
+	
+	
+{% endblock %}
+{% block footer_block %}
+	<a href="/">HOME</a>
+{% endblock %}

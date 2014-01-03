@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+<h2> Name your adventure </h2>
+{% endblock %}
+{% block body_block %}
+	<form id='create_character_form' method='POST' action='/create_character/' enctype='multipart/form-data'>
+		{% csrf_token %}
+		{{ create_character_form.as_p }}
+		<br />
+		<input type='submit' name='submit' value='create' />
+{% endblock %}

@@ -17,7 +17,7 @@ You are not logged in
 	<h3> Your current games are:</h3>
 	<ul>
 		{% for game in games %}
-			<li>{{ game.name }}</li>
+			<li><a href='/game/{{ game.name }}/'>{{ game.name }}</a></li>
 		{% endfor %}
 	</ul>
 		{% if characters %}
@@ -28,13 +28,15 @@ You are not logged in
 	<h3> Your characters are: </h3>
 	<ul>
 		{% for character in characters %}
-			<li>{{ character.name }}</li>
+			<li><a href="/character/{{ character.name }}/">{{ character.name }}</a></li>
 		{% endfor %}
 	</ul>
 	{% endif %}
 	{% if not games or characters %}
 	<p> you don't have any active games or characters. That's probably because I haven't created a way for you to make those yet </p>
 	{% endif %}
+	<a href="/create_game/">Create a new game idiot</a><br />
+	<a href="/create_character/">Create a new character, friendo</a><br />
 {% endif %}
 {% endblock %}
 

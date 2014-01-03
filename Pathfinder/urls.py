@@ -23,7 +23,10 @@ urlpatterns = patterns('',
     url(r'^register/$',views.register,name='register'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
-    url(r'^create_game/$', views.create_game, name='create_game_form'),
+    url(r'^create_game/$', views.create_game, name='create_game'),
+    url(r'^create_character/$', views.create_character, name='create_character'),
+    url(r'^game/(?P<game_url>\w+)/$', views.game, name='game'),
+    url(r'^character/(?P<character_url>\w+)/$', views.character, name='character'),
 
 
 )

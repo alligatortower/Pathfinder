@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+<h2> adventures: {{ game.name }} </h2>
+{% endblock %}
+{% block body_block %}
+	{% if characters %}
+		<ul>
+			{% for character in characters %}
+				<li> {{ character.name }} </l1>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p> There are no characters in this game, probably because you're a bad person. </p>
+	{% endif %}
+{% endblock %}
+{% block footer_block %}
+	<a href='/'>HOME</a>
+{% endblock %}

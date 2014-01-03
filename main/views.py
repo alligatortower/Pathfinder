@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from main.models import Character, Game
-from main.forms import UserForm, UserProfileForm, CreateGameForm
+from main.forms import UserForm, UserProfileForm, CreateGameForm, CreateCharacterForm
 from datetime import datetime
 
 
@@ -75,13 +75,11 @@ def create_game(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
 		create_game_form = CreateGameForm(data=request.POST)
-		
 		if create_game_form.is_valid():
 			new_game = create_game_form.save(commit=False)
-			gm = request.user
-			new_game.gm = gm
+			new_game.gm = request.user
 			#new_game.last_updated = datetime.now
-			create_game_form.save()
+			new_game.save()
 			return HttpResponseRedirect('/')
 		else:
 			print create_game_form.errors
@@ -89,3 +87,38 @@ def create_game(request):
 		create_game_form = CreateGameForm()
 	return render_to_response(
 		'create_game.html',{'create_game_form':create_game_form}, context)
+
+def game(request, game_url):
+	context = RequestContext(request)
+	## sanatize url
+	game = Game.objects.get(name=game_url)
+	character_list = game.characters.all()
+	context_dict = {'characters':character_list,'game':game}
+	
+	return render_to_response(
+		'game.html', context_dict, context)
+
+def create_character(request):
+	context = RequestContext(request)
+	if request.method == 'POST':
+		create_character_form = CreateCharacterForm(data=request.POST)
+		
+		if create_character_form.is_valid():
+			new_character = create_character_form.save(commit=False)
+			new_character.player = request.user
+			new_character.save()
+			return HttpResponseRedirect('/')
+		else:
+			print create_character_form.errors
+	else:
+		create_character_form = CreateCharacterForm()
+	return render_to_response(
+		'create_character.html',{'create_character_form':create_character_form}, context)		
+
+def character(request, character_url):
+	context = RequestContext(request)
+	character = Character.objects.get(name=character_url)
+	context_dict = {'character':character }
+	return render_to_response(
+		'character.html', context_dict, context)
+		

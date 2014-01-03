@@ -1,5 +1,5 @@
 from django import forms
-from main.models import UserProfile, Game
+from main.models import UserProfile, Game, Character
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -16,7 +16,13 @@ class UserProfileForm(forms.ModelForm):
 		fields = ()
 
 class CreateGameForm(forms.ModelForm):
-	name = forms.CharField(max_length=64)
+	name = forms.CharField(max_length=128)
 	class Meta:
 		model = Game
 		fields = ('name',)
+
+class CreateCharacterForm(forms.ModelForm):
+	
+	class Meta:
+		model = Character
+		fields = ('name', 'avatar', 'ability_str', 'ability_dex', 'ability_con', 'ability_wis', 'ability_int','ability_cha','hp','base_class_1')

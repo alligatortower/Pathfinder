@@ -8,7 +8,7 @@ class UserProfile(models.Model):
 		return self.user.username
 
 class Character(models.Model):
-	player = models.ForeignKey(UserProfile)
+	player = models.ForeignKey(User)
 	avatar = models.ImageField(upload_to='character_avatars', blank=True)
 	name = models.CharField(max_length=64)
 
@@ -30,15 +30,10 @@ class Character(models.Model):
 
 class Game(models.Model):
 	name = models.CharField(max_length=128,unique=True)
-	gm = models.OneToOneField(User)
+	gm = models.ForeignKey(User)
 	characters = models.ManyToManyField(Character)
 	#last_updated = models.DateTimeField(blank=True)
 
 	def __unicode__(self):
 		return self.name
 
-class UserProfile(models.Model):
-	user = models.ForeignKey(User)
-	
-	def __unicode__(self):
-		return self.user.username
