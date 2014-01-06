@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from main.models import Character, Game
 from main.forms import UserForm, UserProfileForm, CreateGameForm, CreateCharacterForm
 from datetime import datetime
@@ -9,11 +10,15 @@ from datetime import datetime
 
 def home(request):
 	context = RequestContext(request)
-	
-	character_list = Character.objects.order_by('level')
-	game_list = Game.objects.all()
-	context_dict = {'characters':character_list,"games":game_list}
+	game_list = Game.objects.all()[:5]
 
+	if request.user.is_authenticated():
+		character_list = Character.objects.filter(player=request.user)
+		your_game_list = Game.objects.filter(gm=request.user)	
+		context_dict = {'characters':character_list,"your games":your_game_list, "games":game_list}
+	else:
+		context_dict = {'characters':None,"your games":None,"games":game_list 
+		
 	return render_to_response("home.html", context_dict, context)
 
 def user_login(request):
@@ -114,11 +119,14 @@ def create_character(request):
 		create_character_form = CreateCharacterForm()
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)		
-
+@login_required
 def character(request, character_url):
 	context = RequestContext(request)
 	character = Character.objects.get(name=character_url)
 	context_dict = {'character':character }
 	return render_to_response(
 		'character.html', context_dict, context)
-		
+	
+@login_required
+def restricted(request):
+	return HttpResponse("You are not logged in, please log in")	

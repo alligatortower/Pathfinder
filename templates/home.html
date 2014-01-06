@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header_block %} 
-<h1> Welcome to Pathfinder (something something) </h1>
+<h1> Welcome to Pathfinder (something something) </h1><br />
 {% if user.is_authenticated %}
 You are currently logged in as {{ user.username }}
 {% else %}
@@ -14,26 +14,26 @@ You are not logged in
 <p> This project was created for me to learn Django and because I want to create a tool to help my Pathfinder campaign. And also because all of the online character sheets I've found are retarded and I think I can do better </p>
 {% else %}
 	{% if games %}
-	<h3> Your current games are:</h3>
-	<ul>
-		{% for game in games %}
-			<li><a href='/game/{{ game.name }}/'>{{ game.name }}</a></li>
-		{% endfor %}
-	</ul>
-		{% if characters %}
-		<br /><br />
-		{% endif %}
+		<h3> Your current games are:</h3>
+		<ul>
+			{% for game in games %}
+				<li><a href='/game/{{ game.name }}/'>{{ game.name }}</a></li>
+			{% endfor %}
+		</ul>
+			{% if characters %}
+			<br /><br />
+			{% endif %}
 	{% endif %}
 	{% if characters %}
-	<h3> Your characters are: </h3>
-	<ul>
-		{% for character in characters %}
-			<li><a href="/character/{{ character.name }}/">{{ character.name }}</a></li>
-		{% endfor %}
-	</ul>
+		<h3> Your characters are: </h3>
+		<ul>
+			{% for character in characters %}
+				<li><a href="/character/{{ character.name }}/">{{ character.name }}</a></li>
+			{% endfor %}
+		</ul>
 	{% endif %}
-	{% if not games or characters %}
-	<p> you don't have any active games or characters. That's probably because I haven't created a way for you to make those yet </p>
+	{% if not games and characters %}
+		<p> you don't have any active games or characters. Make some! </p>
 	{% endif %}
 	<a href="/create_game/">Create a new game idiot</a><br />
 	<a href="/create_character/">Create a new character, friendo</a><br />
