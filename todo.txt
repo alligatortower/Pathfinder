@@ -2,7 +2,6 @@
 #bugs
 
 -Characters and game names need to accept and deal with spaces
--account stuff needs to be uniform. some pages don't have home buttons etc.
 -after registering it should auto-log you on.
 
 #features
@@ -10,5 +9,4 @@
 -add characters to games
 -edit characters you own
 -tabbed character pages
--TESTS (check for 200 on all templates)
 

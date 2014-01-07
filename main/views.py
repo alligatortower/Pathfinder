@@ -48,7 +48,6 @@ def user_logout(request):
 
 def register(request):
 	context = RequestContext(request)
-	registered = False
 
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
@@ -63,7 +62,10 @@ def register(request):
 			profile.user = user
 			profile.save()
 
-			registered = True
+			
+			new_user = authenticate(username=request.POST['username'],password=request.POST['password'])
+			login(request, new_user)
+			return HttpResponseRedirect("/")			
 
 		else:
 			print user_form.errors,profile_form.errors
@@ -72,7 +74,7 @@ def register(request):
 		profile_form = UserProfileForm()
 
 	return render_to_response(
-		'register.html',{'user_form':user_form, 'profile_form':profile_form,'registered':registered}, context)
+		'register.html',{'user_form':user_form, 'profile_form':profile_form}, context)
 
 def create_game(request):
 	context = RequestContext(request)

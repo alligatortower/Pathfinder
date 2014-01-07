@@ -3,7 +3,7 @@
 	<h2>Register, bitch.</h2>
 {% endblock %}
 {% block body_block %}
-	{% if registered %}
+	{% if user.is_authenticated %}
 		You are registered as {{ user.username }}
 	{% else %}
 		<form id='user_form' method='post' action='/register/' enctype='multipart/form-data'>
