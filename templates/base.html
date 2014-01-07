@@ -47,7 +47,7 @@
 				<h4>Recently updated games:</h4>
 				<ul>
 				{% for game in general_games %}
-					<li><a href="/game/{{ game.name }}">{{ game.name }}</a></li>
+					<li><a href="/game/{{ game.slug }}/">{{ game.name }}</a></li>
 				{% endfor %}
 				</ul>
 			</div>
@@ -55,7 +55,7 @@
 				<h4>Characters created recently:</h4>
 				<ul>
 				{% for character in general_characters %}
-					<li><a href="/character/{{ character.name }}">{{ character.name }}</a></li>
+					<li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
 				{% endfor %}
 				</ul>
 			</div>

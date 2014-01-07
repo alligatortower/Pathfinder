@@ -17,7 +17,7 @@ You are not logged in
 		<h3> Your current games are:</h3>
 		<ul>
 			{% for game in my_games %}
-				<li><a href='/game/{{ game.name }}/'>{{ game.name }}</a></li>
+				<li><a href='/game/{{ game.slug }}/'>{{ game.name }}</a></li>
 			{% endfor %}
 		</ul>
 			{% if characters %}
@@ -28,7 +28,7 @@ You are not logged in
 		<h3> Your characters are: </h3>
 		<ul>
 			{% for character in characters %}
-				<li><a href="/character/{{ character.name }}/">{{ character.name }}</a></li>
+				<li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
 			{% endfor %}
 		</ul>
 	{% endif %}

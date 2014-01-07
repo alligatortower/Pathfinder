@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -11,6 +12,7 @@ class Character(models.Model):
 	player = models.ForeignKey(User)
 	avatar = models.ImageField(upload_to='character_avatars', blank=True)
 	name = models.CharField(max_length=64)
+	slug = models.SlugField(editable=False)
 
 	ability_str = models.IntegerField(default=0)
 	ability_dex = models.IntegerField(default=0)
@@ -25,14 +27,25 @@ class Character(models.Model):
 
 	base_class_1 = models.CharField(max_length=20)
 	
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(Character, self).save(*args,**kwargs)
+
 	def __unicode__(self):
 		return self.name
 
 class Game(models.Model):
 	name = models.CharField(max_length=128,unique=True)
+	slug = models.SlugField(editable=False)
 	gm = models.ForeignKey(User)
 	characters = models.ManyToManyField(Character)
 	#last_updated = models.DateTimeField(blank=True)
+	
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(Game, self).save(*args,**kwargs)
 
 	def __unicode__(self):
 		return self.name

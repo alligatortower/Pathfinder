@@ -21,6 +21,11 @@ class CreateGameForm(forms.ModelForm):
 		model = Game
 		fields = ('name',)
 
+class EditGameForm(forms.ModelForm):
+	
+	class Meta:
+		model = Game
+
 class CreateCharacterForm(forms.ModelForm):
 	
 	class Meta:

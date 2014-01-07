@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.template.defaultfilters import slugify
 from main.models import Character, Game
 from main.forms import UserForm, UserProfileForm, CreateGameForm, CreateCharacterForm
 from datetime import datetime
@@ -96,7 +97,7 @@ def create_game(request):
 def game(request, game_url):
 	context = RequestContext(request)
 	## sanatize url
-	game = Game.objects.get(name=game_url)
+	game = Game.objects.get(slug=game_url)
 	character_list = game.characters.all()
 	context_dict = {'characters':character_list,'game':game}
 	
@@ -122,7 +123,7 @@ def create_character(request):
 @login_required
 def character(request, character_url):
 	context = RequestContext(request)
-	character = Character.objects.get(name=character_url)
+	character = Character.objects.get(slug=character_url)
 	context_dict = {'character':character }
 	return render_to_response(
 		'character.html', context_dict, context)

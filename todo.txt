@@ -1,8 +1,7 @@
 
 #bugs
 
--Characters and game names need to accept and deal with spaces
--after registering it should auto-log you on.
+-footer general list needs to actually sort by recent / models need to know what recent means
 
 #features
 
