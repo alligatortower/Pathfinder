@@ -22,19 +22,41 @@
         <![endif]-->
 <div id="main">
 	<div id="header">
-        {% block header_block %}
+      		{% block header_block %}
 
-	{% endblock %}
+		{% endblock %}
 	</div>
 	<div id="content">
-	{% block body_block %}
-	{% endblock %}
+		{% block body_block %}
+		{% endblock %}
 	</div>
 	<br /> <br />
 	<div id="footer">
-	{% block footer_block %}
+		<div class="footer_account_details">
+			{% block footer_block %}
 
-	{% endblock %}
+			{% endblock %}
+		</div>
+		{% if general_games and general_characters %}
+		<div class="general_activity_feed">
+			<div class="general_game_feed">
+				<h4>Recently updated games:</h4>
+				<ul>
+				{% for game in general_games %}
+					<li><a href="/game/{{ game.name }}">{{ game.name }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="general_character_feed">
+				<h4>Characters created recently:</h4>
+				<ul>
+				{% for character in general_characters %}
+					<li><a href="/character/{{ character.name }}">{{ character.name }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		{% endif %}	
 	</div>
 </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

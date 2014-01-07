@@ -9,16 +9,14 @@ from datetime import datetime
 
 
 def home(request):
-	context = RequestContext(request)
-	game_list = Game.objects.all()[:5]
-
+	context = RequestContext(request, processors=[general_activity_feed])	
 	if request.user.is_authenticated():
 		character_list = Character.objects.filter(player=request.user)
-		your_game_list = Game.objects.filter(gm=request.user)	
-		context_dict = {'characters':character_list,"your games":your_game_list, "games":game_list}
+		my_game_list = Game.objects.filter(gm=request.user)	
+		context_dict = {'characters':character_list,"my_games":my_game_list}
 	else:
-		context_dict = {'characters':None,"your games":None,"games":game_list 
-		
+		context_dict = {'characters':None,"my_games":None}
+
 	return render_to_response("home.html", context_dict, context)
 
 def user_login(request):
@@ -126,6 +124,13 @@ def character(request, character_url):
 	context_dict = {'character':character }
 	return render_to_response(
 		'character.html', context_dict, context)
+
+def general_activity_feed(request):
+	return {
+		'general_games' : Game.objects.all()[:5],
+		'general_characters' : Character.objects.all()[:5]
+	}
+
 	
 @login_required
 def restricted(request):
