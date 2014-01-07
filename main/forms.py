@@ -22,10 +22,11 @@ class CreateGameForm(forms.ModelForm):
 		fields = ('name',)
 
 class EditGameForm(forms.ModelForm):
-	
+	characters = forms.ModelMultipleChoiceField(queryset=Character.objects.all())	
+
 	class Meta:
 		model = Game
-
+		fields = ('characters',)
 class CreateCharacterForm(forms.ModelForm):
 	
 	class Meta:

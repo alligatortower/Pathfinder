@@ -4,13 +4,23 @@
 <h2> adventures: {{ game.name }} </h2>
 {% endblock %}
 {% block body_block %}
-	{% if characters %}
+	{% if character_list %}
 		<ul>
-			{% for character in characters %}
-				<li> {{ character.name }} </l1>
+			{% for character in character_list %}
+				<li> {{ character.name }} </li>
 			{% endfor %}
 		</ul>
-	{% else %}
+	{% elif not game.gm == user %}
 		<p> There are no characters in this game, probably because you're a bad person. </p>
 	{% endif %}
+	{% if game.gm == user and edit_game_form %}
+		<h4> Add characters to this game </h4>
+		<form id='edit_game_form' method='post' action='/game/{{ game.slug}}/' enctype='multiepart/form-data'>
+			{% csrf_token %}
+			{{ edit_game_form }}
+			<br />
+			<input type='submit' name='add' />
+		</form>
+	{% endif %}
+	
 {% endblock %}
