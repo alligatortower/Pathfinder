@@ -8,53 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'UserProfile'
-        db.create_table(u'main_userprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-        ))
-        db.send_create_signal(u'main', ['UserProfile'])
-
-        # Adding model 'Game'
-        db.create_table(u'main_game', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('gm', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-        ))
-        db.send_create_signal(u'main', ['Game'])
-
-        # Adding model 'Character'
-        db.create_table(u'main_character', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('player', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('avatar', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('current_game', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['main.Game'], null=True, blank=True)),
-            ('ability_str', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('ability_dex', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('ability_con', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('ability_wis', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('ability_int', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('ability_cha', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('level', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('hp', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('current_hp', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('base_class_1', self.gf('django.db.models.fields.CharField')(max_length=20)),
-        ))
-        db.send_create_signal(u'main', ['Character'])
+        # Adding field 'Character.created'
+        db.add_column(u'main_character', 'created',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, null=True, blank=True),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'UserProfile'
-        db.delete_table(u'main_userprofile')
-
-        # Deleting model 'Game'
-        db.delete_table(u'main_game')
-
-        # Deleting model 'Character'
-        db.delete_table(u'main_character')
+        # Deleting field 'Character.created'
+        db.delete_column(u'main_character', 'created')
 
 
     models = {
@@ -104,10 +66,12 @@ class Migration(SchemaMigration):
             'ability_wis': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'avatar': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
             'base_class_1': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
             'current_game': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['main.Game']", 'null': 'True', 'blank': 'True'}),
             'current_hp': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             'hp': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'level': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'player': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
@@ -117,6 +81,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Game'},
             'gm': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'})
         },

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+{% if this_player == user %}
+	<h2> This is an overview of your stuffs </h2>
+{% else %}
+	<h2> This is an overview of {{ this_player.username }}'s stuffs </h2>
+{% endif %}
+{% endblock %}
+
+
+{% block body_block %}
+        {% if my_games %}
+                <h3> Your current games are:</h3>
+                <ul>
+                        {% for game in my_games %}
+                                <li><a href='/game/{{ game.slug }}/'>{{ game.name }}</a></li>
+                        {% endfor %}
+                </ul>
+                        {% if characters %}
+                        <br />
+                        {% endif %}
+        {% endif %}
+        {% if my_characters %}
+                <h3> Your characters are: </h3>
+                <ul>
+                        {% for character in my_characters %}
+                                <li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
+                        {% endfor %}
+                </ul>
+        {% endif %}
+        {% if not my_games and not my_characters %}
+                <p> You are logged in but you don't have any active games or characters. Make some! </p>
+        {% endif %}
+{% endblock %}

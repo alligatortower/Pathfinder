@@ -3,7 +3,7 @@
 
 
 
-#main {
+body {
 	background-color: #FCEAC2;
 	padding: 40px;
 }
@@ -27,18 +27,24 @@
 	display:inline;
 }
 
-#edit_game_form {
+.edit_game_form {
 	display:inline;
 }
 
 #footer {
-	overflow:auto;
 }
 
 .footer_account_details {
-	float:left;
+	display:inline-block;
 }
+.footer_create_links {
+	margin-left:200px;
+	padding:0px;
+	display:inline-block;
+	vertical-align: top;
+	 
 
+}
 .general_activity_feed {
 	background-color: #F3C786;
 	float:right;

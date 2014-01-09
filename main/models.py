@@ -4,6 +4,12 @@ from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
+	class Meta:
+		model = User
+	def save(self,*args,**kwargs):
+		if not self.id:
+			self.slug = slugify(self.username)
+		super(UserProfile, self).save(*args,**kwargs)
 	
 	def __unicode__(self):
 		return self.user.username
@@ -13,7 +19,7 @@ class Game(models.Model):
 	name = models.CharField(max_length=128,unique=True)
 	slug = models.SlugField(editable=False)
 	gm = models.ForeignKey(User)
-	#last_updated = models.DateTimeField(blank=True)
+	last_updated = models.DateTimeField(auto_now=True,null=True)
 	
 	def save(self, *args, **kwargs):
 		if not self.id:
@@ -28,7 +34,9 @@ class Character(models.Model):
 	avatar = models.ImageField(upload_to='character_avatars', blank=True)
 	name = models.CharField(max_length=64)
 	slug = models.SlugField(editable=False)
-	current_game = models.ForeignKey(Game,blank=True,null=True)	
+	current_game = models.ForeignKey(Game,blank=True,null=True)
+	created = models.DateTimeField(auto_now_add=True,null=True)	
+	last_updated = models.DateTimeField(auto_now=True,null=True)
 
 	ability_str = models.IntegerField(default=0)
 	ability_dex = models.IntegerField(default=0)

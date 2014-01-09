@@ -41,29 +41,22 @@
 			 | <a href="/">Home</a>
 			<br />
 			{% if user.is_authenticated %}
-				You are currently logged in as {{ user.username }}
+				You are currently logged in as <a href="/player/{{ user.slug}}/">{{ user.username }}</a>
 			{% else %}
 				You are not logged in
 			{% endif %}
 	
 		</div>
+		{% if user.is_authenticated %}
+		<span class="footer_create_links">
+			<p>Create: <a href="/create_game/">Game</a> | <a href="/create_character/">Character</a></p>
+		</span>
+		{% endif %}
 		{% if general_games or general_characters %}
 		<div class="general_activity_feed">
 			<div class="general_game_feed">
-				<h4>Recently updated games:</h4>
-				<ul>
-				{% for game in general_games %}
-					<li><a href="/game/{{ game.slug }}/">{{ game.name }}</a></li>
-				{% endfor %}
-				</ul>
 			</div>
 			<div class="general_character_feed">
-				<h4>Characters created recently:</h4>
-				<ul>
-				{% for character in general_characters %}
-					<li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
-				{% endfor %}
-				</ul>
 			</div>
 		</div>
 		{% endif %}	

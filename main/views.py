@@ -11,13 +11,9 @@ from datetime import datetime
 
 
 def home(request):
-	context = RequestContext(request, processors=[general_activity_feed])	
-	if request.user.is_authenticated():
-		character_list = Character.objects.filter(player=request.user)
-		my_game_list = Game.objects.filter(gm=request.user)	
-		context_dict = {'characters':character_list,"my_games":my_game_list}
-	else:
-		context_dict = {'characters':None,"my_games":None}
+	context = RequestContext(request)	
+	context_dict=	{'general_games' : Game.objects.all().order_by("-last_updated")[:5],
+			'general_characters' : Character.objects.all().order_by("-created")[:5]}
 
 	return render_to_response("home.html", context_dict, context)
 
@@ -78,6 +74,20 @@ def register(request):
 	return render_to_response(
 		'register.html',{'user_form':user_form, 'profile_form':profile_form}, context)
 
+def player(request,player_url):
+	context = RequestContext(request)
+	
+	my_games = Game.objects.filter(gm=request.user)
+	my_characters = Character.objects.filter(player=request.user)
+	this_player = User.objects.get(slug=player_url)
+
+	
+	context_dict = {"my_games":my_games,"my_characters":my_charactersi,"this_player":this_player}	
+	
+	return render_to_response(
+		'player.html', context_dict, context)
+
+@login_required
 def create_game(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
@@ -112,12 +122,14 @@ def game(request, game_url):
 			character_to_add = cleaned_form_data['character_to_add']
 			character_to_add.current_game = game
 			character_to_add.save()
+			game.save() #to update last_updated
 			
 	character_list = Character.objects.filter(current_game=game)
 	context_dict.update({'character_list':character_list})
 	return render_to_response(
 		'game.html', context_dict, context)
 
+@login_required
 def create_character(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
@@ -156,8 +168,6 @@ def character(request, character_url):
 #include for the footer box if you want it in that view
 def general_activity_feed(request):
 	return {
-		'general_games' : Game.objects.all()[:5],
-		'general_characters' : Character.objects.all()[:5]
 	}
 
 	
