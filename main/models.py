@@ -8,11 +8,27 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
+
+class Game(models.Model):
+	name = models.CharField(max_length=128,unique=True)
+	slug = models.SlugField(editable=False)
+	gm = models.ForeignKey(User)
+	#last_updated = models.DateTimeField(blank=True)
+	
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(Game, self).save(*args,**kwargs)
+
+	def __unicode__(self):
+		return self.name
+
 class Character(models.Model):
 	player = models.ForeignKey(User)
 	avatar = models.ImageField(upload_to='character_avatars', blank=True)
 	name = models.CharField(max_length=64)
 	slug = models.SlugField(editable=False)
+	current_game = models.ForeignKey(Game,blank=True,null=True)	
 
 	ability_str = models.IntegerField(default=0)
 	ability_dex = models.IntegerField(default=0)
@@ -34,19 +50,3 @@ class Character(models.Model):
 
 	def __unicode__(self):
 		return self.name
-
-class Game(models.Model):
-	name = models.CharField(max_length=128,unique=True)
-	slug = models.SlugField(editable=False)
-	gm = models.ForeignKey(User)
-	characters = models.ManyToManyField(Character)
-	#last_updated = models.DateTimeField(blank=True)
-	
-	def save(self, *args, **kwargs):
-		if not self.id:
-			self.slug = slugify(self.name)
-		super(Game, self).save(*args,**kwargs)
-
-	def __unicode__(self):
-		return self.name
-

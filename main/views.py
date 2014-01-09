@@ -1,3 +1,4 @@
+import pdb
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -98,17 +99,24 @@ def game(request, game_url):
 	context = RequestContext(request)
 	game = Game.objects.get(slug=game_url)
 	context_dict = {'game':game}
-	if game.gm == request.user:
-		context_dict.update({'edit_game_form':EditGameForm(instance=game)})
+
+	#if user is gm let him edit the game
+	if game.gm == request.user: 
+		context_dict.update({'edit_game_form':EditGameForm()})
 	if request.method == 'POST': 
-		edited_game_form = EditGameForm(data=request.POST, instance=game)
+		edited_game_form = EditGameForm(data=request.POST)
 		
 		if edited_game_form.is_valid():
-			edited_game = edited_game_form.save()
-	character_list = game.characters.all()
+			cleaned_form_data = edited_game_form.cleaned_data
+			character_to_add = Character.objects.get(name=cleaned_form_data['character_to_add'])
+			character_to_add.current_game = game
+			character_to_add.save()
+	
+	character_list = Character.objects.filter(current_game=game)
 	context_dict.update({'character_list':character_list})
 	return render_to_response(
 		'game.html', context_dict, context)
+
 def create_character(request):
 	context = RequestContext(request)
 	if request.method == 'POST':

@@ -1,0 +1,5 @@
+Forms:
+	-what is the reasoning behind making making things different forms. Obviously two forms dealing with two separate things on two different views should be separated. But what about forms on the same page dealing with similar things? UGH I hate this question now that I've written it.
+
+models:
+	defining a model that relates to another model gives error unless it comes after that model has been defined. That makes total sense but just makes me feel like it's messy. This isn't a question I'm just writing it here to feel better about it I don't know get off my back

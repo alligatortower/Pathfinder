@@ -1,6 +1,7 @@
 from django import forms
-from main.models import UserProfile, Game, Character
+from django.db.models import Q
 from django.contrib.auth.models import User
+from main.models import UserProfile, Game, Character
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
@@ -21,12 +22,13 @@ class CreateGameForm(forms.ModelForm):
 		model = Game
 		fields = ('name',)
 
-class EditGameForm(forms.ModelForm):
-	characters = forms.ModelMultipleChoiceField(queryset=Character.objects.all())	
+class EditGameForm(forms.Form):
+	character_to_add = forms.ModelChoiceField(queryset = Character.objects.filter(current_game=None))
+	
 
 	class Meta:
-		model = Game
 		fields = ('characters',)
+
 class CreateCharacterForm(forms.ModelForm):
 	
 	class Meta:
