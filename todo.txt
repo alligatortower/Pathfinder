@@ -2,10 +2,15 @@
 #bugs
 
 -footer general list needs to actually sort by recent / models need to know what recent means
+-on refresh pages (game maybe others) ask if I want to resubmit data
 
 #features
 
--add characters to games
+-remove characters from games
+-characters names link to the game they're in and vise versa
 -edit characters you own
--tabbed character pages
+-tabbed, ajaxy character pages
+-make view for players (games they GM, characters they own)
+-add avatars for characters
+-add images for games
 

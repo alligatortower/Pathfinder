@@ -8,7 +8,6 @@
 	padding: 40px;
 }
 #main h1 {
-	display:inline;
 }
 
 #header {
@@ -19,7 +18,17 @@
 
 #content {
 	background-color: #BAB284;
-	padding-left: 20px;
+	padding: 8px 20px;
+}
+
+/* Input buttons */
+
+#remove_player {
+	display:inline;
+}
+
+#edit_game_form {
+	display:inline;
 }
 
 #footer {
@@ -33,6 +42,7 @@
 .general_activity_feed {
 	background-color: #F3C786;
 	float:right;
+	padding: 0px 8px;
 }
 
 

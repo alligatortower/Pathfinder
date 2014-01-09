@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^create_character/$', views.create_character, name='create_character'),
     url(r'^game/(?P<game_url>[-\w]+)/$', views.game, name='game'),
     url(r'^character/(?P<character_url>[-\w]+)/$', views.character, name='character'),
-
+    url(r'^game/(?P<game_url>[-\w]+)/remove/(?P<character_url>[-\w]+)/$', views.remove_character, name='remove_character'),
 
 )
 

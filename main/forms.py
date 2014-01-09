@@ -25,6 +25,10 @@ class CreateGameForm(forms.ModelForm):
 class EditGameForm(forms.Form):
 	character_to_add = forms.ModelChoiceField(queryset = Character.objects.filter(current_game=None))
 	
+	def clean_chracter_to_add(self):
+		character_name = self.cleaned_data['character_to_add']
+		character = Character.objects.get(name=character_name)
+		return character
 
 	class Meta:
 		fields = ('characters',)

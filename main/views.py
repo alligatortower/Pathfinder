@@ -103,15 +103,16 @@ def game(request, game_url):
 	#if user is gm let him edit the game
 	if game.gm == request.user: 
 		context_dict.update({'edit_game_form':EditGameForm()})
+	
+	#figure out what was posted and do that
 	if request.method == 'POST': 
 		edited_game_form = EditGameForm(data=request.POST)
-		
 		if edited_game_form.is_valid():
 			cleaned_form_data = edited_game_form.cleaned_data
-			character_to_add = Character.objects.get(name=cleaned_form_data['character_to_add'])
+			character_to_add = cleaned_form_data['character_to_add']
 			character_to_add.current_game = game
 			character_to_add.save()
-	
+			
 	character_list = Character.objects.filter(current_game=game)
 	context_dict.update({'character_list':character_list})
 	return render_to_response(
@@ -132,7 +133,16 @@ def create_character(request):
 	else:
 		create_character_form = CreateCharacterForm()
 	return render_to_response(
-		'create_character.html',{'create_character_form':create_character_form}, context)		
+		'create_character.html',{'create_character_form':create_character_form}, context)
+
+def remove_character(request, game_url, character_url):
+	character_to_remove = Character.objects.get(slug=character_url)
+	character_to_remove.current_game = None
+	character_to_remove.save()
+
+	return_url = "/game/" + game_url + '/'
+	return HttpResponseRedirect(return_url)
+		
 @login_required
 def character(request, character_url):
 	context = RequestContext(request)
@@ -141,6 +151,9 @@ def character(request, character_url):
 	return render_to_response(
 		'character.html', context_dict, context)
 
+
+
+#include for the footer box if you want it in that view
 def general_activity_feed(request):
 	return {
 		'general_games' : Game.objects.all()[:5],

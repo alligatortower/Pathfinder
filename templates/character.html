@@ -11,6 +11,15 @@
 	wis: {{ character.ability_wis }} <br />
 	int: {{ character.ability_int }} <br />
 	cha: {{ character.ability_cha }} <br /> 
-	
-	
+		
+	{% if character.player == user %}
+		<p> {{ character.name }} is a character you control </p>
+	{% else %}
+		<p> {{ character.name }} is controlled by {{ character.player }} </p>
+	{% endif %}
+	{% if character.current_game %}
+		<p> Currently in game <a href="/game/{{ character.current_game.slug }}/">{{ character.current_game.name }}</a></p>
+	{% else %}
+		<p> Not currently on an adventure </p>
+	{% endif %}
 {% endblock %}

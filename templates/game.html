@@ -4,14 +4,28 @@
 <h2> adventures: {{ game.name }} </h2>
 {% endblock %}
 {% block body_block %}
+	{% if game.gm == user %}
+	<p> You are the GM of this game </p>
+	{% else %}
+	<p> The user <strong>{{ game.gm }}</strong> is the GM for this game </p>
+	{% endif %}
 	{% if character_list %}
+		<h4> The characters in this game are: </h4>
 		<ul>
 			{% for character in character_list %}
-				<li> {{ character.name }} </li>
+				<li> <a href="/character/{{ character.slug }}/">{{ character.name }}</a> 
+					{% if game.gm == user %}
+					| 
+					<form id="remove_player" method="post" action='/game/{{ game.slug }}/remove/{{ character.slug }}/' enctype='multiepart/form-data'>
+					{% csrf_token %}
+					<input type='submit' name='remove' value="remove" />
+					</form> 
+					{% endif %}
+				</li>
 			{% endfor %}
 		</ul>
 	{% elif not game.gm == user %}
-		<p> There are no characters in this game, probably because you're a bad person. </p>
+		<p> There are no characters in this game </p>
 	{% endif %}
 	{% if game.gm == user and edit_game_form %}
 		<h4> Add characters to this game </h4>
@@ -19,7 +33,7 @@
 			{% csrf_token %}
 			{{ edit_game_form }}
 			<br />
-			<input type='submit' name='add' />
+			<input type='submit' name='add' value="add" />
 		</form>
 	{% endif %}
 	
