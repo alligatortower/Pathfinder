@@ -7,7 +7,7 @@
 	{% if game.gm == user %}
 	<p> You are the GM of this game </p>
 	{% else %}
-	<p> The user <strong>{{ game.gm }}</strong> is the GM for this game </p>
+	<p> The user <a href="/player/{{ game.gm }}/"><strong>{{ game.gm }}</strong></a> is the GM for this game </p>
 	{% endif %}
 	{% if character_list %}
 		<h4> The characters in this game are: </h4>

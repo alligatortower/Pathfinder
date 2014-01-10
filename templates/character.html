@@ -15,7 +15,7 @@
 	{% if character.player == user %}
 		<p> {{ character.name }} is a character you control </p>
 	{% else %}
-		<p> {{ character.name }} is controlled by {{ character.player }} </p>
+		<p> {{ character.name }} is controlled by <a href="/player/{{ character.player }}/">{{ character.player }}</a> </p>
 	{% endif %}
 	{% if character.current_game %}
 		<p> Currently in game <a href="/game/{{ character.current_game.slug }}/">{{ character.current_game.name }}</a></p>

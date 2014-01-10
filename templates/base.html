@@ -41,7 +41,7 @@
 			 | <a href="/">Home</a>
 			<br />
 			{% if user.is_authenticated %}
-				You are currently logged in as <a href="/player/{{ user.slug}}/">{{ user.username }}</a>
+				You are currently logged in as <a href="/player/{{ user.username}}/">{{ user.username }}</a>
 			{% else %}
 				You are not logged in
 			{% endif %}

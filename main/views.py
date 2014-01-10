@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
-from main.models import Character, Game
+from main.models import Character, Game, UserProfile, User
 from main.forms import UserForm, UserProfileForm, CreateGameForm, CreateCharacterForm, EditGameForm
 from datetime import datetime
 
@@ -77,12 +77,11 @@ def register(request):
 def player(request,player_url):
 	context = RequestContext(request)
 	
-	my_games = Game.objects.filter(gm=request.user)
-	my_characters = Character.objects.filter(player=request.user)
-	this_player = User.objects.get(slug=player_url)
-
+	this_player = User.objects.get(username=player_url)
+	player_games = Game.objects.filter(gm=this_player)
+	player_characters = Character.objects.filter(player=this_player)
 	
-	context_dict = {"my_games":my_games,"my_characters":my_charactersi,"this_player":this_player}	
+	context_dict = {"player_games":player_games, "player_characters":player_characters, "this_player":this_player}	
 	
 	return render_to_response(
 		'player.html', context_dict, context)

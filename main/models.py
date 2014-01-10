@@ -4,12 +4,6 @@ from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	class Meta:
-		model = User
-	def save(self,*args,**kwargs):
-		if not self.id:
-			self.slug = slugify(self.username)
-		super(UserProfile, self).save(*args,**kwargs)
 	
 	def __unicode__(self):
 		return self.user.username
