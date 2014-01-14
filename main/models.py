@@ -39,6 +39,11 @@ class Character(models.Model):
 	ability_int = models.IntegerField(default=0)
 	ability_cha = models.IntegerField(default=0)
 
+	base_attack_bonus = models.IntegerField(default=0)
+	ac = models.IntegerField(default=0)
+	
+	
+
 	level = models.IntegerField(default=1)
 	hp = models.IntegerField(default=1)
 	current_hp = models.IntegerField(default=1)

@@ -4,22 +4,36 @@
 	<h2> {{ character.name }} the {{ character.base_class_1 }} (level: {{ character.level }}) </h2>
 {% endblock %}
 {% block body_block %}
-	<h3> abilities </h3>
-	str: {{ character.ability_str }} <br />
-	dex: {{ character.ability_dex }} <br />
-	con: {{ character.ability_con }} <br />
-	wis: {{ character.ability_wis }} <br />
-	int: {{ character.ability_int }} <br />
-	cha: {{ character.ability_cha }} <br /> 
-		
-	{% if character.player == user %}
-		<p> {{ character.name }} is a character you control </p>
-	{% else %}
-		<p> {{ character.name }} is controlled by <a href="/player/{{ character.player }}/">{{ character.player }}</a> </p>
-	{% endif %}
-	{% if character.current_game %}
-		<p> Currently in game <a href="/game/{{ character.current_game.slug }}/">{{ character.current_game.name }}</a></p>
-	{% else %}
-		<p> Not currently on an adventure </p>
-	{% endif %}
+	<div id="character_stats">
+		<div id="character_ability_block">
+			<h3> abilities </h3>
+			str: {{ character.ability_str }} <br />
+			dex: {{ character.ability_dex }} <br />
+			con: {{ character.ability_con }} <br />
+			wis: {{ character.ability_wis }} <br />
+			int: {{ character.ability_int }} <br />
+			cha: {{ character.ability_cha }} <br /> 
+		</div>		
+		<div id="character_combatstats">
+			<h3> Combat Stats </h3>
+			Base Attack: {{ character.base_attack_bonus }} <br />
+			AC: {{ character.ac }}
+		</div>
+	</div>
+	<ul id="character_nav">
+		<li><a href="#character_ability_block">Abilities</a></li>
+		<li><a href="#character_combatstats">Combat</a><li>
+	</ul>
+	<div class="character_footer">
+		{% if character.player == user %}
+			<p> {{ character.name }} is a character you control </p>
+		{% else %}
+			<p> {{ character.name }} is controlled by <a href="/player/{{ character.player }}/">{{ character.player }}</a> </p>
+		{% endif %}
+		{% if character.current_game %}
+			<p> Currently in game <a href="/game/{{ character.current_game.slug }}/">{{ character.current_game.name }}</a></p>
+		{% else %}
+			<p> Not currently on an adventure </p>
+		{% endif %}
+	</div>
 {% endblock %}
