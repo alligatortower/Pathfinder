@@ -1,15 +1,12 @@
 {% extends 'character.html' %}
 	{% block ability_block %}
+		<script type="text/javascript"> var slug = "{{ character.slug }}"; </script>
+		<script type="text/javascript" src="/media/edit_character.js"></script>
 		<form id='edit_character_form' method='POST' enctype='multipart/form-data'>
-                {% csrf_token %}
-                {{ edit_character_form.ability_str }}<br />
-                {{ edit_character_form.ability_dex }}<br />
-                {{ edit_character_form.ability_con }}<br />
-                {{ edit_character_form.ability_wis }}<br />
-                {{ edit_character_form.ability_int }}<br />
-                {{ edit_character_form.ability_cha }}<br />
-                <br />
-                <input type='submit' name='submit' value='save' />
+			{% csrf_token %}
+			{{ EditCharacter_Abilities_Form.as_p }}<br />
+			<br />
+			<input type='submit' name='submit' value='save' />
 		</form>
 		<div id='edit_character_form_response'>
 		</div>

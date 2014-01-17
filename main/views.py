@@ -1,12 +1,13 @@
 import pdb
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.template.defaultfilters import slugify
 from main.models import Character, Game, UserProfile, User
-from main.forms import UserForm, UserProfileForm, CreateGameForm, CreateCharacterForm, EditGameForm
+from main.forms import *
 from datetime import datetime
 
 
@@ -146,17 +147,18 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
-def edit_character(request):
-	if request.is_ajax():
-		edit_character_form = CreateCharacterForm(data=request.POST)
+def edit_character(request, character_url):
+	if request.is_ajax() and request.method == 'POST':
+		this_character = get_object_or_404(Character, slug=character_url)
+		edit_character_form = EditCharacter_Abilities_Form(request.POST, instance = this_character)
 		if edit_character_form.is_valid():
 			edit_character_form.save()
-			return HttpResponse("the form saved")
+			return HttpResponse('success')
 		else:
 			print edit_character_form.errors
+			return HttpResponse("badSumbit")
 	else:
-		return HttpResponse("What are you doing how did you get here")
-
+		return HttpResponse(json.dumps(response), content_type="application/json")
 
 def remove_character(request, game_url, character_url):
 	character_to_remove = Character.objects.get(slug=character_url)
@@ -167,18 +169,31 @@ def remove_character(request, game_url, character_url):
 	return HttpResponseRedirect(return_url)
 		
 @login_required
+@ensure_csrf_cookie
 def character(request, character_url):
-	context = RequestContext(request)
-	character = Character.objects.get(slug=character_url)
-		
+    character = get_object_or_404(Character, slug=character_url)
+    data = {'character':character }
 
-	context_dict = {'character':character }
-	if request.user == character.player:
-		edit_character_form = CreateCharacterForm(instance=character)
-		context_dict.update({'edit_character_form':edit_character_form})
-		return render_to_response('edit_character.html', context_dict, context)
-	else:
-		return render_to_response('character.html', context_dict, context)
+    if request.user == character.player:
+        template_name = 'edit_character.html'
+        data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
+	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+    else:
+        template_name = 'character.html'
+    return render(request, template_name, data)
+
+
+#def character(request, character_url):
+#	context = RequestContext(request)
+#	character = Character.objects.get(slug=character_url)
+#	context_dict = {'character':character }
+#
+#	if request.user == character.player:
+#		edit_character_form = CreateCharacterForm(instance=character)
+#		context_dict.update({'edit_character_form':edit_character_form})
+#		return render_to_response('edit_character.html', context_dict, context)
+#	else:
+#		return render_to_response('character.html', context_dict, context)
 
 
 

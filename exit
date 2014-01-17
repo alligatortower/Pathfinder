@@ -1,0 +1,107 @@
+commit 6731fcbcb56eedeea4519486a2e85c1129adf9c3
+Author: alligatortower <mrweed@gmail.com>
+Date:   Thu Jan 16 19:31:24 2014 -0500
+
+    trying to ajax-edit characters you own, NOT WORKING
+
+commit 6ed58dd3299897ec4fadd893fbeb9b9daeb1c21d
+Author: alligatortower <mrweed@gmail.com>
+Date:   Tue Jan 14 17:09:47 2014 -0500
+
+    added jquery and VERY EARLY character page tabbing
+
+commit cf6415f11729ec42887e466a558cd78b7f45546b
+Author: alligatortower <mrweed@gmail.com>
+Date:   Thu Jan 9 20:22:28 2014 -0500
+
+    [player view]WHY IS IT A REQUIREMENT THAT SPACES FOLLOW COMMAS WHAT. THE. FUCK I HATE PYTHON
+
+commit c2c9138761e3b74edc201666cda5b15e14965d1f
+Author: alligatortower <mrweed@gmail.com>
+Date:   Thu Jan 9 09:36:30 2014 -0500
+
+    trying to add player view, not working, giving up and goin to sleep
+
+commit aa992d00637b6608731b38b2781e1dd22e1008a9
+Author: alligatortower <mrweed@gmail.com>
+Date:   Thu Jan 9 05:25:10 2014 -0500
+
+    players can now be removed from games by the GM + minor styling improvements
+
+commit 4230f42639f00183e6fbc894c62a60216838f5a8
+Author: alligatortower <mrweed@gmail.com>
+Date:   Wed Jan 8 22:18:04 2014 -0500
+
+    adding players to games works for real! super simple. characters are no longer going to be able to join more than one game at a time.
+
+commit f151cd63f0518ebe5c6d6097dcccfed6fd6475d1
+Author: alligatortower <mrweed@gmail.com>
+Date:   Tue Jan 7 13:02:01 2014 -0500
+
+    super basic, buggy version of adding characters to games
+
+commit 6f293aeae6b794a253412cd91d4b499e948e87e5
+Author: alligatortower <mrweed@gmail.com>
+Date:   Tue Jan 7 07:29:09 2014 -0500
+
+    Urls properly slug. Changed DB to mysql
+
+commit 737464e9a75a80de982385a375100b0c6a7602d2
+Author: alligatortower <mrweed@gmail.com>
+Date:   Tue Jan 7 02:20:17 2014 -0500
+
+    auto-login on register, sane/consistent footer links
+
+commit 2fd8217820db0f3990a246f43d223ab4d6ca8eed
+Author: alligatortower <mrweed@gmail.com>
+Date:   Mon Jan 6 23:07:30 2014 -0500
+
+    I think I deleted all the garbage files?
+
+commit 1bb5e37fe1fdfce03bdc3bd0c8ef7e3a9b6a87a0
+Author: alligatortower <mrweed@gmail.com>
+Date:   Mon Jan 6 22:55:24 2014 -0500
+
+    added basic 200 test and beginnings of global games/characters to footer
+
+commit 317031e60f45a572e586dd6b7316c1afb73e3c8e
+Author: alligatortower <mrweed@gmail.com>
+Date:   Mon Jan 6 15:31:07 2014 -0500
+
+    Added basic CSS and poked some other stuff
+
+commit 4662d1e83e5d743e6724a4bf6458b1dc865828a9
+Author: alligatortower <mrweed@gmail.com>
+Date:   Fri Jan 3 13:05:24 2014 -0500
+
+    Added player page, create player, other minor tweaks
+
+commit f40ca9e796a4e3b6fd28cdcc505e3d7648c733db
+Author: alligatortower <mrweed@gmail.com>
+Date:   Tue Dec 24 11:14:21 2013 -0500
+
+    adding create game logic, commit so ben can help
+
+commit f3ba5f35a7fa7a2c73bc8953d3502cd4d5e49e4d
+Author: alligatortower <mrweed@gmail.com>
+Date:   Mon Dec 23 18:27:53 2013 -0500
+
+    added user registering, login, logout
+
+commit bd78b3937fb5c52697b457929a43e3809420d979
+Author: alligatortower <mrweed@gmail.com>
+Date:   Sun Dec 22 06:07:21 2013 -0500
+
+    Added basic models, basic view, url mapping, updated settings.py and got homepage to render correctly
+
+commit c33aebe468c75d991bdccbec2cc2d99ed8fe6d92
+Author: alligatortower <mrweed@gmail.com>
+Date:   Sun Dec 22 02:15:31 2013 -0500
+
+    created main app
+
+commit ced63e8aa8fa0a34424d4fa9d741bdeb4babf13c
+Author: alligatortower <mrweed@gmail.com>
+Date:   Sun Dec 22 01:27:13 2013 -0500
+
+    initial commit

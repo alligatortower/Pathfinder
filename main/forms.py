@@ -38,3 +38,15 @@ class CreateCharacterForm(forms.ModelForm):
 	class Meta:
 		model = Character
 		fields = ('name', 'avatar', 'ability_str', 'ability_dex', 'ability_con', 'ability_wis', 'ability_int','ability_cha','hp','base_class_1')
+
+class EditCharacter_Abilities_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ('ability_str', 'ability_dex', 'ability_con', 'ability_wis', 'ability_int','ability_cha')
+
+class EditCharacter_Combatstats_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ('hp','base_attack_bonus','ac')
