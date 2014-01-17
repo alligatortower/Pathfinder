@@ -146,6 +146,18 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
+def edit_character(request):
+	if request.is_ajax():
+		edit_character_form = CreateCharacterForm(data=request.POST)
+		if edit_character_form.is_valid():
+			edit_character_form.save()
+			return HttpResponse("the form saved")
+		else:
+			print edit_character_form.errors
+	else:
+		return HttpResponse("What are you doing how did you get here")
+
+
 def remove_character(request, game_url, character_url):
 	character_to_remove = Character.objects.get(slug=character_url)
 	character_to_remove.current_game = None
@@ -158,9 +170,15 @@ def remove_character(request, game_url, character_url):
 def character(request, character_url):
 	context = RequestContext(request)
 	character = Character.objects.get(slug=character_url)
+		
+
 	context_dict = {'character':character }
-	return render_to_response(
-		'character.html', context_dict, context)
+	if request.user == character.player:
+		edit_character_form = CreateCharacterForm(instance=character)
+		context_dict.update({'edit_character_form':edit_character_form})
+		return render_to_response('edit_character.html', context_dict, context)
+	else:
+		return render_to_response('character.html', context_dict, context)
 
 
 

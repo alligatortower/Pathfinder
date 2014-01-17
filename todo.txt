@@ -6,10 +6,18 @@
 
 #features
 
+-better tabs
+-completed character information (at least 100% of info on default pathfinder character sheet)
 -edit characters you own
--tabbed, ajaxy character pages
+-ajaxy character pages
 -add avatars for characters
 -add images for games
+
+#refactor (in the long distant future of maybe never)
+
+-abstract out to class based views
+-specify custom user model
+
 
 #consider
 

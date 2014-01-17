@@ -1,8 +1,8 @@
 
 $(document).ready(function() {
 
+	// Tabs on character page
 	$('#character_stats div:not(:first)').hide();
-	
 	$('#character_nav li').click(function(e) {
 		$('#character_stats div').hide();
 		$('#character_nav .current').removeClass("current");
@@ -13,6 +13,21 @@ $(document).ready(function() {
 		e.preventDefault();
 	}).eq(0).addClass('current');
  
-//	alert($('#character_stats').length);
 });
 
+$(document).ready(function() {
+	// POSTing character edits
+	var edit_character_form = $('#edit_character_form');
+	edit_character_form.submit(function () {
+		$.ajax({
+			type: 'POST',
+			url: '/character/edit/',
+			data: 'title=ajax call',
+			datatype: 'json',
+		});
+		return false;
+
+	});
+});
+
+//	alert($('#character_stats').length);
