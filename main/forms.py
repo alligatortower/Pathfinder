@@ -49,4 +49,4 @@ class EditCharacter_Combatstats_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
-		fields = ('hp','base_attack_bonus','ac')
+		fields = ('hp','bab','ac')

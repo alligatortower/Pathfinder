@@ -3,13 +3,15 @@
 
 -on refresh, pages (game maybe others) sometimes ask if I want to resubmit data
 -after creating a game you should be brough to the game page
+-slugs need to be forced to be unique https://github.com/django-extensions/django-extensions/blob/master/django_extensions/db/fields/__init__.py#L29
+-base attack bonus (bab) model field needs to be able to save multiple integers. No idea how to do this.
 
 #features
 
 -better tabs
 -completed character information (at least 100% of info on default pathfinder character sheet)
 -edit characters you own
--ajaxy character pages
+-completely ajaxy character forms
 -add avatars for characters
 -add images for games
 
@@ -21,4 +23,9 @@
 
 #consider
 
--replace "game" with "campaign" recursively everywhere and then deal with the problems 
+-replace "game" with "campaign" recursively everywhere and then deal with the problems
+
+##### character model logic
+#### skills
+if <skill_class> == yes -> +3
+if <skill_rank> <= level -> allow ranks to increase 
