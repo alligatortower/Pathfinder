@@ -5,6 +5,14 @@
 {% endblock %}
 {% block body_block %}
 	<div id="character_stats">
+		<div id="character_home">
+			<h3> Home </h3>
+			{% block character_home %}
+			Alignment: {{ character.alignment }}<br />
+			Race: {{ character.race }}<br />
+			Class: {{ character.base_class_1 }}<br />
+			{% endblock %}
+		</div>
 		<div id="character_ability_block">
 			<h3> abilities </h3>
 			{% block ability_block %}
@@ -19,14 +27,60 @@
 		<div id="character_combatstats">
 			<h3> Combat Stats </h3>
 			{% block combatstats_block %}
+			Initiative: {{ character.initiative }} <br />
 			Base Attack: {{ character.base_attack_bonus }} <br />
-			AC: {{ character.ac }}
+			AC: {{ character.ac }} <br />
+			Hit Points: {{ character.hp }} | Current Health: {{ character.current_hp }} <br />
+			CMB: {{ character.cmb }}<br />
+			{% endblock %}
+		</div>
+		<div id="character_skills">
+			<h3>Skills</h3>
+			{% block skills_block %}
+			Acrobatics: {{ character.sk_acrobatics }}<br />
+			Appraise: {{ character.sk_appraise }}<br />
+			Bluff: {{ character.sk_bluff }}<br />
+			Cimb: {{ character.sk_climb }}<br />
+			Craft ({{ character.sk_craft_type }}): {{ character.sk_craft }}<br />
+			Diplomacy: {{ character.sk_diplomacy }}<br />
+			Disable Device: {{ character.sk_disable_device }}<br />
+			Disguise: {{ character.sk_disguise }}<br />
+			Escape Artist: {{ character.sk_disguise }}<br />
+			Fly: {{ character.sk_fly }}<br />
+			Handle Animal: {{ character.sk_handle_animal }}<br />
+			Heal: {{ character.sk_heal }}<br />
+			Intimidate: {{ character.sk_intimidate }}<br />
+			Knowledge (arcana): {{ character.sk_knowledge_arcana }}<br />
+			Knowledge (dungeoneering): {{ character.sk_knowledge_dungeoneering }}<br />
+			Knowledge (engineering): {{ character.sk_knowledge_engineering }}<br />
+			Knowledge (geography): {{ character.sk_knowledge_geography }}<br />
+			Knowledge (history): {{ character.sk_knowledge_history }}<br />
+			Knowledge (local): {{ character.sk_knowledge_local }}<br />
+			Knowledge (nature): {{ character.sk_knowledge_nature }}<br />
+			Knowledge (nobility): {{ character.sk_knowledge_nobility }}<br />
+			Knowledge (planes): {{ character.sk_knowledge_planes }}<br />
+			Knowledge (religion): {{ character.sk_knowledge_religion }}<br />
+			Linguistics: {{ character.sk_linguistics }}<br />
+			Perception: {{ character.sk_perception }}<br />
+			Perform: {{ character.sk_perform }}<br />
+			Profession ({{ character.sk_profession_type }}): {{ character.sk_profession }}<br />
+			Ride: {{ character.sk_ride }}<br />
+			Sense Motive: {{ character.sk_sense_motive }}<br />
+			Sleight of Hand: {{ character.sk_sleight_of_hand }}<br />
+			Spellcraft: {{ character.sk_spellcraft }}<br />
+			Stealth: {{ character.sk_stealth }}<br />
+			Survival: {{ character.sk_survival }}<br />
+			Swim: {{ character.sk_swim }}<br />
+			Use Magical Device: {{ character.sk_use_magical_device }}<br />
+
 			{% endblock %}
 		</div>
 	</div>
 	<ul id="character_nav">
+		<li><a href="#character_home">Home</a></li>
 		<li><a href="#character_ability_block">Abilities</a></li>
-		<li><a href="#character_combatstats">Combat</a><li>
+		<li><a href="#character_combatstats">Combat</a></li>
+		<li><a href="#character_skills">Skills</a></li>
 	</ul>
 	<div class="character_footer">
 		{% if character.player == user %}

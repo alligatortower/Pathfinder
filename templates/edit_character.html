@@ -4,7 +4,12 @@
 		<script type="text/javascript" src="/media/edit_character.js"></script>
 		<form id='edit_character_form' method='POST' enctype='multipart/form-data'>
 			{% csrf_token %}
-			{{ EditCharacter_Abilities_Form.as_p }}<br />
+			({{character.ability_str_mod}}) - <strong>Strength:</strong> ({{character.ability_str_score}})  {{ EditCharacter_Abilities_Form.ability_str_base }}<br />
+			({{character.ability_dex_mod}}) - <strong>Dexterity:</strong> ({{character.ability_dex_score}})  {{ EditCharacter_Abilities_Form.ability_dex_base }}<br />
+			({{character.ability_con_mod}}) - <strong>Constitution:</strong> ({{character.ability_con_score}})  {{ EditCharacter_Abilities_Form.ability_con_base }}<br />
+			({{character.ability_int_mod}}) - <strong>Intelligence:</strong> ({{character.ability_int_score}})  {{ EditCharacter_Abilities_Form.ability_int_base }}<br />
+			({{character.ability_wis_mod}}) - <strong>Wisdom:</strong> ({{character.ability_wis_score}})  {{ EditCharacter_Abilities_Form.ability_wis_base }}<br />
+			({{character.ability_cha_mod}}) - <strong>Charisma:</strong> ({{character.ability_cha_score}})  {{ EditCharacter_Abilities_Form.ability_cha_base }}<br />
 			<br />
 			<input type='submit' name='submit' value='save' />
 		</form>

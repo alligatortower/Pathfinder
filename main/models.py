@@ -1,3 +1,4 @@
+import pdb
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -50,29 +51,64 @@ class Character(models.Model):
 	base_class_1 = models.CharField(max_length=20)
 
 	#ability tab
-	ability_str = models.IntegerField(default=0)
-	ability_str_mod = models.IntegerField(default=0)
-	ability_str_temp = models.IntegerField(default=0)
+	ability_str_base = models.PositiveIntegerField(default=0)
+	ability_str_score = models.PositiveIntegerField(default=0)
+	ability_str_mod = models.IntegerField(default=0,db_column="ability_str_mod")
+	ability_str_temp = models.PositiveIntegerField(default=0)
 
-	ability_dex = models.IntegerField(default=0)
-	ability_dex_mod = models.IntegerField(default=0)
-	ability_dex_temp = models.IntegerField(default=0)
+#	@property
+#	def ability_str_mod(self):
+#		return self._ability_str_mod
 
-	ability_con = models.IntegerField(default=0)
+#	@ability_str_mod.setter
+#	def ability_str_mod(self, value):
+#		self.ability_str_mod = (self.ability_str - 10) / 2
+		
+
+	ability_dex_base = models.PositiveIntegerField(default=0,db_column="ability_dex")
+	ability_dex_score = models.PositiveIntegerField(default=0)
+	ability_dex_mod = models.IntegerField(default=0,db_column="ability_dex_mod")
+	ability_dex_temp = models.PositiveIntegerField(default=0)
+	
+#	@property
+#	def ability_dex(self):
+#		return self._ability_dex
+
+#	@ability_dex.setter
+#	def ability_dex(self, value):
+#		self.ability_dex_mod = (self.ability_dex - 10) / 2
+#		self.ability_con = 12
+#		pdb.set_trace()
+#	@property
+#	def ability_dex_mod(self):
+#		return self._ability_dex_mod
+
+#	@ability_dex_mod.setter
+#	def ability_dex_mod(self, value):
+#		return
+#		self._sk_acrobatics = self.sk_acrobatics_ranks + self.sk_acrobatics_misc + ability_dex_mod 
+#		if self.sk_acrobatics_class and self.sk_acrobatics_ranks >= 1:
+#			self._sk_acrobatics += 3
+
+	ability_con_base = models.PositiveIntegerField(default=0)
+	ability_con_score = models.PositiveIntegerField(default=0)
 	ability_con_mod = models.IntegerField(default=0)
-	ability_con_temp = models.IntegerField(default=0)
+	ability_con_temp = models.PositiveIntegerField(default=0)
 
-	ability_wis = models.IntegerField(default=0)
+	ability_wis_base = models.PositiveIntegerField(default=0)
+	ability_wis_score = models.PositiveIntegerField(default=0)
 	ability_wis_mod = models.IntegerField(default=0)
-	ability_wis_temp = models.IntegerField(default=0)
+	ability_wis_temp = models.PositiveIntegerField(default=0)
 
-	ability_int = models.IntegerField(default=0)
+	ability_int_base = models.PositiveIntegerField(default=0)
+	ability_int_score = models.PositiveIntegerField(default=0)
 	ability_int_mod = models.IntegerField(default=0)
-	ability_int_temp = models.IntegerField(default=0)
+	ability_int_temp = models.PositiveIntegerField(default=0)
 
-	ability_cha = models.IntegerField(default=0)
+	ability_cha_base = models.PositiveIntegerField(default=0)
+	ability_cha_score = models.PositiveIntegerField(default=0)
 	ability_cha_mod = models.IntegerField(default=0)
-	ability_cha_temp = models.IntegerField(default=0)
+	ability_cha_temp = models.PositiveIntegerField(default=0)
 
 	speed_normal = models.IntegerField(default=0)
 	speed_armor = models.IntegerField(default=0)
@@ -100,10 +136,19 @@ class Character(models.Model):
 	
 
 	#skills tab
-	sk_acrobatics =models.IntegerField(default=0)
+
 	sk_acrobatics_ranks = models.IntegerField(default=0)
 	sk_acrobatics_misc = models.IntegerField(default=0)
 	sk_acrobatics_class = models.BooleanField(default=False) 
+	sk_acrobatics =models.IntegerField(default=0,db_column="sk_acrobatics")
+	
+#	@property
+#	def sk_acrobatics(self):
+#		return self._sk_acrobatics
+
+#	@sk_acrobatics.setter
+#	def sk_acrobatics(self, value):
+#		ability_mod = self.ability_dex_mod
 
 	sk_appraise =models.IntegerField(default=0)
 	sk_appraise_ranks = models.IntegerField(default=0)
@@ -117,9 +162,9 @@ class Character(models.Model):
 		
 	sk_climb =models.IntegerField(default=0)
 	sk_climb_ranks = models.IntegerField(default=0)
-	sk_climb_misc = models.IntegerField(default=0)
-	sk_climb_class = models.BooleanField(default=False) 
-	
+	sk_climb_misc = models.IntegerField(default=0)	
+	sk_climb_class = models.BooleanField(default=False)	
+
 	sk_craft_type = models.CharField(default="-", max_length = 20) 
 	sk_craft = models.IntegerField(default=0)
 	sk_craft_ranks = models.IntegerField(default=0)

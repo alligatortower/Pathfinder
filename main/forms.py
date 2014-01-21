@@ -37,16 +37,37 @@ class CreateCharacterForm(forms.ModelForm):
 	
 	class Meta:
 		model = Character
-		fields = ('name', 'avatar', 'ability_str', 'ability_dex', 'ability_con', 'ability_wis', 'ability_int','ability_cha','hp','base_class_1')
+		fields = ('name', 'avatar', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','hp','base_class_1')
 
 class EditCharacter_Abilities_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
-		fields = ('ability_str', 'ability_dex', 'ability_con', 'ability_wis', 'ability_int','ability_cha')
+		fields = ('ability_str_base', 'ability_dex_base', 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base')
+
+	def save(self,commit=True, *args, **kwargs):
+		instance = super(EditCharacter_Abilities_Form, self).save(commit=False)
+		if commit:
+			set_abilities(instance)
+			instance.save()
+		return instance
 
 class EditCharacter_Combatstats_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
 		fields = ('hp','bab','ac')
+	
+def set_abilities(instance):		
+	instance.ability_str_score = instance.ability_str_base + instance.ability_str_temp
+	instance.ability_str_mod = (instance.ability_str_score - 10) / 2
+	instance.ability_dex_score = instance.ability_dex_base + instance.ability_dex_temp
+	instance.ability_dex_mod = (instance.ability_dex_score - 10) / 2
+	instance.ability_con_score = instance.ability_con_base + instance.ability_con_temp
+	instance.ability_con_mod = (instance.ability_con_score - 10) / 2
+	instance.ability_int_score = instance.ability_int_base + instance.ability_int_temp
+	instance.ability_int_mod = (instance.ability_int_score - 10) / 2
+	instance.ability_wis_score = instance.ability_wis_base + instance.ability_wis_temp
+	instance.ability_wis_mod = (instance.ability_wis_score - 10) / 2
+	instance.ability_cha_score = instance.ability_cha_base + instance.ability_cha_temp
+	instance.ability_cha_mod = (instance.ability_cha_score - 10) / 2

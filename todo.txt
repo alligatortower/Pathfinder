@@ -19,7 +19,7 @@
 
 -abstract out to class based views
 -specify custom user model
-
+-abstract character model skills and abilities (at least) into abstract, subclassed models of their own
 
 #consider
 
