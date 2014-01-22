@@ -70,26 +70,6 @@ class Character(models.Model):
 	ability_dex_mod = models.IntegerField(default=0,db_column="ability_dex_mod")
 	ability_dex_temp = models.PositiveIntegerField(default=0)
 	
-#	@property
-#	def ability_dex(self):
-#		return self._ability_dex
-
-#	@ability_dex.setter
-#	def ability_dex(self, value):
-#		self.ability_dex_mod = (self.ability_dex - 10) / 2
-#		self.ability_con = 12
-#		pdb.set_trace()
-#	@property
-#	def ability_dex_mod(self):
-#		return self._ability_dex_mod
-
-#	@ability_dex_mod.setter
-#	def ability_dex_mod(self, value):
-#		return
-#		self._sk_acrobatics = self.sk_acrobatics_ranks + self.sk_acrobatics_misc + ability_dex_mod 
-#		if self.sk_acrobatics_class and self.sk_acrobatics_ranks >= 1:
-#			self._sk_acrobatics += 3
-
 	ability_con_base = models.PositiveIntegerField(default=0)
 	ability_con_score = models.PositiveIntegerField(default=0)
 	ability_con_mod = models.IntegerField(default=0)
@@ -128,6 +108,8 @@ class Character(models.Model):
 	ac_misc = models.IntegerField(default=0)
 	ac_armor = models.IntegerField(default=0)
 	ac_shield = models.IntegerField(default=0)
+	
+	armor_check_penalty = models.PositiveIntegerField(default=0)
 
 	hp = models.IntegerField(default=1)
 	current_hp = models.IntegerField(default=1)
@@ -274,7 +256,7 @@ class Character(models.Model):
 	sk_perform = models.IntegerField(default=0)
 	sk_perform_ranks = models.IntegerField(default=0)
 	sk_perform_misc = models.IntegerField(default=0)
-	sk_perception_class = models.BooleanField(default=False) 
+	sk_perform_class = models.BooleanField(default=False) 
 
 	sk_profession_type = models.CharField(default="-", max_length = 20)  
 	sk_profession = models.IntegerField(default=0)
@@ -329,3 +311,31 @@ class Character(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+class Equipment(models.Model):
+	owner = models.ForeignKey(Character, null=True, blank=True, default= None)
+	current_game = models.ForeignKey(Game, null=True, blank=True, default= None)
+	is_equiped = models.BooleanField(default=False)
+	is_a = models.CharField(max_length=10, default="Weapon")
+	cost = models.IntegerField(default=0)
+	weight = models.IntegerField(default=0)
+	comments = models.CharField(max_length=500, default="---")
+
+	def __unicode__(self):
+		return self.name
+
+class Armor(Equipment):
+	ac_bonus = models.IntegerField(default=0)
+	max_dex = models.IntegerField(null=True, blank=True, default=None)
+	armor_check_penalty = models.IntegerField(default=0)
+	spell_fail_chance = models.IntegerField(default=0)
+	speed_if_base_20 = models.IntegerField(default=0)
+	speed_if_base_30 = models.IntegerField(default=0)
+
+class Weapon(Equipment):
+	attack_bonus = models.IntegerField(default=0)
+	special = models.CharField(max_length=10)
+	damage = models.CharField(max_length=10, default="1d3")
+	damage_type = models.CharField(max_length=10, default="S")
+	crit_muliplier = models.CharField(max_length=3, default="x2")
+	crit_range = models.CharField(max_length=3, null=True)

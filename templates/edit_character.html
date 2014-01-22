@@ -1,8 +1,8 @@
 {% extends 'character.html' %}
+<script type="text/javascript"> var slug = "{{ character.slug }}"; </script>
+<script type="text/javascript" src="/media/edit_character.js"></script>
 	{% block ability_block %}
-		<script type="text/javascript"> var slug = "{{ character.slug }}"; </script>
-		<script type="text/javascript" src="/media/edit_character.js"></script>
-		<form id='edit_character_form' method='POST' enctype='multipart/form-data'>
+		<form class='edit_character_form' method='POST' enctype='multipart/form-data'>
 			{% csrf_token %}
 			({{character.ability_str_mod}}) - <strong>Strength:</strong> ({{character.ability_str_score}})  {{ EditCharacter_Abilities_Form.ability_str_base }}<br />
 			({{character.ability_dex_mod}}) - <strong>Dexterity:</strong> ({{character.ability_dex_score}})  {{ EditCharacter_Abilities_Form.ability_dex_base }}<br />
@@ -13,9 +13,15 @@
 			<br />
 			<input type='submit' name='submit' value='save' />
 		</form>
-		<div id='edit_character_form_response'>
-		</div>
 	{% endblock %}
 	{% block combatstat_block %}
-
+		<form class='edit_character_form' method='POST' enctype='multipart/form-data'>
+                        Initiative: {{ character.initiative }} <br />
+                        Base Attack: {{ character.bab }} | {{ EditCharacter_Combatstats_Form.bab }} <br />
+                        AC: {{ character.ac }} <br />
+                        Hit Points: {{ character.hp }} | Current Health: {{ character.current_hp }} <br />
+                        CMB: {{ character.cmb }}<br />
+	
+			<input type='submit' name='submit' value-'save' />		
+		</form>
 	{% endblock %}

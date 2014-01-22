@@ -14,6 +14,9 @@
 -completely ajaxy character forms
 -add avatars for characters
 -add images for games
+-way to search characters and add them to your game that makes more sense than a drop down
+-way to add weapons and equipment to a character. Way to equip and de-equip.
+-way to trade equipment between characters in a game
 
 #refactor (in the long distant future of maybe never)
 

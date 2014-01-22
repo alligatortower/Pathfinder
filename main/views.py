@@ -132,6 +132,7 @@ def game(request, game_url):
 @login_required
 def create_character(request):
 	context = RequestContext(request)
+	pdb.set_trace()
 	if request.method == 'POST':
 		create_character_form = CreateCharacterForm(data=request.POST)
 		
@@ -182,26 +183,9 @@ def character(request, character_url):
         template_name = 'character.html'
     return render(request, template_name, data)
 
-
-#def character(request, character_url):
-#	context = RequestContext(request)
-#	character = Character.objects.get(slug=character_url)
-#	context_dict = {'character':character }
-#
-#	if request.user == character.player:
-#		edit_character_form = CreateCharacterForm(instance=character)
-#		context_dict.update({'edit_character_form':edit_character_form})
-#		return render_to_response('edit_character.html', context_dict, context)
-#	else:
-#		return render_to_response('character.html', context_dict, context)
-
-
-
-#include for the footer box if you want it in that view
-def general_activity_feed(request):
-	return {
-	}
-
+def CreateWeapon(request, what_is_making, who_is_making):
+	
+	return render(request, "create_weapon.html")
 	
 @login_required
 def restricted(request):
