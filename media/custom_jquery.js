@@ -12,15 +12,40 @@ $(document).ready(function() {
 		$('#character_stats ' + clicked).fadeIn('fast');
 		e.preventDefault();
 	}).eq(0).addClass('current');
- 
+
+	//Posts character edits 
+        $('.edit_character_form').submit(function(){
+		var the_input = $(this).find("input[value='save']") ;
+		var tab = $(the_input).attr("name");
+		serialized_data = $(this).serialize();
+		console.log(serialized_data);
+		serialized_data += "&tab=" + encodeURIComponent(tab);
+		$.ajax({
+			type: 'POST',
+			url: '/character/' + slug + '/edit/', 
+			data: serialized_data,
+			success: function(response){
+				if (response === "success"){
+					//refresh data here
+				}
+				else if (response === "badSubmit") {
+					console.log("ajax says: view didn't like the submit");
+				}
+			},
+			error: function(){
+				console.log("ajax says: POST failure");
+			},
+		});
+		return false;
+	});
 });
+/*	
 $(document).ready(function() {
-        // POSTing character edits
-        var edit_character_form = $('.edit_character_form');
+	var edit_character_form = $('#edit_character_form');
         edit_character_form.submit(function () {
                 $.ajax({
                         type: 'POST',
-                        url: '/character/' + slug + '/edit/', 
+                        url: '/character/' + slug + '/edit/',
                         data: $(this).serialize(),
                         success: function(response){
                                 if (response === "success"){
@@ -35,5 +60,6 @@ $(document).ready(function() {
                 });
                 return false;
         });
-});
+	
+}); */
 //	alert($('#character_stats').length);

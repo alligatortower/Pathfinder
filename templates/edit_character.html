@@ -1,6 +1,7 @@
 {% extends 'character.html' %}
+{% block additional_scripts %}
 <script type="text/javascript"> var slug = "{{ character.slug }}"; </script>
-<script type="text/javascript" src="/media/edit_character.js"></script>
+{% endblock %}
 	{% block ability_block %}
 		<form class='edit_character_form' method='POST' enctype='multipart/form-data'>
 			{% csrf_token %}
@@ -11,17 +12,19 @@
 			({{character.ability_wis_mod}}) - <strong>Wisdom:</strong> ({{character.ability_wis_score}})  {{ EditCharacter_Abilities_Form.ability_wis_base }}<br />
 			({{character.ability_cha_mod}}) - <strong>Charisma:</strong> ({{character.ability_cha_score}})  {{ EditCharacter_Abilities_Form.ability_cha_base }}<br />
 			<br />
-			<input type='submit' name='submit' value='save' />
+			<input type='submit' name='ability_tab' value='save' />
 		</form>
 	{% endblock %}
-	{% block combatstat_block %}
+	{% block combatstats_block %}
 		<form class='edit_character_form' method='POST' enctype='multipart/form-data'>
-                        Initiative: {{ character.initiative }} <br />
+                        {% csrf_token %}
+			Initiative: {{ character.initiative }} | Dex Mod + Misc Initiative = {{ EditCharacter_Combatstats_Form.initiative_misc }} <br />
                         Base Attack: {{ character.bab }} | {{ EditCharacter_Combatstats_Form.bab }} <br />
-                        AC: {{ character.ac }} <br />
-                        Hit Points: {{ character.hp }} | Current Health: {{ character.current_hp }} <br />
+                        AC: {{ character.ac }} | Natural AC = {{EditCharacter_Combatstats_Form.ac_natural}} + Misc Ac = {{EditCharacter_Combatstats_Form.ac_misc }} <br />
+                        Hit Points: {{ character.hp }} | Current Health: {{ EditCharacter_Combatstats_Form.current_hp }} <br />
                         CMB: {{ character.cmb }}<br />
+			Armor Check Penalty: {{ character.armor_check_penalty }} - {{ EditCharacter_Combatstats_Form.armor_check_penalty }} <br />
 	
-			<input type='submit' name='submit' value-'save' />		
+			<input type='submit' name='combatstats_tab' value='save' />		
 		</form>
 	{% endblock %}

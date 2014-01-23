@@ -59,7 +59,15 @@ class EditCharacter_Combatstats_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
-		fields = ('hp','bab','ac')
+		fields = ('current_hp','bab','ac_natural','ac_misc','initiative_misc')
+
+	def save(self,commit=True, *args, **kwargs):
+		instance = super(EditCharacter_Combatstats_Form, self).save(commit=False)
+		if commit:
+			set_combatstats(instance)
+			instance.save()
+		return instance
+
 
 class WhatToCreateForm(forms.Form):
 	types_of_item = (
@@ -79,15 +87,24 @@ class CreateItemForm(forms.ModelForm):
 		exclude = ("owner","current_game")
 
 class CreateEquipmentForm(CreateItemForm):
+	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
+
 	class Meta(CreateItemForm.Meta):
 		model = Equipment
 		exclude = CreateItemForm.Meta.exclude + ("is_equipped",)
 
+class CreateArmorForm(CreateEquipmentForm):
+	proficiency = forms.ChoiceField(choices=(("Light","Light"),("Medium","Medium"),("Heavy","Heavy"),))
+	is_a = forms.ChoiceField(choices=(("Armor","Armor"),("Shield","Shield"),))
+	class Meta(CreateEquipmentForm.Meta):
+		model = Armor
+
 class CreateWeaponForm(CreateEquipmentForm):
 	is_a = forms.ChoiceField(choices=(("Melee Weapon","Melee Weapon"),("Ranged Weapon","Ranged Weapon"),))
 	damage_type = forms.ChoiceField(choices=(("slashing","slashing"),("piercing","piercing"),("bludgeoning","bludgeoning"),))
-	weapon_type = forms.ChoiceField(choices=(("simple","simple"),("martial","martial"),("exotic","exotic"),))
-	
+	proficiency = forms.ChoiceField(choices=(("simple","simple"),("martial","martial"),("exotic","exotic"),))
+	weapon_type = forms.ChoiceField(choices=(("Light","Light"),("One-Handed","One-Handed"),("Two-Handed","Two-Handed"),))	
+
 	class Meta(CreateEquipmentForm.Meta):
 		model = Weapon
 		exclude = CreateEquipmentForm.Meta.exclude + ("reach","ranged_increment","quantity")
@@ -110,6 +127,7 @@ def set_abilities(instance):
 	instance.ability_cha_mod = (instance.ability_cha_score - 10) / 2
 
 def set_combatstats(instance):
+	instance.bab = instance.bab
 	instance.initiative = instance.ability_dex_mod + instance.initiative_misc
 	instance.ac = instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc
 	instance.cmb = instance.bab + instance.ability_str_mod # + instance.size_mod

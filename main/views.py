@@ -148,7 +148,13 @@ def create_character(request):
 def EditCharacter_Abilities(request, character_url):
 	if request.is_ajax() and request.method == 'POST':
 		this_character = get_object_or_404(Character, slug=character_url)
-		edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
+		if request.POST['tab'] == "ability_tab":
+			edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
+		elif request.POST['tab'] == "combatstats_tab":
+			edit_character_form = EditCharacter_Combatstats_Form(request.POST, instance=this_character)
+		else:
+			return HttpResponse("No Tab")
+
 		if edit_character_form.is_valid():
 			edit_character_form.save()
 			return HttpResponse('success')
@@ -176,6 +182,7 @@ def character(request, character_url):
 		template_name = 'edit_character.html'
 		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
 		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+
 	else:
 		template_name = 'character.html'
 	return render(request, template_name, data)
@@ -212,6 +219,8 @@ def WhatToCreate(request, what_is_making, who_is_making):
 		return HttpResponse("Something fuckd up")
 
 	return render(request, template, data)
+
+
 	
 @login_required
 def restricted(request):
