@@ -61,11 +61,36 @@ class EditCharacter_Combatstats_Form(forms.ModelForm):
 		model = Character
 		fields = ('hp','bab','ac')
 
-class AddWeaponForm(forms.ModelForm):
-	
+class WhatToCreateForm(forms.Form):
+	types_of_item = (
+		("Weapon", "Weapon"),
+		("Armor", "Armor"),
+	)
+
+	what = forms.ChoiceField(choices=types_of_item)
+
 	class Meta:
+		fields = ("what",)
+
+class CreateItemForm(forms.ModelForm):
+
+	class Meta:
+		model = Item
+		exclude = ("owner","current_game")
+
+class CreateEquipmentForm(CreateItemForm):
+	class Meta(CreateItemForm.Meta):
+		model = Equipment
+		exclude = CreateItemForm.Meta.exclude + ("is_equipped",)
+
+class CreateWeaponForm(CreateEquipmentForm):
+	is_a = forms.ChoiceField(choices=(("Melee Weapon","Melee Weapon"),("Ranged Weapon","Ranged Weapon"),))
+	damage_type = forms.ChoiceField(choices=(("slashing","slashing"),("piercing","piercing"),("bludgeoning","bludgeoning"),))
+	weapon_type = forms.ChoiceField(choices=(("simple","simple"),("martial","martial"),("exotic","exotic"),))
+	
+	class Meta(CreateEquipmentForm.Meta):
 		model = Weapon
-		exclude = ("owner","current_game","is_equiped")
+		exclude = CreateEquipmentForm.Meta.exclude + ("reach","ranged_increment","quantity")
 
 
 

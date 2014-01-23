@@ -106,13 +106,12 @@ def create_game(request):
 		'create_game.html',{'create_game_form':create_game_form}, context)
 
 def game(request, game_url):
-	context = RequestContext(request)
 	game = Game.objects.get(slug=game_url)
-	context_dict = {'game':game}
+	data = {'game':game}
 
 	#if user is gm let him edit the game
 	if game.gm == request.user: 
-		context_dict.update({'edit_game_form':EditGameForm()})
+		data['edit_game_form'] = EditGameForm()
 	
 	#figure out what was posted and do that
 	if request.method == 'POST': 
@@ -125,14 +124,12 @@ def game(request, game_url):
 			game.save() #to update last_updated
 			
 	character_list = Character.objects.filter(current_game=game)
-	context_dict.update({'character_list':character_list})
-	return render_to_response(
-		'game.html', context_dict, context)
+	data['character_list'] = character_list
+	return render(request, 'game.html', data)
 
 @login_required
 def create_character(request):
 	context = RequestContext(request)
-	pdb.set_trace()
 	if request.method == 'POST':
 		create_character_form = CreateCharacterForm(data=request.POST)
 		
@@ -148,10 +145,10 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
-def edit_character(request, character_url):
+def EditCharacter_Abilities(request, character_url):
 	if request.is_ajax() and request.method == 'POST':
 		this_character = get_object_or_404(Character, slug=character_url)
-		edit_character_form = EditCharacter_Abilities_Form(request.POST, instance = this_character)
+		edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
 		if edit_character_form.is_valid():
 			edit_character_form.save()
 			return HttpResponse('success')
@@ -172,20 +169,49 @@ def remove_character(request, game_url, character_url):
 @login_required
 @ensure_csrf_cookie
 def character(request, character_url):
-    character = get_object_or_404(Character, slug=character_url)
-    data = {'character':character }
+	character = get_object_or_404(Character, slug=character_url)
+	data = {'character':character }
 
-    if request.user == character.player:
-        template_name = 'edit_character.html'
-        data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
-	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
-    else:
-        template_name = 'character.html'
-    return render(request, template_name, data)
+	if request.user == character.player:
+		template_name = 'edit_character.html'
+		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
+		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+	else:
+		template_name = 'character.html'
+	return render(request, template_name, data)
 
-def CreateWeapon(request, what_is_making, who_is_making):
-	
-	return render(request, "create_weapon.html")
+def WhatToCreate(request, what_is_making, who_is_making):
+	data = {}
+	character = False
+	game = False
+	if what_is_making == "character":
+		character = get_object_or_404(Character, slug=who_is_making)
+		if not request.user == character.player:
+			return HttpResponse("only the player controlling the character can do this")
+		data['character'] = character
+	elif what_is_making == "game":
+		game = get_object_or_404(Game, slug=who_is_making)
+		if not request.user == game.gm:
+			return HttpResponse("Only game GM can do this")
+		data['game'] = game
+	else:
+		return HttpResponse("view is failing, this is not being created by a game or character")
+
+	if request.method == "GET":
+		data['WhatToCreateForm'] = WhatToCreateForm()
+		template = "what_to_create.html"
+	elif request.method == "POST":
+		form = WhatToCreateForm(data=request.POST)
+		if form.is_valid():
+			if request.POST['what'] == "Armor":
+				data['item_to_create'] = CreateArmorForm()
+			elif request.POST['what'] == "Weapon":
+				data['item_to_create'] = CreateWeaponForm()
+			template = "create_armor_or_weapon.html"
+	else:
+		return HttpResponse("Something fuckd up")
+
+	return render(request, template, data)
 	
 @login_required
 def restricted(request):

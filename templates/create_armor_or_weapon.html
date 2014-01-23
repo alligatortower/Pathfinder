@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block header_block %}
+	<h3> Create Weapon or Armor </h3>
+{% endblock %}
+
+{% block body_block %}
+	<form id='create_weapon_or_armor' method='POST' action='/' enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ item_to_create }}
+                <br />
+                <input type='submit' name='submit' value='create' />
+        </form>
+{% endblock %}

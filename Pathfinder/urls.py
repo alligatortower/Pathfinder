@@ -28,10 +28,11 @@ urlpatterns = patterns('',
     url(r'^create_game/$', views.create_game, name='create_game'),
     url(r'^create_character/$', views.create_character, name='create_character'),
     url(r'^game/(?P<game_url>[-\w]+)/$', views.game, name='game'),
-    url(r'^character/(?P<character_url>[-\w]+)/edit/$', views.edit_character, name='edit_character'),
+    url(r'^character/(?P<character_url>[-\w]+)/EditCharacter_Abilities/$', views.EditCharacter_Abilities, name='EditCharacter_Abilities'),
+#    url(r'^character/(?P<character_url>[-\w]+)/EditCharacter_Combatstats/$', views.EditCharacter_Combatstats, name='EditCharacter_Combatstats'),
     url(r'^character/(?P<character_url>[-\w]+)/$', views.character, name='character'),
     url(r'^game/(?P<game_url>[-\w]+)/remove/(?P<character_url>[-\w]+)/$', views.remove_character, name='remove_character'),
-
+    url(r'^what_to_create/(?P<what_is_making>[-\w]+)/(?P<who_is_making>[-\w]+)/$', views.WhatToCreate, name='WhatToCreate'),
 )
 
 if settings.DEBUG:

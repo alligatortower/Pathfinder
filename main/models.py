@@ -312,17 +312,23 @@ class Character(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class Equipment(models.Model):
+class Item(models.Model):
 	owner = models.ForeignKey(Character, null=True, blank=True, default= None)
 	current_game = models.ForeignKey(Game, null=True, blank=True, default= None)
-	is_equiped = models.BooleanField(default=False)
-	is_a = models.CharField(max_length=10, default="Weapon")
+	name = models.CharField(max_length=256, default="Equipment")
 	cost = models.IntegerField(default=0)
 	weight = models.IntegerField(default=0)
-	comments = models.CharField(max_length=500, default="---")
+	material = models.CharField(max_length=20, default="metal")
+	description = models.CharField(max_length=500, default="---")
 
 	def __unicode__(self):
 		return self.name
+
+class Equipment(Item):
+	is_equipped = models.BooleanField(default=False)
+	is_a = models.CharField(max_length=10, default="Weapon")
+	size = models.CharField(max_length=10, default="medium")
+	proficiency = models.CharField(max_length=10,default="Light")
 
 class Armor(Equipment):
 	ac_bonus = models.IntegerField(default=0)
@@ -334,8 +340,11 @@ class Armor(Equipment):
 
 class Weapon(Equipment):
 	attack_bonus = models.IntegerField(default=0)
-	special = models.CharField(max_length=10)
 	damage = models.CharField(max_length=10, default="1d3")
 	damage_type = models.CharField(max_length=10, default="S")
+	weapon_type = models.CharField(max_length=20, default="simple")
 	crit_muliplier = models.CharField(max_length=3, default="x2")
-	crit_range = models.CharField(max_length=3, null=True)
+	crit_range = models.CharField(max_length=10, null=True)
+	reach = models.IntegerField(blank=True, null=True)
+	range_increment = models.IntegerField(blank=True, null=True)
+	quantity = models.IntegerField(default=1)

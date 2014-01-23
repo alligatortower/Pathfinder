@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block header_block %}
+	<h3> What do you want to create? </h3>
+{% endblock %}
+{% block body_block %}
+	<form id='create_item_form' method='POST' action='/what_to_create/character/{{character.slug}}/' enctype='multipart/form-data'>
+		{% csrf_token %}
+                {{ WhatToCreateForm }}
+                <br />
+                <input type='submit' name='submit' value='create' />
+	</form>  
+{% endblock %}

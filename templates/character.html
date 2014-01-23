@@ -84,7 +84,7 @@
 	</ul>
 	<div class="character_footer">
 		{% if character.player == user %}
-			<p> {{ character.name }} is a character you control </p>
+			<p> {{ character.name }} is a character you control. <a href="/what_to_create/character/{{character.slug}}">Add</a> an item to {{ character.name}} </p>
 		{% else %}
 			<p> {{ character.name }} is controlled by <a href="/player/{{ character.player }}/">{{ character.player }}</a> </p>
 		{% endif %}
