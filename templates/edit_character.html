@@ -1,6 +1,14 @@
 {% extends 'character.html' %}
 {% block additional_scripts %}
 <script type="text/javascript"> var slug = "{{ character.slug }}"; </script>
+<script>
+$(document).ready(function(){ 
+	$('#character_nav a').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	})
+});
+</script>
 {% endblock %}
 	{% block ability_block %}
 		<form class='edit_character_form' method='POST' enctype='multipart/form-data'>

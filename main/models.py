@@ -56,15 +56,6 @@ class Character(models.Model):
 	ability_str_mod = models.IntegerField(default=0,db_column="ability_str_mod")
 	ability_str_temp = models.PositiveIntegerField(default=0)
 
-#	@property
-#	def ability_str_mod(self):
-#		return self._ability_str_mod
-
-#	@ability_str_mod.setter
-#	def ability_str_mod(self, value):
-#		self.ability_str_mod = (self.ability_str - 10) / 2
-		
-
 	ability_dex_base = models.PositiveIntegerField(default=0,db_column="ability_dex")
 	ability_dex_score = models.PositiveIntegerField(default=0)
 	ability_dex_mod = models.IntegerField(default=0,db_column="ability_dex_mod")
@@ -123,14 +114,6 @@ class Character(models.Model):
 	sk_acrobatics_misc = models.IntegerField(default=0)
 	sk_acrobatics_class = models.BooleanField(default=False) 
 	sk_acrobatics =models.IntegerField(default=0,db_column="sk_acrobatics")
-	
-#	@property
-#	def sk_acrobatics(self):
-#		return self._sk_acrobatics
-
-#	@sk_acrobatics.setter
-#	def sk_acrobatics(self, value):
-#		ability_mod = self.ability_dex_mod
 
 	sk_appraise =models.IntegerField(default=0)
 	sk_appraise_ranks = models.IntegerField(default=0)

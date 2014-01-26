@@ -145,7 +145,7 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
-def EditCharacter_Abilities(request, character_url):
+def EditCharacter(request, character_url):
 	if request.is_ajax() and request.method == 'POST':
 		this_character = get_object_or_404(Character, slug=character_url)
 		if request.POST['tab'] == "ability_tab":
@@ -157,7 +157,8 @@ def EditCharacter_Abilities(request, character_url):
 
 		if edit_character_form.is_valid():
 			edit_character_form.save()
-			return HttpResponse('success')
+			data = {"character": get_object_or_404(Character, slug=character_url)}
+			return render(request, "edit_character.html", data)
 		else:
 			print edit_character_form.errors
 			return HttpResponse("badSumbit")
