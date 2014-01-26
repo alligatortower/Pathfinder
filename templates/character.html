@@ -14,39 +14,33 @@
 		<li><a href="#character_combatstats" data-toggle="tab">Combat</a></li>
 		<li><a href="#character_skills" data-toggle="tab">Skills</a></li>
 	</ul>
+	{% block character_stats %}
 	<div class="tab-content" id="character_stats">
 		<div class="tab-pane fade in active" id="character_home">
 			<h3> Home </h3>
-			{% block character_home %}
 			Alignment: {{ character.alignment }}<br />
 			Race: {{ character.race }}<br />
 			Class: {{ character.base_class_1 }}<br />
-			{% endblock %}
 		</div>
 		<div class="tab-pane fade" id="character_ability_block">
 			<h3> abilities </h3>
-			{% block ability_block %}
 			str: {{ character.ability_str }} <br />
 			dex: {{ character.ability_dex }} <br />
 			con: {{ character.ability_con }} <br />
 			wis: {{ character.ability_wis }} <br />
 			int: {{ character.ability_int }} <br />
 			cha: {{ character.ability_cha }} <br />
-			{% endblock %} 
 		</div>		
 		<div class="tab-pane fade" id="character_combatstats">
 			<h3> Combat Stats </h3>
-			{% block combatstats_block %}
 			Initiative: {{ character.initiative }} <br />
 			Base Attack: {{ character.base_attack_bonus }} <br />
 			AC: {{ character.ac }} <br />
 			Hit Points: {{ character.hp }} | Current Health: {{ character.current_hp }} <br />
 			CMB: {{ character.cmb }}<br />
-			{% endblock %}
 		</div>
 		<div class="tab-pane fade" id="character_skills">
 			<h3>Skills</h3>
-			{% block skills_block %}
 			Acrobatics: {{ character.sk_acrobatics }}<br />
 			Appraise: {{ character.sk_appraise }}<br />
 			Bluff: {{ character.sk_bluff }}<br />
@@ -82,10 +76,9 @@
 			Survival: {{ character.sk_survival }}<br />
 			Swim: {{ character.sk_swim }}<br />
 			Use Magical Device: {{ character.sk_use_magical_device }}<br />
-
-			{% endblock %}
 		</div>
 	</div>
+	{% endblock %}
 	<div class="character_footer">
 		{% if character.player == user %}
 			<p> {{ character.name }} is a character you control. <a href="/what_to_create/character/{{character.slug}}">Add</a> an item to {{ character.name}} </p>

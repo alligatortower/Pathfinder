@@ -1,6 +1,7 @@
 import pdb
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
+from django.template.response import TemplateResponse
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from django.template.defaultfilters import slugify
 from main.models import Character, Game, UserProfile, User
 from main.forms import *
 from datetime import datetime
-
+from djpjax import pjax
 
 def home(request):
 	context = RequestContext(request)	
@@ -145,25 +146,38 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
+@pjax("edit_character_pjax.html")
 def EditCharacter(request, character_url):
-	if request.is_ajax() and request.method == 'POST':
-		this_character = get_object_or_404(Character, slug=character_url)
+	data = {}
+	this_character = get_object_or_404(Character, slug=character_url)
+	if request.method == 'GET' and request.user == this_character.player:
+		template = 'edit_character.html'
+		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
+		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
+
+	elif request.method == 'POST':
 		if request.POST['tab'] == "ability_tab":
 			edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
 		elif request.POST['tab'] == "combatstats_tab":
 			edit_character_form = EditCharacter_Combatstats_Form(request.POST, instance=this_character)
 		else:
-			return HttpResponse("No Tab")
+			return HttpResponse("No Tab")		
 
 		if edit_character_form.is_valid():
 			edit_character_form.save()
-			data = {"character": get_object_or_404(Character, slug=character_url)}
-			return render(request, "edit_character.html", data)
+			data["character"] = this_character
+			data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
+			data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
+			
 		else:
 			print edit_character_form.errors
 			return HttpResponse("badSumbit")
+	elif request.method == "GET":
+		template = 'character.html'
 	else:
-		return HttpResponse(json.dumps(response), content_type="application/json")
+		return HttpResponse("shit all fucked up")
+
+	return TemplateResponse(request, template, data)
 
 def remove_character(request, game_url, character_url):
 	character_to_remove = Character.objects.get(slug=character_url)
@@ -186,7 +200,7 @@ def character(request, character_url):
 
 	else:
 		template_name = 'character.html'
-	return render(request, template_name, data)
+	return TemplateResponse(request, template_name, data)
 
 def WhatToCreate(request, what_is_making, who_is_making):
 	data = {}

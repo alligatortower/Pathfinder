@@ -1,71 +1,48 @@
 
 $(document).ready(function() {
-/*
-	// Tabs on character page
-	$('#character_stats div:not(:first)').hide();
-	$('#character_nav li').click(function(e) {
-		$('#character_stats div').hide();
-		$('#character_nav .current').removeClass("current");
-		$(this).addClass('current');
-		
-		var clicked = $(this).find('a:first').attr('href');
-		$('#character_stats ' + clicked).fadeIn('fast');
-		e.preventDefault();
-	}).eq(0).addClass('current');
-
-	
-	$(function () {
-    		$('#character_nav a:last').tab('show')
-	})
-	
-*/
-
+	//bootstrap tabs
+	$('#character_nav a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+		localStorage.setItem('lastTab', $(this).attr('href'));
+        })
 	//Posts character edits 
-        $('.edit_character_form').submit(function(){
+	bind_ajax_to_form()
+});
+function bind_ajax_to_form(){
+        $(document).on("submit", "form",  function(event){
 		var the_input = $(this).find("input[value='save']") ;
 		var tab = $(the_input).attr("name");
-		var this_tab = $(this).parent()
 		serialized_data = $(this).serialize();
 		serialized_data += "&tab=" + encodeURIComponent(tab);
-		$.ajax({
+		var url = '/character/' + slug + '/edit/'; 
+		$.pjax({
 			type: 'POST',
-			url: '/character/' + slug + '/edit/', 
+			url: url, 
 			data: serialized_data,
-			success: function(data){
-				console.log(this_tab.attr("id"));	
-				this_tab.load("/ #character_ability_block");
-			//	$('#character_stats').load(' #character_stats').children(); //, function(){$(this).children().unwrap()})
-			//	$(this).addClass('current');
-			//	$('#character_stats div:not(.current)').hide();
+			container: "#character_stats",
+			complete: function(){
 			},
 			error: function(){
 				console.log("ajax says: POST failure");
 			},
 		});
 		return false;
-	});
-});
-/*	
-$(document).ready(function() {
-	var edit_character_form = $('#edit_character_form');
-        edit_character_form.submit(function () {
-                $.ajax({
-                        type: 'POST',
-                        url: '/character/' + slug + '/edit/',
-                        data: $(this).serialize(),
-                        success: function(response){
-                                if (response === "success"){
-                                }
-                                else if (response === "badSubmit") {
-                                        alert("woah bad submit baby");
-                                }
-                        },
-                        error: function(){
-                                alert("ajax has returend the ERROR");
-                        },
-                });
-                return false;
-        });
+	}); 
+
+}
+$(document).on("pjax:end", function(){
+	$("div#character_stats div.active").removeClass("active in");
+	$("ul#character_nav li.active").removeClass("active"); //Remove default tab being active
 	
-}); */
-//	alert($('#character_stats').length);
+	var lastTab = localStorage.getItem('lastTab');
+	if (lastTab) {
+		var my_tab = $("ul#character_nav li").find("a[href='" + lastTab +"']")
+		var string_tab = String(lastTab)
+		var tab_id = string_tab.replace("#","")
+		var my_content = $(document).find("div[id='" + tab_id +"']")
+		my_tab.parent().addClass("active"); //add previous tab as active
+		my_content.addClass("active in")
+		$(my_tab).tab('show') 
+	};
+})
