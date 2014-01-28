@@ -197,6 +197,7 @@ def character(request, character_url):
 		template_name = 'edit_character.html'
 		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
 		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+		data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
 
 	else:
 		template_name = 'character.html'

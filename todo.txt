@@ -1,6 +1,5 @@
 ## Current
--fix tab refresh w/ javascript templates
-
+-completed character information (at least 100% of info on default pathfinder character sheet)
 
 #bugs
 
@@ -11,10 +10,6 @@
 
 #features
 
--better tabs
--completed character information (at least 100% of info on default pathfinder character sheet)
--edit characters you own
--completely ajaxy character forms
 -add avatars for characters
 -add images for games
 -way to search characters and add them to your game that makes more sense than a drop down

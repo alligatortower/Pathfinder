@@ -4,20 +4,21 @@
 
 
 body {
-	background-color: #FCEAC2;
+	background-color: #EEFCFF;
 	padding: 40px;
 }
 #main h1 {
 }
 
 #header {
-	background-color: #F3C786;
-	padding-left: 20px;
-	display: block;
+	background-color: #CCEBF1;
+	padding:0px 20px;
+	display: inline-block;
+	margin-bottom:10px;
 }
 
 #content {
-	background-color: #BAB284;
+	background-color: #FFFFFF;
 	padding: 8px 20px;
 }
 
@@ -50,6 +51,79 @@ body {
 	float:right;
 	padding: 0px 8px;
 }
+
+
+/* SKILLS */
+.skill_housing {
+	padding:0px;
+	margin-top:5px;
+	height:60px;
+	display:inline-block;
+}
+
+.skill_housing_section {
+	display:inline-block;
+	background-color:#DAF3F8;
+	margin-right:5px;
+	height:100%;
+	vertical-align:bottom;
+}
+
+.skill_clicked {
+	background-color:#CCEBF1;
+}
+
+.skill_details {
+	padding:10px;
+}
+
+.skill_main{
+	width:200px;
+	border-color:black;
+	border:2px solid;
+	height:100%;
+	text-align:center;
+}
+
+.skill_name {
+	font-size:large;
+}
+
+.skill_knowledge {
+	font-size:small;
+	text-align:center;
+	width:80%;
+	margin:0 auto;
+}
+
+.skill_total {
+	font-size:x-large;
+}
+
+.skill_component_container {
+	display:inline-block;
+}	
+
+.skill_component_number {
+	text-align:center;
+}
+
+.skill_component_name {
+	font-size:small;
+}
+
+.skill_component_container.skill_abl_dex {
+
+	color:#61D72E;
+}
+
+
+
+
+.popover {
+	max-width:800px;
+}
+
 
 
 

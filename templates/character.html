@@ -40,42 +40,7 @@
 			CMB: {{ character.cmb }}<br />
 		</div>
 		<div class="tab-pane fade" id="character_skills">
-			<h3>Skills</h3>
-			Acrobatics: {{ character.sk_acrobatics }}<br />
-			Appraise: {{ character.sk_appraise }}<br />
-			Bluff: {{ character.sk_bluff }}<br />
-			Cimb: {{ character.sk_climb }}<br />
-			Craft ({{ character.sk_craft_type }}): {{ character.sk_craft }}<br />
-			Diplomacy: {{ character.sk_diplomacy }}<br />
-			Disable Device: {{ character.sk_disable_device }}<br />
-			Disguise: {{ character.sk_disguise }}<br />
-			Escape Artist: {{ character.sk_disguise }}<br />
-			Fly: {{ character.sk_fly }}<br />
-			Handle Animal: {{ character.sk_handle_animal }}<br />
-			Heal: {{ character.sk_heal }}<br />
-			Intimidate: {{ character.sk_intimidate }}<br />
-			Knowledge (arcana): {{ character.sk_knowledge_arcana }}<br />
-			Knowledge (dungeoneering): {{ character.sk_knowledge_dungeoneering }}<br />
-			Knowledge (engineering): {{ character.sk_knowledge_engineering }}<br />
-			Knowledge (geography): {{ character.sk_knowledge_geography }}<br />
-			Knowledge (history): {{ character.sk_knowledge_history }}<br />
-			Knowledge (local): {{ character.sk_knowledge_local }}<br />
-			Knowledge (nature): {{ character.sk_knowledge_nature }}<br />
-			Knowledge (nobility): {{ character.sk_knowledge_nobility }}<br />
-			Knowledge (planes): {{ character.sk_knowledge_planes }}<br />
-			Knowledge (religion): {{ character.sk_knowledge_religion }}<br />
-			Linguistics: {{ character.sk_linguistics }}<br />
-			Perception: {{ character.sk_perception }}<br />
-			Perform: {{ character.sk_perform }}<br />
-			Profession ({{ character.sk_profession_type }}): {{ character.sk_profession }}<br />
-			Ride: {{ character.sk_ride }}<br />
-			Sense Motive: {{ character.sk_sense_motive }}<br />
-			Sleight of Hand: {{ character.sk_sleight_of_hand }}<br />
-			Spellcraft: {{ character.sk_spellcraft }}<br />
-			Stealth: {{ character.sk_stealth }}<br />
-			Survival: {{ character.sk_survival }}<br />
-			Swim: {{ character.sk_swim }}<br />
-			Use Magical Device: {{ character.sk_use_magical_device }}<br />
+			{% include "_skills.html" %}
 		</div>
 	</div>
 	{% endblock %}

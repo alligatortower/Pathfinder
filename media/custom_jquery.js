@@ -8,6 +8,46 @@ $(document).ready(function() {
         })
 	//Posts character edits 
 	bind_ajax_to_form()
+
+	$(".skill_details").hide()
+
+	$(".skill_housing")
+		.mouseover(function(){
+			$(this).find(".skill_housing_section").addClass("skill_clicked")
+		})
+		.mouseleave(function(){
+			$(this).find(".skill_housing_section").removeClass("skill_clicked")
+			
+		})
+		.popover({
+			html: true,
+			delay: 000,
+			animation: false,
+			trigger: "hover",
+			title: function(){
+				if ($(this).find(".class_skill").length == 1){
+					var title = "Class Skill"
+					if ($(this).find(".skill_ranks .skill_component_number").html() >= 1) {
+						title = title + " +3"
+					}
+					else {
+						title = title + ", no ranks yet"
+					}
+					return title
+				}	
+			},
+			content:function(){
+				return $(this).find(".skill_details").html()
+			}
+				
+		})
+		.on("click", function(){
+			var skill = $(this).find(".skill_name span").html()
+			var modal_id = "#" + skill + "_modal"
+			console.log(modal_id)
+			$(modal_id).modal()	
+		})	
+
 });
 function bind_ajax_to_form(){
         $(document).on("submit", "form",  function(event){

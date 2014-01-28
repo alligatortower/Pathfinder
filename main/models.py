@@ -141,7 +141,7 @@ class Character(models.Model):
 	sk_diplomacy_misc = models.IntegerField(default=0)
 	sk_diplomacy_class = models.BooleanField(default=False) 
 	
-	sk_disable_devie =models.IntegerField(default=0)
+	sk_disable_device =models.IntegerField(default=0)
 	sk_disable_device_ranks = models.IntegerField(default=0)
 	sk_disable_device_misc = models.IntegerField(default=0)
 	sk_disable_device_class = models.BooleanField(default=False) 

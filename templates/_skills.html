@@ -1,0 +1,738 @@
+<h3>Skills</h3>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					<span>Acrobatics</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_acrobatics }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl_dex">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_acrobatics_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_acrobatics_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Penalty
+				</div>
+			</div>
+			<span class="class_skill"></span>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Appraise
+				</div>
+				<div class="skill_total">
+					{{ character.sk_appraise }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_appraise_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_appraise_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Bluff
+				</div>
+				<div class="skill_total">
+					{{ character.sk_bluff }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_bluff_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_bluff_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Climb
+				</div>
+				<div class="skill_total">
+					{{ character.sk_climb }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_str_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Strength
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_climb_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_climb_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+
+	Craft ({{ character.sk_craft_type }}): {{ character.sk_craft }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Diplomacy
+				</div>
+				<div class="skill_total">
+					{{ character.sk_diplomacy }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_diplomacy_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_diplomacy_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Disable Device
+				</div>
+				<div class="skill_total">
+					{{ character.sk_disable_device }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_disable_device_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_disable_device_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Disguise
+				</div>
+				<div class="skill_total">
+					{{ character.sk_disguise }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_disguise_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_disguise_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+		       <div class="skill_main">
+				<div class="skill_name">
+					Escape Artist
+				</div>
+				<div class="skill_total">
+					{{ character.sk_escape_artist }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_escape_artist_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_escape_artist_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Fly
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_fly }}
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_fly_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_fly_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	Handle Animal: {{ character.sk_handle_animal }}<br />
+	Heal: {{ character.sk_heal }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Intimidate
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_intimidate }}
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_intimidate_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_intimidate_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_knowledge">
+				Knowledge
+			</div>
+			<div class="skill_name">
+				(Arcana)
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_climb }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_str_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Strength
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_climb_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_climb_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	Knowledge (dungeoneering): {{ character.sk_knowledge_dungeoneering }}<br />
+	Knowledge (engineering): {{ character.sk_knowledge_engineering }}<br />
+	Knowledge (geography): {{ character.sk_knowledge_geography }}<br />
+	Knowledge (history): {{ character.sk_knowledge_history }}<br />
+	Knowledge (local): {{ character.sk_knowledge_local }}<br />
+	Knowledge (nature): {{ character.sk_knowledge_nature }}<br />
+	Knowledge (nobility): {{ character.sk_knowledge_nobility }}<br />
+	Knowledge (planes): {{ character.sk_knowledge_planes }}<br />
+	Knowledge (religion): {{ character.sk_knowledge_religion }}<br />
+	Linguistics: {{ character.sk_linguistics }}<br />
+	Perception: {{ character.sk_perception }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Perform
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_perform }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_perform_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_perform_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+	Profession ({{ character.sk_profession_type }}): {{ character.sk_profession }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Ride
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_ride }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_ride_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_ride_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	Sense Motive: {{ character.sk_sense_motive }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Sleight of Hand
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_sleight_of_hand }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_sleight_of_hand_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_sleight_of_hand_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	Spellcraft: {{ character.sk_spellcraft }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Stealth
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_stealth }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_dex_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Dexterity
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_stealth_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_stealth_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Check Penalty
+				</div>
+			</div>
+		</div>
+	</div>
+	Survival: {{ character.sk_survival }}<br />
+	Swim: {{ character.sk_swim }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section skill_main">
+			<div class="skill_name">
+				Use Magical Device
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_total">
+				{{ character.sk_use_magical_device }}
+			</div>
+		</div>
+		<div class="skill_housing_section">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_use_magical_device_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_use_magic_device_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+		</div>
+	</div>
+

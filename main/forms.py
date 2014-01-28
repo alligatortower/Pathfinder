@@ -68,6 +68,22 @@ class EditCharacter_Combatstats_Form(forms.ModelForm):
 			instance.save()
 		return instance
 
+class EditCharacter_Skills_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = (
+			"sk_acrobatics_ranks","sk_acrobatics_misc", "sk_acrobatics_class"
+		)
+	
+	def save(self,commit=True, *args, **kwargs):
+		instance = super(EditCharacter_Combatstats_Form, self).save(commit=False)
+		if commit:
+			set_skills(instance)
+			instance.save()
+		return instance
+
+
 
 class WhatToCreateForm(forms.Form):
 	types_of_item = (
