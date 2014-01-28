@@ -3,7 +3,7 @@
 
 #bugs
 
--on refresh, pages (game maybe others) sometimes ask if I want to resubmit data
+-???? I don't think this is real ??? on refresh, pages (game maybe others) sometimes ask if I want to resubmit data
 -after creating a game you should be brough to the game page
 -slugs need to be forced to be unique https://github.com/django-extensions/django-extensions/blob/master/django_extensions/db/fields/__init__.py#L29
 -base attack bonus (bab) model field needs to be able to save multiple integers. No idea how to do this.
@@ -15,6 +15,9 @@
 -way to search characters and add them to your game that makes more sense than a drop down
 -way to add weapons and equipment to a character. Way to equip and de-equip.
 -way to trade equipment between characters in a game
+-add spell list / prepared spell list
+-add feats / skills
+-create model for crafting and profession skills and a way to build them into the template
 
 #refactor (in the long distant future of maybe never)
 
@@ -26,7 +29,3 @@
 
 -replace "game" with "campaign" recursively everywhere and then deal with the problems
 
-##### character model logic
-#### skills
-if <skill_class> == yes -> +3
-if <skill_rank> <= level -> allow ranks to increase 

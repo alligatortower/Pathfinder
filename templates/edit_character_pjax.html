@@ -14,7 +14,7 @@
                         ({{character.ability_wis_mod}}) - <strong>Wisdom:</strong> ({{character.ability_wis_score}})  {{ EditCharacter_Abilities_Form.ability_wis_base }}<br />
                         ({{character.ability_cha_mod}}) - <strong>Charisma:</strong> ({{character.ability_cha_score}})  {{ EditCharacter_Abilities_Form.ability_cha_base }}<br />
                         <br />
-                        <input type='submit' name='ability_tab' value='save' />
+			<button class="form_save" type='submit' name='ability_tab'>Save</button>
                 </form>
 	</div>
 	<div class="tab-pane fade" id="character_combatstats">
@@ -27,7 +27,7 @@
                         CMB: {{ character.cmb }}<br />
                         Armor Check Penalty: {{ character.armor_check_penalty }} - {{ EditCharacter_Combatstats_Form.armor_check_penalty }} <br />
 
-                        <input type='submit' name='combatstats_tab' value='save' />
+			<button class="form_save" type='submit' name='combatstats_tab'>Save</button>
                 </form>
         </div>
 	<div class="tab-pane fade" id="character_skills">

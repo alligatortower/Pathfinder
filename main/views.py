@@ -148,18 +148,22 @@ def create_character(request):
 
 @pjax("edit_character_pjax.html")
 def EditCharacter(request, character_url):
-	data = {}
-	this_character = get_object_or_404(Character, slug=character_url)
+	this_character = get_object_or_404(Character, slug=character_url) 
+	data = { "character" : this_character }
+
 	if request.method == 'GET' and request.user == this_character.player:
 		template = 'edit_character.html'
 		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
 		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
+		data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=this_character)
 
 	elif request.method == 'POST':
 		if request.POST['tab'] == "ability_tab":
 			edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
 		elif request.POST['tab'] == "combatstats_tab":
 			edit_character_form = EditCharacter_Combatstats_Form(request.POST, instance=this_character)
+		elif request.POST['tab'] == "skills_tab":
+			edit_character_form = EditCharacter_Skills_Form(request.POST, instance=this_character)
 		else:
 			return HttpResponse("No Tab")		
 
@@ -168,10 +172,11 @@ def EditCharacter(request, character_url):
 			data["character"] = this_character
 			data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
 			data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
+			data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=this_character)
+			template = "edit_character.html"
 			
 		else:
 			print edit_character_form.errors
-			return HttpResponse("badSumbit")
 	elif request.method == "GET":
 		template = 'character.html'
 	else:

@@ -77,7 +77,7 @@ class EditCharacter_Skills_Form(forms.ModelForm):
 		)
 	
 	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCharacter_Combatstats_Form, self).save(commit=False)
+		instance = super(EditCharacter_Skills_Form, self).save(commit=False)
 		if commit:
 			set_skills(instance)
 			instance.save()
