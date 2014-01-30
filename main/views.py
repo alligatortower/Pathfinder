@@ -1,4 +1,5 @@
 import pdb
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.template.response import TemplateResponse
@@ -7,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.template.defaultfilters import slugify
-from main.models import Character, Game, UserProfile, User
+from main.models import *
 from main.forms import *
 from datetime import datetime
 from djpjax import pjax
@@ -146,43 +147,134 @@ def create_character(request):
 	return render_to_response(
 		'create_character.html',{'create_character_form':create_character_form}, context)
 
+def add_character_edit_data(character):	
+	data = {}
+	data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
+	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+	data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
+	data['add_craft_or_profession_form'] = AddCraftOrProfessionForm()
+	data['craft_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="craft")
+	for value in list(enumerate(data['craft_skills'])):   
+		data['craft_skills'][value[0]].__dict__.update({"form": EditCraftOrProfessionForm(instance=value[1]), "skill_order":value[0] })
+		data['craft_skills'][value[0]].save()
+	data['profession_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="profession")
+	for value in list(enumerate(data['profession_skills'])):   
+		data['profession_skills'][value[0]].__dict__.update({"form": EditCraftOrProfessionForm(instance=value[1]), "skill_order":value[0]})
+		data['profession_skills'][value[0]].save()
+	return data
+	
+
 @pjax("edit_character_pjax.html")
-def EditCharacter(request, character_url):
+def character(request, character_url):
+
 	this_character = get_object_or_404(Character, slug=character_url) 
 	data = { "character" : this_character }
-
 	if request.method == 'GET' and request.user == this_character.player:
 		template = 'edit_character.html'
-		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
-		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
-		data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=this_character)
+		data.update(add_character_edit_data(this_character))
 
-	elif request.method == 'POST':
-		if request.POST['tab'] == "ability_tab":
-			edit_character_form = EditCharacter_Abilities_Form(request.POST, instance=this_character)
-		elif request.POST['tab'] == "combatstats_tab":
-			edit_character_form = EditCharacter_Combatstats_Form(request.POST, instance=this_character)
-		elif request.POST['tab'] == "skills_tab":
-			edit_character_form = EditCharacter_Skills_Form(request.POST, instance=this_character)
-		else:
-			return HttpResponse("No Tab")		
-
-		if edit_character_form.is_valid():
-			edit_character_form.save()
-			data["character"] = this_character
-			data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=this_character)
-			data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=this_character)
-			data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=this_character)
-			template = "edit_character.html"
-			
-		else:
-			print edit_character_form.errors
 	elif request.method == "GET":
 		template = 'character.html'
 	else:
 		return HttpResponse("shit all fucked up")
 
 	return TemplateResponse(request, template, data)
+
+
+@pjax("edit_character_pjax.html")
+def add_multiskill(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = AddCraftOrProfessionForm(request.POST)
+		if form.is_valid():
+			form = form.save(commit=False)
+			form.character = this_character
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+		else:
+			print form.errors
+	else:
+		return HttpResonse("You don't have permission to do this")
+
+@pjax("edit_character_pjax.html")
+def edit_multiskill(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		skill_domain = request.POST['skill_domain']
+		print skill_domain
+		skill_type = request.POST['skill_type']
+		print skill_type
+		skill = MultiSkill.objects.get(character=this_character, sk_domain=skill_domain)
+		print skill
+		form = EditCraftOrProfessionForm(data=request.POST, instance=skill)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+		else:
+			print form.errors
+	else:
+		return HttpResonse("You don't have permission to do this")
+
+@csrf_exempt
+@pjax("edit_character_pjax.html")
+def delete_multiskill(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		skill_domain = request.POST['skill_domain']
+		skill = MultiSkill.objects.filter(character=this_character, sk_domain=skill_domain)
+		skill.delete()
+		data.update(add_character_edit_data(this_character))
+		return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_abilities(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Abilities_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+		else:
+			print form.errors
+	else:
+		return HttpResonse("You don't have permission to do this")
+
+@pjax("edit_character_pjax.html")
+def edit_combatstats(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Combatstats_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+		else:
+			print form.errors
+	else:
+		return HttpResonse("You don't have permission to do this")
+
+@pjax("edit_character_pjax.html")
+def edit_skills(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Skills_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+		else:
+			print form.errors
+	else:
+		return HttpResonse("You don't have permission to do this")
 
 def remove_character(request, game_url, character_url):
 	character_to_remove = Character.objects.get(slug=character_url)
@@ -192,21 +284,6 @@ def remove_character(request, game_url, character_url):
 	return_url = "/game/" + game_url + '/'
 	return HttpResponseRedirect(return_url)
 		
-@login_required
-@ensure_csrf_cookie
-def character(request, character_url):
-	character = get_object_or_404(Character, slug=character_url)
-	data = {'character':character }
-
-	if request.user == character.player:
-		template_name = 'edit_character.html'
-		data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
-		data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
-		data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
-
-	else:
-		template_name = 'character.html'
-	return TemplateResponse(request, template_name, data)
 
 def WhatToCreate(request, what_is_making, who_is_making):
 	data = {}

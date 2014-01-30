@@ -41,42 +41,46 @@ class Character(models.Model):
 	race = models.CharField(default="-", max_length = 20 )
 	deity = models.CharField(default="-", max_length = 20 )
 	size = models.CharField(default="-" , max_length = 20)
+	size_mod = models.IntegerField(default=0)
 	gender = models.CharField(default="-" , max_length = 20)
 	age = models.IntegerField(default=0 )
 	height = models.IntegerField(default=0 )
 	weight = models.IntegerField(default=0 )
 	hair = models.CharField(default="-", max_length=20 )
 	eyes = models.CharField(default="-", max_length=20)
-	level = models.IntegerField(default=1)
-	base_class_1 = models.CharField(max_length=20)
+
+	#misc
+	hd = models.CharField(max_length=10, default="1d6")
+	total_levels = models.IntegerField(default=0)
+	
 
 	#ability tab
-	ability_str_base = models.PositiveIntegerField(default=0)
+	ability_str_base = models.PositiveIntegerField(default=10)
 	ability_str_score = models.PositiveIntegerField(default=0)
 	ability_str_mod = models.IntegerField(default=0,db_column="ability_str_mod")
 	ability_str_temp = models.PositiveIntegerField(default=0)
 
-	ability_dex_base = models.PositiveIntegerField(default=0,db_column="ability_dex")
+	ability_dex_base = models.PositiveIntegerField(default=10,db_column="ability_dex")
 	ability_dex_score = models.PositiveIntegerField(default=0)
 	ability_dex_mod = models.IntegerField(default=0,db_column="ability_dex_mod")
 	ability_dex_temp = models.PositiveIntegerField(default=0)
 	
-	ability_con_base = models.PositiveIntegerField(default=0)
+	ability_con_base = models.PositiveIntegerField(default=10)
 	ability_con_score = models.PositiveIntegerField(default=0)
 	ability_con_mod = models.IntegerField(default=0)
 	ability_con_temp = models.PositiveIntegerField(default=0)
 
-	ability_wis_base = models.PositiveIntegerField(default=0)
+	ability_wis_base = models.PositiveIntegerField(default=10)
 	ability_wis_score = models.PositiveIntegerField(default=0)
 	ability_wis_mod = models.IntegerField(default=0)
 	ability_wis_temp = models.PositiveIntegerField(default=0)
 
-	ability_int_base = models.PositiveIntegerField(default=0)
+	ability_int_base = models.PositiveIntegerField(default=10)
 	ability_int_score = models.PositiveIntegerField(default=0)
 	ability_int_mod = models.IntegerField(default=0)
 	ability_int_temp = models.PositiveIntegerField(default=0)
 
-	ability_cha_base = models.PositiveIntegerField(default=0)
+	ability_cha_base = models.PositiveIntegerField(default=10)
 	ability_cha_score = models.PositiveIntegerField(default=0)
 	ability_cha_mod = models.IntegerField(default=0)
 	ability_cha_temp = models.PositiveIntegerField(default=0)
@@ -109,6 +113,8 @@ class Character(models.Model):
 	
 
 	#skills tab
+	total_ranks = models.IntegerField(default=0)
+	max_ranks = models.IntegerField(default=0)
 
 	sk_acrobatics_ranks = models.IntegerField(default=0)
 	sk_acrobatics_misc = models.IntegerField(default=0)
@@ -129,12 +135,6 @@ class Character(models.Model):
 	sk_climb_ranks = models.IntegerField(default=0)
 	sk_climb_misc = models.IntegerField(default=0)	
 	sk_climb_class = models.BooleanField(default=False)	
-
-	sk_craft_type = models.CharField(default="-", max_length = 20) 
-	sk_craft = models.IntegerField(default=0)
-	sk_craft_ranks = models.IntegerField(default=0)
-	sk_craft_misc = models.IntegerField(default=0)
-	sk_craft_class = models.BooleanField(default=False) 
 
 	sk_diplomacy = models.IntegerField(default=0)
 	sk_diplomacy_ranks = models.IntegerField(default=0)
@@ -241,12 +241,6 @@ class Character(models.Model):
 	sk_perform_misc = models.IntegerField(default=0)
 	sk_perform_class = models.BooleanField(default=False) 
 
-	sk_profession_type = models.CharField(default="-", max_length = 20)  
-	sk_profession = models.IntegerField(default=0)
-	sk_profession_ranks = models.IntegerField(default=0)
-	sk_profession_misc = models.IntegerField(default=0)
-	sk_profession_class = models.BooleanField(default=False) 
-
 	sk_ride = models.IntegerField(default=0)
 	sk_ride_ranks = models.IntegerField(default=0)
 	sk_ride_misc = models.IntegerField(default=0)
@@ -294,6 +288,22 @@ class Character(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+class MultiSkill(models.Model):
+	character = models.ForeignKey(Character)
+	sk_craft_or_profession = models.CharField(max_length=10, default="craft")
+	sk_domain = models.CharField(max_length=30)
+	sk_total = models.IntegerField(default=0)
+	sk_ranks = models.IntegerField(default=0)
+	sk_misc = models.IntegerField(default=0)
+	sk_class = models.BooleanField(default=False)
+	
+	class Meta:
+		unique_together = (("character","sk_domain"),)
+
+class BaseClass(models.Model):
+	class_name = models.CharField(max_length=30, default="Barbarian")
+	class_levels = models.IntegerField(max_length=30, default=1)
 
 class Item(models.Model):
 	owner = models.ForeignKey(Character, null=True, blank=True, default= None)

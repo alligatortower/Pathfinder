@@ -38,7 +38,21 @@ class CreateCharacterForm(forms.ModelForm):
 	
 	class Meta:
 		model = Character
-		fields = ('name', 'avatar', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','hp','base_class_1')
+		fields = ('name', 'avatar', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','hp')
+
+class EditCharacter_Details_Form(forms.ModelForm):
+	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
+
+	class Meta:
+		model = Character
+		fields = ("alignment","race","deity","size","gender","age","height","weight","hair","eyes")
+
+	def save(self,commit=True, *args, **kwargs):
+		instance = super(EditCharacter_Details_Form, self).save(commit=False)
+		if commit:
+			size_mod_update(instance)
+			instance.save()
+		return instance
 
 class EditCharacter_Abilities_Form(forms.ModelForm):
 
@@ -73,7 +87,8 @@ class EditCharacter_Skills_Form(forms.ModelForm):
 	class Meta:
 		model = Character
 		fields = (
-			"sk_acrobatics_ranks","sk_acrobatics_misc", "sk_acrobatics_class"
+			"sk_acrobatics_ranks","sk_acrobatics_misc", "sk_acrobatics_class",
+			"sk_appraise_ranks","sk_appraise_misc","sk_appraise_class"
 		)
 	
 	def save(self,commit=True, *args, **kwargs):
@@ -83,7 +98,18 @@ class EditCharacter_Skills_Form(forms.ModelForm):
 			instance.save()
 		return instance
 
+class AddCraftOrProfessionForm(forms.ModelForm):
+	sk_craft_or_profession = forms.ChoiceField(choices=(("Craft","Craft"),("Profession","Profession"),))
 
+	class Meta:
+		model = MultiSkill 
+		fields = ("sk_craft_or_profession","sk_domain","sk_ranks","sk_misc","sk_class")
+
+class EditCraftOrProfessionForm(forms.ModelForm):
+
+	class Meta:
+		model = MultiSkill
+		fields = ("sk_domain","sk_ranks","sk_misc","sk_class")
 
 class WhatToCreateForm(forms.Form):
 	types_of_item = (
@@ -126,7 +152,13 @@ class CreateWeaponForm(CreateEquipmentForm):
 		exclude = CreateEquipmentForm.Meta.exclude + ("reach","ranged_increment","quantity")
 
 
-
+def size_mod_update(instante):
+	if instance.size == "Small":
+		instance.size_mod = 1
+	elif instance.size == "Medium":
+		instance.size_mod = 0
+	elif instance.size == "Large":
+		instance.size_mod = -1
 	
 def set_abilities(instance):		
 	instance.ability_str_score = instance.ability_str_base + instance.ability_str_temp
@@ -145,8 +177,8 @@ def set_abilities(instance):
 def set_combatstats(instance):
 	instance.bab = instance.bab
 	instance.initiative = instance.ability_dex_mod + instance.initiative_misc
-	instance.ac = instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc
-	instance.cmb = instance.bab + instance.ability_str_mod # + instance.size_mod
+	instance.ac = instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc + instance.size_mod
+	instance.cmb = instance.bab + instance.ability_str_mod + instance.size_mod
 
 def set_skills(instance):
 	instance.sk_acrobatics = instance.ability_dex_mod + instance.sk_acrobatics_ranks + instance.sk_acrobatics_misc - instance.armor_check_penalty
@@ -161,9 +193,6 @@ def set_skills(instance):
 	instance.sk_climb = instance.ability_str_mod + instance.sk_climb_ranks + instance.sk_climb_misc - instance.armor_check_penalty
 	if instance.sk_climb_class:
 		instance.sk_climb += 3
-	instance.sk_craft = instance.ability_int_mod + instance.sk_craft_ranks + instance.sk_craft_misc
-	if instance.sk_craft_class:
-		instance.sk_craft += 3
 	instance.sk_diplomacy = instance.ability_cha_mod + instance.sk_diplomacy_ranks + instance.sk_diplomacy_misc
 	if instance.sk_diplomacy_class:
 		instance.sk_diplomacy += 3
@@ -215,7 +244,6 @@ def set_skills(instance):
 	instance.sk_linguistics = skill(instance.sk_linguistics, instance.ability_int_mod, instance.sk_linguistics_ranks, instance.sk_linguistics_misc, instance.sk_linguistics_class)
 	instance.sk_perception = skill(instance.sk_perception, instance.ability_wis_mod, instance.sk_perception_ranks, instance.sk_perception_misc, instance.sk_perception_class)
 	instance.sk_perform = skill(instance.sk_perform, instance.ability_cha_mod, instance.sk_perform_ranks, instance.sk_perform_misc, instance.sk_perform_class)
-	instance.sk_profession = skill(instance.sk_profession, instance.ability_wis_mod, instance.sk_profession_ranks, instance.sk_profession_misc, instance.sk_profession_class)
 
 def skill(skill, ability, skill_ranks, skill_misc, skill_class, armor_penalty=False):
 	skill = ability + skill_ranks + skill_misc

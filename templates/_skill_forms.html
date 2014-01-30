@@ -1,4 +1,6 @@
 
+<form class="edit_character_modal_form">
+	{% csrf_token %}
 <div class="modal fade" id="Acrobatics_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -6,18 +8,116 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title" id="myModalLabel">Edit Acrobatics</h4>
 			</div>
-			<form class="edit_character_modal_form">
 				<div class="modal-body">
-						{% csrf_token %}
 						Ranks: {{ EditCharacter_Skills_Form.sk_acrobatics_ranks }}
 						Miscellaneous: {{ EditCharacter_Skills_Form.sk_acrobatics_misc }}
 						Class Skill? {{ EditCharacter_Skills_Form.sk_acrobatics_class }}
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary form_save"  value="save" name="skills_tab">Save changes</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Appraise_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Appraise</h4>
+			</div>
+				<div class="modal-body">
+						Ranks: {{ EditCharacter_Skills_Form.sk_appraise_ranks }}
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_appraise_misc }}
+						Class Skill? {{ EditCharacter_Skills_Form.sk_appraise_class }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+</form>
+
+<!--  FOR EDITING CRAFT OR PROFESSION SKILLS -->
+{% if craft_skills %}
+{% for value in craft_skills %}
+<div class="modal fade" id="craft{{ value.skill_order }}_modal" data-type="edit_craft_or_profession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit <span id="skill_type">Craft</span> <span id="multiskill_domain">{{value.sk_domain}}</span></h4>
+			</div>
+			<form class="edit_character_modal_form">
+				<div class="modal-body">
+						{% csrf_token %}
+						{{ value.form }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default craft_or_profession_delete">DELETE</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+{% if profession_skills %}
+{% for value in craft_skills %}
+<div class="modal fade" id="profession{{ value.skill_order }}_modal" data-type="edit_craft_or_profession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit <span id="skill_type">Profession</span> <span id="multiskill_domain">{{value.sk_domain}}</span></h4>
+			</div>
+			<form class="edit_character_modal_form">
+				<div class="modal-body">
+						{% csrf_token %}
+						{{ value.form }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+<!-- THIS IS FOR THE CREATING CRAFT OR PROFESSION BUTTON -->
+
+<div class="modal fade" id="add_craft_or_profession_modal" data-type="add_craft_or_profession_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Add Craft or Appraise Skill</h4>
+			</div>
+			<form class="edit_character_modal_form">
+				<div class="modal-body">
+						{% csrf_token %}
+						{{ add_craft_or_profession_form.sk_craft_or_profession }}<br />
+						{{ add_craft_or_profession_form.sk_domain }}<br />
+						{{ add_craft_or_profession_form.sk_ranks }}<br />
+						{{ add_craft_or_profession_form.sk_misc }}<br />
+						{{ add_craft_or_profession_form.sk_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+

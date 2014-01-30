@@ -17,27 +17,68 @@ function bind_jquery_to_form(){
 	$(".edit_character_form").on("submit", function(e){
 		e.preventDefault();
 		var form_data = $(this).serialize();
-		submit_form.call(this,[form_data]);
+		the_input = $(this).find("button.form_save") ;
+		tab = $(the_input).attr("name");
+		if (tab == "ability_tab"){
+			var url = '/character/' + slug + '/edit_abilities/'; 
+		}
+		else if (tab == "combatstats_tab"){
+			var url = '/character/' + slug + '/edit_combatstats/'; 
+		}
+		form_data += "&tab=" + encodeURIComponent(tab);
+		submit_form.call(this,form_data,url);
 	})
 	$(".edit_character_modal_form").on("submit", function(e){
+		e.preventDefault();	
+	})
+	$(".modal_form_save_button").on("click", function(e){
 		e.preventDefault();
-		var form_data = $(this).serialize();
+		var form_data = $(this).closest(".edit_character_modal_form").serialize();
+		var skill_modal = $(this).closest(".modal")
+		var this_modal = skill_modal.attr("data-type")
+		console.log(this_modal)
+		if (this_modal == "edit_craft_or_profession"){
+			var url = '/character/' + slug + '/edit_multiskill/'; 
+			var skill_domain = skill_modal.find("#multiskill_domain").html()
+			var skill_type = skill_modal.find("#skill_type").html()
+			form_data += "&skill_domain=" + encodeURIComponent(skill_domain);
+			form_data += "&skill_type=" + encodeURIComponent(skill_type);
+		}
+		else if (this_modal == "add_craft_or_profession_modal"){
+			var url = '/character/' + slug + '/add_multiskill/';
+		}
+		else {
+			var url = '/character/' + slug + '/edit_skills/';
+
+		}
+		form_data += "&modal=" + encodeURIComponent(this_modal);
+		form_data += "&tab=" + encodeURIComponent("skills_tab");
 		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
-			submit_form.call(this,[form_data]);
+			submit_form.call(this, form_data, url);
+		})	
+	})
+	$(".craft_or_profession_delete").on("click", function(e){
+		e.preventDefault();
+		var form_data
+		var skill_modal = $(this).closest(".modal")
+		var this_modal = skill_modal.attr("data-type")
+		var url = '/character/' + slug + '/delete_multiskill/'; 
+		var skill_domain = skill_modal.find("#multiskill_domain").html()
+		var skill_type = skill_modal.find("#skill_type").html()
+		form_data += "&skill_domain=" + encodeURIComponent(skill_domain);
+		form_data += "&skill_type=" + encodeURIComponent(skill_type);
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form.call(this, form_data, url);
 		})	
 	})
 }
 
-function submit_form(form_data){
-		the_input = $(this).find("button.form_save") ;
-		tab = $(the_input).attr("name");
-		serialized_data = form_data;
-		serialized_data += "&tab=" + encodeURIComponent(tab);
-		var url = '/character/' + slug + '/edit/'; 
+function submit_form(form_data, url){
 		$.pjax({
 			type: 'POST',
 			url: url, 
-			data: serialized_data,
+			data: form_data,
+			push: false,
 			container: "#character_stats",
 			success: function(){
 			},
@@ -55,10 +96,10 @@ function skill_magic(){
 	$(".skill_housing")
 		//sexy rollover colors
 		.mouseover(function(){
-			$(this).find(".skill_housing_section").addClass("skill_clicked")
+			$(this).find(".skill_housing").addClass("skill_clicked")
 		})
 		.mouseleave(function(){
-			$(this).find(".skill_housing_section").removeClass("skill_clicked")
+			$(this).find(".skill_housing").removeClass("skill_clicked")
 			
 		})
 
@@ -87,10 +128,19 @@ function skill_magic(){
 				
 		})
 		.on("click", function(){
+			if (!$(this).hasClass("craft_or_profession_housing")){
 			var skill = $(this).find(".skill_name span").html()
 			var modal_id = "#" + skill + "_modal"
 			$(modal_id).modal()	
+			}
 		})
+	$(".add_craft_or_profession").on("click", function(){
+		$("#add_craft_or_profession_modal").modal()
+	})
+	$(".craft_or_profession_housing").on("click", function(){
+		var which_one = $(this).attr("id")
+		$("#" + which_one +"_modal" ).modal()
+	})
 }
 	
 $(document).on("pjax:end", function(){

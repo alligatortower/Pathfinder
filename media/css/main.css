@@ -57,14 +57,13 @@ body {
 .skill_housing {
 	padding:0px;
 	margin-top:5px;
-	height:60px;
+	margin-right:5px;
 	display:inline-block;
 }
 
 .skill_housing_section {
 	display:inline-block;
 	background-color:#DAF3F8;
-	margin-right:5px;
 	height:100%;
 	vertical-align:bottom;
 }
@@ -87,13 +86,20 @@ body {
 
 .skill_name {
 	font-size:large;
+	display:inline-block;
 }
 
-.skill_knowledge {
-	font-size:small;
+.skill_category_wrapper {
+	display:inline-block;
 	text-align:center;
-	width:80%;
+	width:100%;
+}
+
+.skill_category {
+	font-size:small;
+	width:auto;
 	margin:0 auto;
+	display:inline-block;
 }
 
 .skill_total {
