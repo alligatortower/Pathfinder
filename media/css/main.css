@@ -29,7 +29,6 @@ body {
 }
 
 .edit_game_form {
-	display:inline;
 }
 
 #footer {
@@ -59,11 +58,11 @@ body {
 	margin-top:5px;
 	margin-right:5px;
 	display:inline-block;
+	background-color:#DAF3F8;
 }
 
 .skill_housing_section {
 	display:inline-block;
-	background-color:#DAF3F8;
 	height:100%;
 	vertical-align:bottom;
 }
@@ -74,6 +73,8 @@ body {
 
 .skill_details {
 	padding:10px;
+	width:auto;
+	display:none;
 }
 
 .skill_main{
@@ -127,6 +128,7 @@ body {
 
 
 .popover {
+	width:auto;
 	max-width:800px;
 }
 

@@ -69,7 +69,7 @@
 {% endfor %}
 {% endif %}
 {% if profession_skills %}
-{% for value in craft_skills %}
+{% for value in profession_skills %}
 <div class="modal fade" id="profession{{ value.skill_order }}_modal" data-type="edit_craft_or_profession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -83,6 +83,7 @@
 						{{ value.form }}
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-default craft_or_profession_delete">DELETE</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
 				</div>

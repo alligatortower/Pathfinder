@@ -1,6 +1,5 @@
 ## Current
 -completed character information (at least 100% of info on default pathfinder character sheet)
--create model for crafting and profession skills and a way to build them into the template
 -way to add weapons and equipment to a character. Way to equip and de-equip.
 
 #bugs

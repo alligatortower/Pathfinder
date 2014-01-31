@@ -263,7 +263,7 @@ class Character(models.Model):
 
 	sk_stealth = models.IntegerField(default=0)
 	sk_stealth_ranks = models.IntegerField(default=0)
-	sk_steahth_misc = models.IntegerField(default=0)
+	sk_stealth_misc = models.IntegerField(default=0)
 	sk_stealth_class = models.BooleanField(default=False) 
 
 	sk_survival = models.IntegerField(default=0)

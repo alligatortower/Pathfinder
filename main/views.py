@@ -153,6 +153,7 @@ def add_character_edit_data(character):
 	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
 	data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
 	data['add_craft_or_profession_form'] = AddCraftOrProfessionForm()
+	data['EditMaxRanksForm'] = EditMaxRanksForm(instance=character)
 	data['craft_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="craft")
 	for value in list(enumerate(data['craft_skills'])):   
 		data['craft_skills'][value[0]].__dict__.update({"form": EditCraftOrProfessionForm(instance=value[1]), "skill_order":value[0] })
@@ -190,6 +191,9 @@ def add_multiskill(request, character_url):
 		if form.is_valid():
 			form = form.save(commit=False)
 			form.character = this_character
+			form.sk_total = this_character.ability_int_mod + form.sk_ranks + form.sk_misc
+			if form.sk_class:
+				form.sk_total += 3
 			form.save()
 			data.update(add_character_edit_data(this_character))
 			return TemplateResponse(request, "character.html", data)
@@ -204,11 +208,8 @@ def edit_multiskill(request, character_url):
 	data = {"character":this_character}
 	if request.method == "POST" and request.user == this_character.player:
 		skill_domain = request.POST['skill_domain']
-		print skill_domain
 		skill_type = request.POST['skill_type']
-		print skill_type
 		skill = MultiSkill.objects.get(character=this_character, sk_domain=skill_domain)
-		print skill
 		form = EditCraftOrProfessionForm(data=request.POST, instance=skill)
 		if form.is_valid():
 			form.save()
@@ -266,7 +267,10 @@ def edit_skills(request, character_url):
 	this_character = get_object_or_404(Character, slug=character_url)
 	data = {"character":this_character}
 	if request.method == "POST" and request.user == this_character.player:
-		form = EditCharacter_Skills_Form(data=request.POST, instance=this_character)
+		if request.POST['which_form'] == "skills_form":
+			form = EditCharacter_Skills_Form(data=request.POST, instance=this_character)
+		elif request.POST['which_form'] == "max_ranks_form":
+			form = EditMaxRanksForm(data=request.POST, instance=this_character)
 		if form.is_valid():
 			form.save()
 			data.update(add_character_edit_data(this_character))

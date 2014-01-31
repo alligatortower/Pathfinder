@@ -36,26 +36,33 @@ function bind_jquery_to_form(){
 		var form_data = $(this).closest(".edit_character_modal_form").serialize();
 		var skill_modal = $(this).closest(".modal")
 		var this_modal = skill_modal.attr("data-type")
-		console.log(this_modal)
 		if (this_modal == "edit_craft_or_profession"){
 			var url = '/character/' + slug + '/edit_multiskill/'; 
-			var skill_domain = skill_modal.find("#multiskill_domain").html()
-			var skill_type = skill_modal.find("#skill_type").html()
-			form_data += "&skill_domain=" + encodeURIComponent(skill_domain);
-			form_data += "&skill_type=" + encodeURIComponent(skill_type);
+//			var skill_domain = skill_modal.find("#multiskill_domain").html()
+//			var skill_type = skill_modal.find("#skill_type").html()
+//			form_data += "&skill_domain=" + encodeURIComponent(skill_domain);
+//			form_data += "&skill_type=" + encodeURIComponent(skill_type);
 		}
 		else if (this_modal == "add_craft_or_profession_modal"){
 			var url = '/character/' + slug + '/add_multiskill/';
 		}
 		else {
 			var url = '/character/' + slug + '/edit_skills/';
+			form_data += "&which_form=skills_form"
 
 		}
-		form_data += "&modal=" + encodeURIComponent(this_modal);
-		form_data += "&tab=" + encodeURIComponent("skills_tab");
+//		form_data += "&modal=" + encodeURIComponent(this_modal);
 		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
 			submit_form.call(this, form_data, url);
 		})	
+	})
+	$(".edit_max_ranks_button").on("click", function(e){
+		e.preventDefault();
+		alert("fuck you robocop")
+		var url = '/character/' + slug + '/edit_skills/';
+		var form_data = $(this).closest(".edit_max_ranks_form").serialize();
+		form_data += "&which_form=max_ranks_form";
+		submit_form.call(this, form_data, url) 	
 	})
 	$(".craft_or_profession_delete").on("click", function(e){
 		e.preventDefault();
@@ -75,6 +82,12 @@ function bind_jquery_to_form(){
 
 function submit_form(form_data, url){
 		$.pjax({
+			html: true,
+			container: 'body',
+			delay: 000,
+			animation: false,
+			trigger: "hover",
+			placement: "auto top",
 			type: 'POST',
 			url: url, 
 			data: form_data,
@@ -91,24 +104,24 @@ function submit_form(form_data, url){
 
 }
 function skill_magic(){
-	$(".skill_details").hide()
 
 	$(".skill_housing")
 		//sexy rollover colors
 		.mouseover(function(){
-			$(this).find(".skill_housing").addClass("skill_clicked")
+			$(this).addClass("skill_clicked")
 		})
 		.mouseleave(function(){
-			$(this).find(".skill_housing").removeClass("skill_clicked")
-			
+			$(this).removeClass("skill_clicked")
 		})
 
 		// create popovers
 		.popover({
 			html: true,
+			container: 'body',
 			delay: 000,
 			animation: false,
 			trigger: "hover",
+			placement: "auto top",
 			//set title depending on things
 			title: function(){
 				if ($(this).find(".class_skill").length == 1){
@@ -134,6 +147,19 @@ function skill_magic(){
 			$(modal_id).modal()	
 			}
 		})
+	$(".skill_details").hide()
+
+	//Gray out Trained Skills without ranks
+	$(".skill_housing").each(function(index){
+	        if ($(this).hasClass("trained_skill") && $(this).find(".skill_ranks").find(".skill_component_number").html() <= 0){
+			$(this).css("background-color","#E9E9E9")
+		};
+		if ($(this).hasClass("armor_penalty") && $(this).find(".armor_penalty_container").find(".skill_component_number").html() > 0) {
+			$(this).find(".skill_total").css("color","red")
+			$(this).find(".armor_penalty_container").css("color","red")
+		}
+	})
+
 	$(".add_craft_or_profession").on("click", function(){
 		$("#add_craft_or_profession_modal").modal()
 	})
@@ -141,10 +167,20 @@ function skill_magic(){
 		var which_one = $(this).attr("id")
 		$("#" + which_one +"_modal" ).modal()
 	})
+	$(".ranks_total").popover({
+		html: true,
+		container: 'body',
+		delay: 000,
+		animation: false,
+		trigger: "click",
+		placement: "auto top",
+		content: $(".max_ranks_form_popover").html()
+	})
+	$(".max_ranks_form_popover").hide()
 }
 	
-$(document).on("pjax:end", function(){
-	console.log("pjax has ended")
+$(document).on("pjax:success", function(){
+	console.log("pjax has succeeded")
 	//redo bindings after pseudo page refresh
 	bind_jquery_to_form()
 	skill_magic()

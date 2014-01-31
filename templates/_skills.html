@@ -1,6 +1,21 @@
-<h3>Skills</h3>
-
-	<div class="skill_housing">
+<div class="skills_header">
+	<div class="skills_title">
+		<h3>Skills</h3>
+	</div>
+	<div class="ranks_total">
+		<span>Total Skill Ranks: {{ character.total_ranks }} / {{ character.max_ranks }}</span>
+	</div>
+</div>
+<div class="max_ranks_form_popover">
+	<form class="edit_max_ranks_form">
+		{{ EditMaxRanksForm }}
+		<br />
+		<button type="button" class="btn btn-default" data-dismiss="popover">Close</button>
+		<button type="submit" class="btn btn-primary edit_max_ranks_button"  value="save" name="skills_tab">Save</button>
+	</form>
+		
+</div>
+	<div class="skill_housing armor_penalty">
 		<div class="skill_housing_section">
 		       <div class="skill_main">
 				<div class="skill_name">
@@ -39,7 +54,7 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
@@ -47,7 +62,9 @@
 					Armor Penalty
 				</div>
 			</div>
+			{% if character.sk_acrobatics_class %}
 			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	<div class="skill_housing">
@@ -88,6 +105,9 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_appraise_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	<div class="skill_housing">
@@ -128,10 +148,13 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_bluff_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	<div class="skill_housing">
-		<div class="skill_housing_section">
+		<div class="skill_housing_section armor_penalty">
 		       <div class="skill_main">
 				<div class="skill_name">
 					<span>Climb</span>
@@ -169,14 +192,17 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
 				<div class="skill_component_name">
-					Armor Check Penalty
+					Armor Penalty
 				</div>
 			</div>
+			{% if character.sk_climb_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	{% if craft_skills %}
@@ -224,6 +250,9 @@
 					Misc
 				</div>
 			</div>
+			{% if value.sk_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	{% endfor %}
@@ -266,9 +295,12 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_diplomacy_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	<div class="skill_housing">
+	<div class="skill_housing trained_skill armor_penalty">
 		<div class="skill_housing_section">
 		       <div class="skill_main">
 				<div class="skill_name">
@@ -307,14 +339,17 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
 				<div class="skill_component_name">
-					Armor Check Penalty
+					Armor Penalty
 				</div>
 			</div>
+			{% if character.sk_disable_device_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	<div class="skill_housing">
@@ -355,9 +390,12 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_disguise_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	<div class="skill_housing">
+	<div class="skill_housing armor_penalty">
 		<div class="skill_housing_section">
 		       <div class="skill_main">
 				<div class="skill_name">
@@ -400,13 +438,16 @@
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
-				<div class="skill_component_name">
-					Armor Check Penalty
+				<div class="skill_component_name armor_penalty_container">
+					Armor Penalty
 				</div>
 			</div>
+			{% if character.sk_escape_artist_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	<div class="skill_housing">
+	<div class="skill_housing armor_penalty">
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_name">
@@ -445,18 +486,105 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
 				<div class="skill_component_name">
-					Armor Check Penalty
+					Armor Penalty
+				</div>
+			</div>
+			{% if character.sk_fly_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Handle Animal</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_handle_animal }}
 				</div>
 			</div>
 		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_handle_animal_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_handle_animal_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_handle_animal_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
 	</div>
-	Handle Animal: {{ character.sk_handle_animal }}<br />
-	Heal: {{ character.sk_heal }}<br />
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Heal</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_heal }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_wis_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Wisdom
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_heal_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_heal_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_heal_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
 	<div class="skill_housing">
 		<div class="skill_housing_section">
 			<div class="skill_main">
@@ -495,9 +623,12 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_intimidate_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	<div class="skill_housing">
+	<div class="skill_housing trained_skill">
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_category_wrapper">
@@ -505,7 +636,7 @@
 						<span>Knowledge</span>
 					</div>
 					<div class="skill_name">
-						<span>(Arcana)</span>
+						(<span>Arcana</span>)
 					</div>
 				</div>
 				<div class="skill_total">
@@ -540,19 +671,529 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_knowledge_arcana_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	Knowledge (dungeoneering): {{ character.sk_knowledge_dungeoneering }}<br />
-	Knowledge (engineering): {{ character.sk_knowledge_engineering }}<br />
-	Knowledge (geography): {{ character.sk_knowledge_geography }}<br />
-	Knowledge (history): {{ character.sk_knowledge_history }}<br />
-	Knowledge (local): {{ character.sk_knowledge_local }}<br />
-	Knowledge (nature): {{ character.sk_knowledge_nature }}<br />
-	Knowledge (nobility): {{ character.sk_knowledge_nobility }}<br />
-	Knowledge (planes): {{ character.sk_knowledge_planes }}<br />
-	Knowledge (religion): {{ character.sk_knowledge_religion }}<br />
-	Linguistics: {{ character.sk_linguistics }}<br />
-	Perception: {{ character.sk_perception }}<br />
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowl.</span>
+					</div>
+					<div class="skill_name">
+						(<span>Dungeoneering</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_dungeoneering }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_dungeoneering_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_dungeoneering_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_dungeoneering_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Engineering</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_engineering }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_engineering_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_engineering_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_engineering_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Geography</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_geography }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_geography_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_geography_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_geography_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>History</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_history }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_history_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_history_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_history_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Local</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_local }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_local_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_local_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_local_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Nature</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_nature }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_nature_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_nature_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_nature_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Nobility</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_nobility }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_nobility_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_nobility_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_nobility_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Planes</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_planes }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_planes_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_planes_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_planes_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_category_wrapper">
+					<div class="skill_category">
+						<span>Knowledge</span>
+					</div>
+					<div class="skill_name">
+						(<span>Religion</span>)
+					</div>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_knowledge_religion }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_religion_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_knowledge_religion_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_knowledge_religion_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Linguistics</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_linguistics }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_linguistics_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_linguistics_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_linguistics_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Perception</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_perception }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_wis_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Perception
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_perception_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_perception_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_perception_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
 	<div class="skill_housing">
 		<div class="skill_housing_section">
 			<div class="skill_main">
@@ -564,7 +1205,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="skill_housing_section skill_detials">
+		<div class="skill_housing_section skill_details">
 			<div class="skill_component_container skill_abl">
 				<div class="skill_component_number skill_abl_mod">
 					{{ character.ability_cha_mod }}
@@ -591,11 +1232,14 @@
 					Misc
 				</div>
 			</div>
+			{% if character.sk_perform_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	{% if profession_skills %}
 	{% for value in profession_skills %}	
-	<div class="skill_housing craft_or_profession_housing" id=profession{{value.skill_order}}>
+	<div class="skill_housing craft_or_profession_housing trained_skill" id=profession{{value.skill_order}}>
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_category_wrapper">
@@ -638,11 +1282,14 @@
 					Misc
 				</div>
 			</div>
+			{% if value.sk_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	{% endfor %}
 	{% endif %}
-	<div class="skill_housing">
+	<div class="skill_housing armor_penalty">
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_name">
@@ -681,18 +1328,63 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
 				<div class="skill_component_name">
-					Armor Check Penalty
+					Armor Penalty
+				</div>
+			</div>
+			{% if character.sk_ride_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Sense Motive</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_sense_motive }}
 				</div>
 			</div>
 		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_wis_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Wisdom
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_sense_motive_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_sense_motive_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_sense_motive_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
 	</div>
-	Sense Motive: {{ character.sk_sense_motive }}<br />
-	<div class="skill_housing">
+	<div class="skill_housing trained_skill armor_penalty">
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_name">
@@ -731,7 +1423,7 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
@@ -739,10 +1431,55 @@
 					Armor Penalty
 				</div>
 			</div>
+			{% if character.sk_sleight_of_hand_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
-	Spellcraft: {{ character.sk_spellcraft }}<br />
-	<div class="skill_housing">
+	<div class="skill_housing trained_skill">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Spellcraft</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_spellcraft }}
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_spellcraft_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_spellcraft_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_spellcraft_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing armor_penalty">
 		<div class="skill_housing_section">
 			<div class="skill_main">
 				<div class="skill_name">
@@ -781,30 +1518,126 @@
 				</div>
 			</div>
 			-
-			<div class="skill_component_container">
+			<div class="skill_component_container armor_penalty_container">
 				<div class="skill_component_number">
 					{{ character.armor_check_penalty }}
 				</div>
 				<div class="skill_component_name">
-					Armor Check Penalty
+					Armor Penalty
+				</div>
+			</div>
+			{% if character.sk_stealth_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Survival</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_survival }}
 				</div>
 			</div>
 		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_wis_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Wisdom
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_survival_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_survival_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_survival_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
 	</div>
-	Survival: {{ character.sk_survival }}<br />
-	Swim: {{ character.sk_swim }}<br />
-	<div class="skill_housing">
-		<div class="skill_housing_section skill_main">
-			<div class="skill_name">
-				Use Magical Device
+	<div class="skill_housing armor_penalty">
+		<div class="skill_housing_section">
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Swim</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_swim }}
+				</div>
 			</div>
 		</div>
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_str_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Strength
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_swim_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_swim_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			-
+			<div class="skill_component_container armor_penalty_container">
+				<div class="skill_component_number">
+					{{ character.armor_check_penalty }}
+				</div>
+				<div class="skill_component_name">
+					Armor Penalty
+				</div>
+			</div>
+			{% if character.sk_swim_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+	</div>
+	<div class="skill_housing trained_skill">
 		<div class="skill_housing_section">
-			<div class="skill_total">
-				{{ character.sk_use_magical_device }}
+			<div class="skill_main">
+				<div class="skill_name">
+					<span>Use Magical Device</span>
+				</div>
+				<div class="skill_total">
+					{{ character.sk_use_magical_device }}
+				</div>
 			</div>
 		</div>
-		<div class="skill_housing_section">
+		<div class="skill_housing_section skill_details">
 			<div class="skill_component_container skill_abl">
 				<div class="skill_component_number skill_abl_mod">
 					{{ character.ability_cha_mod }}
@@ -825,12 +1658,15 @@
 			+
 			<div class="skill_component_container">
 				<div class="skill_component_number">
-					{{ character.sk_use_magic_device_misc }}
+					{{ character.sk_use_magical_device_misc }}
 				</div>
 				<div class="skill_component_name">
 					Misc
 				</div>
 			</div>
+			{% if character.sk_use_magical_device_class %}
+			<span class="class_skill"></span>
+			{% endif %}
 		</div>
 	</div>
 	<br />
