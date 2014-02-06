@@ -143,6 +143,9 @@ body {
 
 
 /* COMBATSTATS */
+.combat_mouseover {
+	text-decoration:underline;
+}
 .other_combat_stats {
 	font-size:0;
 }
@@ -475,10 +478,13 @@ body {
 
 .skill_housing {
 	padding:0px;
-	margin-top:5px;
-	margin-right:5px;
+	margin-top:1px;
+	margin-right:1px;
 	display:inline-block;
 	background-color:#DAF3F8;
+}
+.skill_boxes_container {
+	font-size:0;
 }
 
 .skill_housing_section {
@@ -494,15 +500,17 @@ body {
 .skill_details {
 	padding:10px;
 	width:auto;
-	display:none;
+	display:block;
 }
 
 .skill_main{
 	width:200px;
+	height:60px;
 /*	border-color:black;
 	border:2px solid;   */
 	height:100%;
 	text-align:center;
+	color:white;
 }
 
 .skill_name {
@@ -513,7 +521,6 @@ body {
 .skill_category_wrapper {
 	display:inline-block;
 	text-align:center;
-	width:100%;
 }
 
 .skill_category {
@@ -538,11 +545,32 @@ body {
 .skill_component_name {
 	font-size:small;
 }
-
-.skill_component_container.skill_abl_dex {
-
-	color:#61D72E;
+.str_skill {
+	background-color:#CE1836;
 }
+.dex_skill {
+	background-color:#A3A948;
+}
+.int_skill {
+	background-color:#009989;
+}
+.wis_skill {
+	background-color:#BC31F8;
+}
+.cha_skill {
+	background-color:#F85931;
+}
+.skill_title_box {
+	background-color:white;
+	color:black;
+	font-size:x-large;
+	width:200px;
+	height:60px;
+	text-align:center;
+	vertical-align:top;
+}
+
+
 
 
 
@@ -551,11 +579,59 @@ body {
 	width:auto;
 	max-width:800px;
 }
+.modal_ability_container {
+	padding:10px;
+	color:white;
+}
+.modal_ability_container input {
+	width:40px;
+}
+.modal_str {
+	background-color:#CE1836;
+}
+.modal_dex {
+	background-color:#A3A948;
+}
+.modal_con {
+	background-color:#EDB92E;
+}
+.modal_int {
+	background-color:#009989;
+}
+.modal_wis {
+	background-color:#BC31F8;
+}
+.modal_cha {
+	background-color:#F85931;
+}
+.modal_base_class_attack_bonus_container {
+	display:inline-block;
+	padding:10px;
+}
+#attack_bonus_modal {
+	text-align:center;
+}
+#attack_bonus_modal input {
+	width:40px;
+}
+.modal_total_base_attack_bonus {
+	font-size:x-large;
+	text-align:center;
+	margin-bottom:15px;
+}
+#initiative_modal {
+	text-align:center;
+}
+.modal_initiative_total {
+	font-size:x-large;
+}
+#initiative_modal input {
+	width:40px;
 
-
-
-
-
+}
+.modal_speed_container input {
+	width:40px;
+}
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
 /*

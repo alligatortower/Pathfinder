@@ -59,7 +59,13 @@ class EditCharacter_Abilities_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
-		fields = ('ability_str_base', 'ability_dex_base', 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base')
+		fields = ('ability_str_base', 'ability_str_equip', 'ability_str_spell', 'ability_str_misc',
+			'ability_dex_base',  'ability_dex_equip', 'ability_dex_spell', 'ability_dex_misc',
+			'ability_con_base',  'ability_con_equip', 'ability_con_spell', 'ability_con_misc',
+			'ability_wis_base',  'ability_wis_equip', 'ability_wis_spell', 'ability_wis_misc',
+			'ability_int_base', 'ability_int_equip', 'ability_int_spell', 'ability_int_misc',
+			'ability_cha_base', 'ability_cha_equip', 'ability_cha_spell', 'ability_cha_misc',)
+
 
 	def save(self,commit=True, *args, **kwargs):
 		instance = super(EditCharacter_Abilities_Form, self).save(commit=False)
@@ -204,6 +210,37 @@ class EditBaseClassSavesForm(forms.ModelForm):
 		model = BaseClass
 		fields = ("class_base_fortitude_save","class_base_reflex_save", "class_base_willpower_save")
 
+class EditCharacter_Health_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("current_hp","total_hp","nonlethal_damage",)
+
+class EditCharacter_Initiative_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("initiative_feat","initiative_misc",)
+
+class EditCharacter_AC_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("ac_total",)
+
+class EditCharacter_Speed_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("speed_base","speed_armor","speed_fly","speed_climb","speed_swim")
+
+class EditCharacter_BaseAttack_Form(forms.ModelForm):
+	melee_attack_bonus_str_or_dex = forms.ChoiceField(choices=(("str","Strength"),("dex","Dexterity"),))
+
+	class Meta:
+		model = Character
+		fields = ("melee_attack_bonus_str_or_dex", "base_attack_bonus_misc")
+
 class CreateItemForm(forms.ModelForm):
 
 	class Meta:
@@ -243,21 +280,31 @@ def size_mod_update(instance):
 		instance.size_mod = -1
 	
 def set_abilities(instance):		
-	instance.ability_str_score = instance.ability_str_base + instance.ability_str_temp
+	instance.ability_str_misc_total = instance.ability_str_equip + instance.ability_str_spell + instance.ability_str_misc 
+	instance.ability_str_score = instance.ability_str_base + instance.ability_str_misc_total
 	instance.ability_str_mod = (instance.ability_str_score - 10) / 2
-	instance.ability_dex_score = instance.ability_dex_base + instance.ability_dex_temp
+	
+	instance.ability_dex_misc_total = instance.ability_dex_equip + instance.ability_dex_spell + instance.ability_dex_misc 
+	instance.ability_dex_score = instance.ability_dex_base + instance.ability_dex_misc_total
 	instance.ability_dex_mod = (instance.ability_dex_score - 10) / 2
-	instance.ability_con_score = instance.ability_con_base + instance.ability_con_temp
+	
+	instance.ability_con_misc_total = instance.ability_con_equip + instance.ability_con_spell + instance.ability_con_misc 
+	instance.ability_con_score = instance.ability_con_base + instance.ability_con_misc_total
 	instance.ability_con_mod = (instance.ability_con_score - 10) / 2
-	instance.ability_int_score = instance.ability_int_base + instance.ability_int_temp
+	
+	instance.ability_int_misc_total = instance.ability_int_equip + instance.ability_int_spell + instance.ability_int_misc 
+	instance.ability_int_score = instance.ability_int_base + instance.ability_int_misc_total
 	instance.ability_int_mod = (instance.ability_int_score - 10) / 2
-	instance.ability_wis_score = instance.ability_wis_base + instance.ability_wis_temp
+	
+	instance.ability_wis_misc_total = instance.ability_wis_equip + instance.ability_wis_spell + instance.ability_wis_misc 
+	instance.ability_wis_score = instance.ability_wis_base + instance.ability_wis_misc_total
 	instance.ability_wis_mod = (instance.ability_wis_score - 10) / 2
-	instance.ability_cha_score = instance.ability_cha_base + instance.ability_cha_temp
+
+	instance.ability_cha_misc_total = instance.ability_cha_equip + instance.ability_cha_spell + instance.ability_cha_misc 
+	instance.ability_cha_score = instance.ability_cha_base + instance.ability_cha_misc_total
 	instance.ability_cha_mod = (instance.ability_cha_score - 10) / 2
 
 def set_combatstats(instance):
-	print instance.name
 	instance.initiative_total = instance.ability_dex_mod + instance.initiative_misc
 	instance.ac = instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc + instance.size_mod
 	instance.cmb =  instance.ability_str_mod + instance.size_mod

@@ -26,7 +26,7 @@
 	{% endif %}
 	<div class="other_combat_stats">
 		<div class="combat_container_1">
-			<div class="health_container">
+			<div class="combatstat_container health_container">
 				<h4>Health</h4>
 				<div class="current_total_hp_container">
 					<div class="current_hp_container">
@@ -56,7 +56,7 @@
 				</div>
 
 			</div>
-			<div class="initiative_container">
+			<div class="combatstat_container initiative_container">
 				<h4>Initiative</h4>
 				<div class="initiative_total">
 					{{ character.initiative_total }}
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="ac_container">
+			<div class="combatstat_container ac_container">
 				<h4>Armor Class</h4>
 				<div class="ac_set_container">
 					<div class="ac_total_container">
@@ -188,7 +188,7 @@
 			</div>
 		</div>
 		<div class="combat_container_2">
-			<div class="speed_container">
+			<div class="combatstat_container speed_container">
 				<h4>Speed</h4>
 				<div class="speed_base_container">
 					<div class="speed_name speed_base_name">
@@ -235,7 +235,7 @@
 
 				</div>
 			</div>
-			<div class="base_attack_container">
+			<div class="combatstat_container base_attack_container">
 				<div class="base_attack_bonus">
 					<h4>Base Attack Bonus</h4>
 					<div class="attack_bonus_number">
@@ -301,7 +301,7 @@
 			</div>
 		</div>
 		<div class="combat_container_3">
-			<div class="combat_maneuvers_container">
+			<div class="combatstat_container combat_maneuvers_container">
 				<div class="combat_maneuver_bonus_container">
 					<h4>Combat Maneuver Bonus</h4>
 					<div class="combat_maneuver_bonus_total_container">
@@ -395,7 +395,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="saves_container">
+			<div class="combatstat_container saves_container">
 				<h4>Saves</h4>
 				<div class="save_container fortitude_container">
 					<h5>Fortitude</h5>
@@ -500,8 +500,3 @@
 			</div>
 		</div>
 	</div>
-		<form class="edit_character_form">
-				{% csrf_token %}
-			{{ EditCharacter_Combatstats_Form }}
-			<button type="submit" class="form_save" name="combatstats_tab">save</button>
-		</form>

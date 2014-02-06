@@ -1,4 +1,99 @@
-{% if base_classes %}
+
+<div class="modal fade" id="health_modal" data-type="health_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Health</h4>
+			</div>
+			<form class="edit_health_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					Current HP: {{ EditCharacter_Health_Form.current_hp }}<br /><br />
+					Total HP: {{ EditCharacter_Health_Form.total_hp }}<br /><br />
+					Non Lethal Damage: {{ EditCharacter_Health_Form.nonlethal_damage }}<br /><br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="initiative_modal" data-type="initiative_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Initiative</h4>
+			</div>
+			<form class="edit_initiative_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="modal_initiative_etc">
+						Dexterity Modifier: {{ character.ability_dex_mod }} + Bonus from feats: {{ EditCharacter_Initiative_Form.initiative_feat }} + Miscellaneous Bonuses: {{ EditCharacter_Initiative_Form.initiative_misc }} =
+					</div>
+					<div class="modal_initiative_total">
+						{{ character.initiative_total }}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="ac_modal" data-type="ac_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Armor Class</h4>
+			</div>
+			<form class="edit_ac_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="modal_initiative_total">
+						{{ character.ac_total }}
+					</div>
+					<div class="modal_initiative_etc">
+						Dexterity Modifier: {{ character.ability_dex_mod }} + Bonus from feats: {{ EditCharacter_Initiative_Form.initiative_feat }} + Miscellaneous Bonuses: {{ EditCharacter_Initiative_Form.initiative_misc }} =
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="speed_modal" data-type="speed_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Speed</h4>
+			</div>
+			<form class="edit_speed_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="modal_speed_container">
+						{{ EditCharacter_Speed_Form.as_p }}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="attack_bonus_modal" data-type="attack_bonus_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -9,11 +104,35 @@
 			<form class="edit_attack_bonus_modal_form">
 				{% csrf_token %}
 				<div class="modal-body">
+					{% if base_classes %}
 					{% for value in base_classes %}
-						<div class="base_class_attack_bonus_modal_container" data-modal="class{{ value.class_number }}">
+						{% if value.class_number > 0 %}
+							+
+						{% endif %}
+						<div class="modal_base_class_attack_bonus_container" data-modal="class{{ value.class_number }}">
 							{{ value.class_name }}({{ value.class_levels }}): +{{ value.class_base_attack_bonus_1}}{% if value.class_base_attack_bonus_2 > 0 %}/+{{ value.class_base_attack_bonus_2 }}{% endif %}{% if value.class_base_attack_bonus_3 > 0 %}/+{{ value.class_base_attack_bonus_3 }}{% endif %}{% if value.class_base_attack_bonus_4 > 0 %}/+{{ value.class_base_attack_bonus_4 }}{% endif %}
 						</div>
 					{% endfor %}
+						+
+					{% endif %}
+					<div class="modal_attack_bonus_misc">
+						Miscellaneous Attack Bonus: {{ EditCharacter_BaseAttack_Form.base_attack_bonus_misc }}
+					</div>
+					=
+					<div class="modal_total_base_attack_bonus">
+						+{{ character.base_attack_bonus_1 }}
+						{% if character.base_attack_bonus_2 > 0 %}
+							/ +{{ character.base_attack_bonus_2 }} 
+						{% endif %}{% if character.base_attack_bonus_3 > 0 %}
+							/ +{{ character.base_attack_bonus_3 }}
+						{% endif %}{% if character.base_attack_bonus_4 > 0 %}
+							/ +{{ character.base_attack_bonus_4 }}
+						{% endif %}
+					</div>
+					<div class="model_melee_str_or_dex">
+						Your melee attacking bonus is based on: {{ EditCharacter_BaseAttack_Form.melee_attack_bonus_str_or_dex }}<br />
+						(Your ranged attack bonus is always based on dexterity)
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -23,5 +142,4 @@
 		</div>
 	</div>
 </div>
-{% endif %}
 

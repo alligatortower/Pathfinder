@@ -39,7 +39,39 @@ function bind_jquery_submit_logic(){
 			submit_form(form_data, url);
 		})
 	})
+	$(".edit_health_modal_form").on("submit", function(e) {
+		e.preventDefault();
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_health/'
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+	})
+	$(".edit_initiative_modal_form").on("submit", function(e) {
+		e.preventDefault();
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_initiative/'
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+	})
+	$(".edit_speed_modal_form").on("submit", function(e) {
+		e.preventDefault();
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_speed/'
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+	})
+	$(".edit_attack_bonus_modal_form").on("submit", function(e){
+		e.preventDefault()
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_base_attack/'
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
 
+	})
 	$(".edit_character_form").on("submit", function(e){
 		e.preventDefault();
 		var form_data = $(this).serialize();
@@ -138,6 +170,18 @@ function submit_form(form_data, url){
 
 }
 function bind_other_jquery_magic(){
+	$(".combatstat_container")
+		.mouseover(function(){
+			$(this).find("h4").addClass("combat_mouseover")
+		})
+		.mouseleave(function(){
+			$(this).find("h4").removeClass("combat_mouseover")
+		})
+	$(".ability_container").on("click", function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#edit_abilities_modal").modal()
+	})
 	$(".open_add_base_class_modal").on("click", function(e){
 		e.preventDefault();
 		$("#add_base_class_modal").modal()
@@ -149,18 +193,33 @@ function bind_other_jquery_magic(){
 		var which_class_modal = "#" + which_class + "_modal"
 		$(which_class_modal).modal()
 	})
+	$(".health_container").on("click", function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#health_modal").modal()	
+	})
+	$(".initiative_container").on("click", function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#initiative_modal").modal()	
+	})
+	$(".speed_container").on("click", function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#speed_modal").modal()	
+		
+	})
 	$(".character_description_main_container").on("click", function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		$("#edit_details_modal").modal()
 
 	})
-	$(".base_class_attack_bonus_modal_container").on("click", function(e){
+	$(".modal_base_class_attack_bonus_container").on("click", function(e){
 		e.stopPropagation();
 		e.preventDefault();
 		var which_class = $(this).attr("data-modal")
 		var which_class_modal = "#" + which_class + "_modal"
-		console.log(which_class_modal)
 		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
 			$(which_class_modal).modal()
 		})
@@ -179,31 +238,7 @@ function bind_other_jquery_magic(){
 		})
 
 		// create popovers
-		.popover({
-			html: true,
-			container: 'body',
-			delay: 000,
-			animation: false,
-			trigger: "hover",
-			placement: "auto top",
-			//set title depending on things
-			title: function(){
-				if ($(this).find(".class_skill").length == 1){
-					var title = "Class Skill"
-					if ($(this).find(".skill_ranks .skill_component_number").html() >= 1) {
-						title = title + " +3"
-					}
-					else {
-						title = title + ", no ranks yet"
-					}
-					return title
-				}	
-			},
-			content:function(){
-				return $(this).find(".skill_details").html()
-			}
 				
-		})
 		.on("click", function(){
 			if (!$(this).hasClass("craft_or_profession_housing")){
 			var skill = $(this).find(".skill_name span").html()
@@ -211,7 +246,6 @@ function bind_other_jquery_magic(){
 			$(modal_id).modal()	
 			}
 		})
-	$(".skill_details").hide()
 
 	//Gray out Trained Skills without ranks
 	$(".skill_housing").each(function(index){

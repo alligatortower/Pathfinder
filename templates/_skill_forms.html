@@ -9,9 +9,49 @@
 				<h4 class="modal-title" id="myModalLabel">Edit Acrobatics</h4>
 			</div>
 				<div class="modal-body">
-						Ranks: {{ EditCharacter_Skills_Form.sk_acrobatics_ranks }}
-						Miscellaneous: {{ EditCharacter_Skills_Form.sk_acrobatics_misc }}
-						Class Skill? {{ EditCharacter_Skills_Form.sk_acrobatics_class }}
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl_dex">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_acrobatics_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_acrobatics_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_acrobatics_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_acrobatics_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_acrobatics_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_acrobatics_class }}<br />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -28,9 +68,1690 @@
 				<h4 class="modal-title" id="myModalLabel">Edit Appraise</h4>
 			</div>
 				<div class="modal-body">
-						Ranks: {{ EditCharacter_Skills_Form.sk_appraise_ranks }}
-						Miscellaneous: {{ EditCharacter_Skills_Form.sk_appraise_misc }}
-						Class Skill? {{ EditCharacter_Skills_Form.sk_appraise_class }}
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_int_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Intelligence
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_appraise_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_appraise_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_appraise_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+
+					Ranks: {{ EditCharacter_Skills_Form.sk_appraise_ranks }}<br />
+					Miscellaneous: {{ EditCharacter_Skills_Form.sk_appraise_misc }}<br />
+					Class Skill? {{ EditCharacter_Skills_Form.sk_appraise_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Bluff_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Bluff</h4>
+			</div>
+			<div class="modal-body">
+		<div class="skill_housing_section skill_details">
+			<div class="skill_component_container skill_abl">
+				<div class="skill_component_number skill_abl_mod">
+					{{ character.ability_cha_mod }}
+				</div>
+				<div class="skill_component_name skill_abl_name">
+					Charisma
+				</div>
+			</div>
+			+
+			<div class="skill_component_container skill_ranks">
+				<div class="skill_component_number">
+					{{ character.sk_bluff_ranks }}
+				</div>
+				<div class="skill_component_name">
+					Ranks
+				</div>
+			</div>
+			+
+			<div class="skill_component_container">
+				<div class="skill_component_number">
+					{{ character.sk_bluff_misc }}
+				</div>
+				<div class="skill_component_name">
+					Misc
+				</div>
+			</div>
+			{% if character.sk_bluff_class %}
+			<span class="class_skill"></span>
+			{% endif %}
+		</div>
+
+		Ranks: {{ EditCharacter_Skills_Form.sk_bluff_ranks }}<br />
+		Miscellaneous: {{ EditCharacter_Skills_Form.sk_bluff_misc }}<br />
+		Class Skill? {{ EditCharacter_Skills_Form.sk_bluff_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Climb_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Climb</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_str_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Strength
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_climb_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_climb_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_climb_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_climb_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_climb_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_climb_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Diplomacy_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Diplomacy</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_diplomacy_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_diplomacy_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_diplomacy_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_diplomacy_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_diplomacy_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_diplomacy_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Disable_Device_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Disable Device</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_disable_device_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_disable_device_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_disable_device_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_disable_device_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_disable_device_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_disable_device_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Disguise_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Disguise</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_disguise_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_disguise_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_disguise_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_disguise_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_disguise_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_disguise_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Escape_Artist_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Diplomacy</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_escape_artist_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_escape_artist_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name armor_penalty_container">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_escape_artist_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_escape_artist_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_escape_artist_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_escape_artist_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Fly_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Fly</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_fly_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_fly_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_fly_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_fly_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_fly_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_fly_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Handle_Animal_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Handle Animal</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_handle_animal_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_handle_animal_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_handle_animal_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_handle_animal_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_handle_animal_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_handle_animal_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Heal_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Heal</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_wis_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Wisdom
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_heal_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_heal_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_heal_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_heal_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_heal_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_heal_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Intimidate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Intimidate</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_intimidate_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_intimidate_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_intimidate_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_intimidate_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_intimidate_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_intimidate_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Linguistics_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Linguistics</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_linguistics_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_linguistics_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_linguistics_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_linguistics_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_linguistics_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_linguistics_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Perception_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Perception</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_wis_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Perception
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_perception_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_perception_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_perception_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_perception_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_perception_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_perception_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Perform_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Perform</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_perform_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_perform_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_perform_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_perform_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_perform_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_perform_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Ride_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Ride</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_ride_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_ride_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_ride_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_ride_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_ride_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_ride_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Sense_Motive_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Sense Motive</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_wis_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Wisdom
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_sense_motive_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_sense_motive_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_sense_motive_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_sense_motive_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_sense_motive_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_sense_motive_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Sleight_of_Hand_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Sleight of Hand</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_sleight_of_hand_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_sleight_of_hand_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_sleight_of_hand_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_sleight_of_hand_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_sleight_of_hand_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_sleight_of_hand_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Spellcraft_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Spellcraft</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_spellcraft_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_spellcraft_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_spellcraft_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_spellcraft_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_spellcraft_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_spellcraft_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Stealth_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Stealth</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_dex_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Dexterity
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_stealth_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_stealth_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_stealth_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_stealth_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_stealth_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_stealth_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Survival_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Survival</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_wis_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Wisdom
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_survival_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_survival_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_survival_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_survival_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_survival_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_survival_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Swim_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Swim</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_str_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Strength
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_swim_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_swim_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						-
+						<div class="skill_component_container armor_penalty_container">
+							<div class="skill_component_number">
+								{{ character.armor_check_penalty }}
+							</div>
+							<div class="skill_component_name">
+								Armor Penalty
+							</div>
+						</div>
+						{% if character.sk_swim_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_swim_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_swim_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_swim_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Use_Magical_Device_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Use Magical Device</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_cha_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Charisma
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_use_magical_device_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_use_magical_device_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_use_magical_device_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_use_magical_device_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_use_magical_device_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_use_magical_device_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Arcana_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Arcana</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_arcana_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_arcana_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_arcana_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_arcana_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_arcana_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_arcana_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Dungeoneeering_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Dungeoneeering</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_dungeoneering_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_dungeoneering_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_dungeoneering_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_dungeoneering_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_dungeoneering_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_dungeoneering_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Engineering_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Engineering</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_engineering_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_engineering_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_engineering_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_engineering_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_engineering_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_engineering_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Geography_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Geography</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_geography_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_geography_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_geography_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_geography_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_geography_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_geography_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="History_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge History</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_history_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_history_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_history_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_history_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_history_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_history_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Local_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Local</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_local_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_local_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_local_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_local_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_local_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_local_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Nature_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Nature</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_nature_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_nature_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_nature_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_nature_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_nature_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_nature_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Nobility_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Nobility</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_nobility_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_nobility_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_nobility_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_nobility_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_nobility_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_nobility_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Planes_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Planes</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_planes_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_planes_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_planes_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_planes_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_planes_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_planes_class }}<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Religion_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">				
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Knowledge Religion</h4>
+			</div>
+				<div class="modal-body">
+					<div class="skill_housing_section skill_details">
+						<div class="skill_component_container skill_abl">
+							<div class="skill_component_number skill_abl_mod">
+								{{ character.ability_int_mod }}
+							</div>
+							<div class="skill_component_name skill_abl_name">
+								Intelligence
+							</div>
+						</div>
+						+
+						<div class="skill_component_container skill_ranks">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_religion_ranks }}
+							</div>
+							<div class="skill_component_name">
+								Ranks
+							</div>
+						</div>
+						+
+						<div class="skill_component_container">
+							<div class="skill_component_number">
+								{{ character.sk_knowledge_religion_misc }}
+							</div>
+							<div class="skill_component_name">
+								Misc
+							</div>
+						</div>
+						{% if character.sk_knowledge_religion_class %}
+						<span class="class_skill"></span>
+						{% endif %}
+					</div>
+						Ranks: {{ EditCharacter_Skills_Form.sk_knowledge_religion_ranks }}<br />
+						Miscellaneous: {{ EditCharacter_Skills_Form.sk_knowledge_religion_misc }}<br />
+						Class Skill? {{ EditCharacter_Skills_Form.sk_knowledge_religion_class }}<br />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

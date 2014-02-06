@@ -5,23 +5,17 @@
 </script>
 {% endblock %}
 {% block header_block %}
-	<h2> {{ character.name }} the {{ character.base_class_1 }} (level: {{ character.level }}) </h2>
+	<h2>{{ character.name }}</h2>
 {% endblock %}
 {% block body_block %}
 	<ul class="nav nav-tabs" id="character_nav">
-		<li><a href="#character_ability_block" data-toggle="tab">Abilities</a></li>
+		<li class="active"><a href="#character_ability_block" data-toggle="tab">Abilities</a></li>
 		<li><a href="#character_combatstats" data-toggle="tab">Combat</a></li>
 		<li><a href="#character_skills" data-toggle="tab">Skills</a></li>
 	</ul>
 	{% block character_stats %}
 	<div class="tab-content" id="character_stats">
-		<div class="tab-pane fade in active" id="character_home">
-			<h3> Home </h3>
-			Alignment: {{ character.alignment }}<br />
-			Race: {{ character.race }}<br />
-			Class: {{ character.base_class_1 }}<br />
-		</div>
-		<div class="tab-pane fade" id="character_ability_block">
+		<div class="tab-pane fade in active" id="character_ability_block">
 			<h3> abilities </h3>
 			str: {{ character.ability_str }} <br />
 			dex: {{ character.ability_dex }} <br />
@@ -43,6 +37,10 @@
 		</div>
 	</div>
 	{% endblock %}
+	<br />
+	<br />
+	<br />
+	<br />
 	<div class="character_footer">
 		{% if character.player == user %}
 			<p> {{ character.name }} is a character you control. <a href="/what_to_create/character/{{character.slug}}">Add</a> an item to {{ character.name}} </p>

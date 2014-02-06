@@ -1,4 +1,70 @@
 
+<div class="modal fade" id="edit_abilities_modal" data-type="edit_abilities_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Abilities</h4>
+			</div>
+			<form class="edit_abilities_form">
+				<div class="modal-body">
+					{% csrf_token %}
+					<div class="modal_ability_container modal_str">
+						<h4>Strength (Modifier: {{ character.ability_str_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_str_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_str_base }} + Miscellaneous: {{ character.ability_str_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_str_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_str_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_str_misc }}</span>)
+						
+						</div>		
+					</div>
+					<div class="modal_ability_container modal_dex">
+						<h4>Dexterity (Modifier: {{ character.ability_dex_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_dex_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_dex_base }} + Miscellaneous: {{ character.ability_dex_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_dex_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_dex_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_dex_misc }}</span>)
+						
+						</div>		
+					</div>
+					<div class="modal_ability_container modal_con">
+						<h4>Constitution (Modifier: {{ character.ability_con_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_con_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_con_base }} + Miscellaneous: {{ character.ability_con_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_con_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_con_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_con_misc }}</span>)
+						
+						</div>		
+					</div>
+					<div class="modal_ability_container modal_int">
+						<h4>Intelligence (Modifier: {{ character.ability_int_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_int_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_int_base }} + Miscellaneous: {{ character.ability_int_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_int_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_int_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_int_misc }}</span>)
+						
+						</div>		
+					</div>
+					<div class="modal_ability_container modal_wis">
+						<h4>Wisdom (Modifier: {{ character.ability_wis_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_wis_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_wis_base }} + Miscellaneous: {{ character.ability_wis_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_wis_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_wis_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_wis_misc }}</span>)
+						
+						</div>		
+					</div>
+					<div class="modal_ability_container modal_cha">
+						<h4>Charisma (Modifier: {{ character.ability_cha_mod }})</h4>
+						<div class="modal_ability_parts">
+							<span class="modal_ability_score">Score: {{ character.ability_cha_score }} =</span>
+							<span class="modal_ability_base">Base: {{ EditCharacter_Abilities_Form.ability_cha_base }} + Miscellaneous: {{ character.ability_cha_misc_total }}</span> (<span class="model_ability_etc">from equipment: {{ EditCharacter_Abilities_Form.ability_cha_equip }} + from spell effects: {{ EditCharacter_Abilities_Form.ability_cha_spell }} + from any other source: {{ EditCharacter_Abilities_Form.ability_cha_misc }}</span>)
+						</div>		
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" action="submit" class="btn btn-primary modal_form_save_button">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <div class="modal fade" id="edit_details_modal" data-type="edit_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

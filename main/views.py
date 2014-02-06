@@ -152,6 +152,11 @@ def add_character_edit_data(character):
 	data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
 	data['EditCharacter_Details_Form'] = EditCharacter_Details_Form(instance=character)
 	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+	data['EditCharacter_Health_Form'] = EditCharacter_Health_Form(instance=character)
+	data['EditCharacter_Initiative_Form'] = EditCharacter_Initiative_Form(instance=character)
+	data['EditCharacter_AC_Form'] = EditCharacter_AC_Form(instance=character)
+	data['EditCharacter_Speed_Form'] = EditCharacter_Speed_Form(instance=character)
+	data['EditCharacter_BaseAttack_Form'] = EditCharacter_BaseAttack_Form(instance=character)
 	data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
 	data['add_base_class_form'] = AddBaseClassForm(instance=character)
 	data['add_craft_or_profession_form'] = AddCraftOrProfessionForm()
@@ -237,10 +242,8 @@ def edit_base_class(request, character_url):
 @csrf_exempt
 @pjax("edit_character_pjax.html")
 def delete_base_class(request, character_url):
-	print "making it to beginning of view"
 	this_character = get_object_or_404(Character, slug=character_url)
 	data = {"character":this_character}
-	print "making it to the view"
 	if request.method == "POST" and request.user == this_character.player:
 		class_to_delete = BaseClass.objects.get(class_belongs_to=this_character, class_name= request.POST['class_name'])
 		print class_to_delete.class_name
@@ -248,7 +251,65 @@ def delete_base_class(request, character_url):
 		data.update(add_character_edit_data(this_character))
 		return TemplateResponse(request, "character.html", data)
 
-			
+
+@pjax("edit_character_pjax.html")
+def edit_health(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Health_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_initiative(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Initiative_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			set_combatstats(this_character)
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_ac(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_AC_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			set_combatstats(this_character)
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_speed(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Speed_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_base_attack(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_BaseAttack_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			set_combatstats(this_character)
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
 
 @pjax("edit_character_pjax.html")
 def add_multiskill(request, character_url):
