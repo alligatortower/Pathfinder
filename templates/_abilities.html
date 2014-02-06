@@ -1,0 +1,187 @@
+<div class="home_container">
+	<div class="ability_container">
+		<h3>Abilities</h3>
+		<div class="ability_housing str_housing">
+			<div class="ability_mod">
+				{{ character.ability_str_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Str
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_str_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_str_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_str_temp }}
+			</div>
+		</div>
+		<div class="ability_housing dex_housing">
+			<div class="ability_mod">
+				{{ character.ability_dex_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Dex
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_dex_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_dex_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_dex_temp }}
+			</div>
+		</div>
+		<div class="ability_housing con_housing">
+			<div class="ability_mod">
+				{{ character.ability_con_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Con
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_con_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_con_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_con_temp }}
+			</div>
+		</div>
+		<div class="ability_housing int_housing">
+			<div class="ability_mod">
+				{{ character.ability_int_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Int
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_int_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_int_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_int_temp }}
+			</div>
+		</div>
+		<div class="ability_housing wis_housing">
+			<div class="ability_mod">
+				{{ character.ability_wis_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Wis
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_wis_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_wis_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_wis_temp }}
+			</div>
+		</div>
+		<div class="ability_housing cha_housing">
+			<div class="ability_mod">
+				{{ character.ability_cha_mod }}
+			</div>
+			<div class="ability_name_container">
+				<div class="ability_name">
+					Cha
+				</div>
+			</div>
+			<div class="ability_score">
+				{{ character.ability_cha_score }}
+			</div>
+			<span class="ability_operator">=</span>
+			<div class="ability_base">
+				{{ character.ability_cha_base }}
+			</div>
+			<span class="ability_operator">+</span>
+			<div class="ability_temp">
+				{{ character.ability_cha_temp }}
+			</div>
+		</div>
+
+	</div>
+	<div class="base_classes_container">
+		<h3>Classes</h3>
+		{% if base_classes %}
+		{% for base_class in base_classes %}
+		<div class="base_class_container" data-modal="class{{ base_class.class_number}}">
+			{{ base_class.class_name }} - {{ base_class.class_levels }}
+		</div>
+		{% endfor %}
+		{% else %}
+		You have no base classes 
+		{% endif %}
+	<button class="open_add_base_class_modal">Add a Base Class</button>
+	</div>
+	<div class="character_description_main_container">
+		<h3>Details</h3>
+		<div class="character_description_avatar">
+			
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Alignment: </span><span class="character_description_detail">{{ character.alignment }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Race: </span><span class="character_description_detail">{{ character.race }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Deity: </span><span class="character_description_detail">{{ character.deity }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Gender: </span><span class="character_description_detail">{{ character.gender }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Size: </span><span class="character_description_detail">{{ character.size }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Eyes: </span><span class="character_description_detail">{{ character.eyes }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Hair: </span><span class="character_description_detail">{{ character.hair }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Age: </span><span class="character_description_detail">{{ character.age }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Height: </span><span class="character_description_detail">{{ character.height }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Weight: </span><span class="character_description_detail">{{ character.weight }}
+		</div>
+		<div class="character_description_etc_container">
+			<span="character_description_title">Alignment: </span>
+			<div class="character_description">
+				{{ character.description }}
+			</div>
+		</div>
+	</div>
+</div>

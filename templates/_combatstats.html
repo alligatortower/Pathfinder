@@ -1,0 +1,507 @@
+<h3>Combat</h3>
+	{% if weapons or armors %}
+	<div class="attack_and_defense">
+		<div class="weapons_container">
+			{% if weapons %}
+			{% for weapon in weapons %}
+			<div class="weapon_container">
+				<div class="weapon_total_attack_bonus">
+					{{ weapon.attack_bonus }}
+				</div>
+				<div class="weapon_damage"
+			</div>
+			{% endfor %}
+			{% endif %}
+
+		</div>
+		<div class="armors_container">
+			{% if armors %}
+			{% for armor in armors %}
+
+			{% endfor %}
+			{% endif %}
+
+		</div>
+	</div>
+	{% endif %}
+	<div class="other_combat_stats">
+		<div class="combat_container_1">
+			<div class="health_container">
+				<h4>Health</h4>
+				<div class="current_total_hp_container">
+					<div class="current_hp_container">
+						<div class="current_hp_number">
+							{{ character.current_hp }}
+						</div>
+						<div class="current_hp_name">
+							<span>Current Hit Points</span>
+						</div>
+					</div>
+					<div class="total_hp_container">
+						<div class="total_hp_number">
+							{{ character.total_hp }}
+						</div>
+						<div class="total_hp_name">
+							<span>Total Hit Points</span>
+						</div>
+					</div>
+				</div>
+				<div class="nonlethal_damage_container">
+					<div class="nonlethal_damage_number">
+						{{ character.nonlethal_damage }}
+					</div>
+					<div class="nonlethal_damage_name">
+						Nonlethal Damage
+					</div>
+				</div>
+
+			</div>
+			<div class="initiative_container">
+				<h4>Initiative</h4>
+				<div class="initiative_total">
+					{{ character.initiative_total }}
+				</div>
+				<div class="initiative_etc_container_container">
+					<div class="initiative_etc_container">
+						<div class="initiative_dex">
+							{{ character.ability_dex_mod }}
+						</div>
+						<div class="initiative_dex_name">
+							Dex
+						</div>
+					</div>
+					<span>+</span>
+					<div class="initiative_etc_container">
+						<div class="initiative_misc">
+							{{ character.initiative_misc }}
+						</div>
+						<div class="initiative_misc_name">
+							Misc
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ac_container">
+				<h4>Armor Class</h4>
+				<div class="ac_set_container">
+					<div class="ac_total_container">
+						<div class="ac_total_number">
+							{{ character.ac_total }}
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						= <span class="big_10">10</span> +
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Dex
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ability_dex_mod }}	
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						<span>+</span>
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Armor
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ac_armor_total }}
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						<span>+</span>
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Misc
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ac_misc_total }}
+						</div>
+					</div>
+				</div>
+				<div class="ac_set_container">
+					<h5>Touch AC</h5>
+					<div class="other_ac_total_container">
+						<div class="other_ac_total_number">
+							{{ character.ac_touch_total }}
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						= <span class="big_10">10</span> +
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Dex
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ability_dex_mod }}	
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						<span>+</span>
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Misc
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ac_misc_total }}
+						</div>
+					</div>
+					
+				</div>
+				<div class="ac_set_container">
+					<h5>Flat Footed AC</h5>
+					<div class="other_ac_total_container">
+						<div class="other_ac_total_number">
+							{{ character.ac_ff_total }}
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						= <span class="big_10">10</span> +
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Armor
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ac_armor_total }}
+						</div>
+					</div>
+					<div class="ac_etc_container">
+						<span>+</span>
+					</div>
+					<div class="ac_etc_container">
+						<div class="ac_etc_name">
+							Misc
+						</div>
+						<div class="ac_etc_number">
+							{{ character.ac_misc_total }}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="combat_container_2">
+			<div class="speed_container">
+				<h4>Speed</h4>
+				<div class="speed_base_container">
+					<div class="speed_name speed_base_name">
+						Base
+					</div>
+					<div class="speed_number speed_base_number">
+						{{ character.speed_base }} ft
+					</div>
+				</div>
+				<div class="speed_etc_container speed_armor_container">
+					<div class="speed_name speed_armor_name">
+						In Armor
+					</div>
+					<div class="speed_number speed_armor_number">
+						{{ character.speed_armor }} ft
+					</div>
+				</div>
+				<br />
+				<div class="speed_etc_container speed_fly_container">
+					<div class="speed_etc_name speed_fly_name">
+						Flying
+					</div>
+					<div class="speed_etc_number speed_fly_number">
+						{{ character.speed_fly }} ft
+					</div>
+
+				</div>
+				<div class="speed_etc_container speed_swim_container">
+					<div class="speed_etc_name speed_swim_name">
+						Swimming
+					</div>
+					<div class="speed_etc_number speed_swim_number">
+						{{ character.speed_swim }} ft
+					</div>
+
+				</div>
+				<div class="speed_etc_container speed_climb_container">
+					<div class="speed_etc_name speed_climb_name">
+						Climbing
+					</div>
+					<div class="speed_etc_number speed_climb_number">
+						{{ character.speed_climb }} ft
+					</div>
+
+				</div>
+			</div>
+			<div class="base_attack_container">
+				<div class="base_attack_bonus">
+					<h4>Base Attack Bonus</h4>
+					<div class="attack_bonus_number">
+						+{{ character.base_attack_bonus_1 }}
+					</div>
+					{% if character.base_attack_bonus_2 > 0 %}
+					/
+					<div class="attack_bonus_number">
+						+{{ character.base_attack_bonus_2 }}
+					</div>
+					{% endif %}{% if character.base_attack_bonus_3 > 0 %}
+					/
+					<div class="attack_bonus_number">
+						+{{ character.base_attack_bonus_3 }}
+					</div>
+					{% endif %}{% if character.base_attack_bonus_4 > 0 %}
+					/
+					<div class="attack_bonus_number">
+						+{{ character.base_attack_bonus_4 }}
+					</div>{% endif %}
+				</div>
+				<div class="melee_attack_bonus">
+					<h5>Melee Attack Bonus</h5>
+					<div class="attack_bonus_etc_number">
+						+{{ character.melee_attack_bonus_1 }}
+					</div>
+					{% if character.base_attack_bonus_2 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.melee_attack_bonus_2 }}
+					</div>
+					{% endif %}{% if character.base_attack_bonus_3 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.melee_attack_bonus_3 }}
+					</div>
+					{% endif %}{% if character.base_attack_bonus_4 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.melee_attack_bonus_4 }}
+					</div>{% endif %}
+				</div>
+				<div class="ranged_attack_bonus">
+					<h5>Ranged Attack Bonus</h5>
+					<div class="attack_bonus_etc_number">
+						+{{ character.ranged_attack_bonus_1 }}
+					</div>
+					{% if character.base_attack_bonus_2 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.ranged_attack_bonus_2 }}
+					</div>
+					{% endif %}{% if character.base_attack_bonus_3 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.ranged_attack_bonus_3 }}
+					</div>{% endif %}{% if character.base_attack_bonus_4 > 0 %}
+					/
+					<div class="attack_bonus_etc_number">
+						+{{ character.ranged_attack_bonus_4 }}
+					</div>{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="combat_container_3">
+			<div class="combat_maneuvers_container">
+				<div class="combat_maneuver_bonus_container">
+					<h4>Combat Maneuver Bonus</h4>
+					<div class="combat_maneuver_bonus_total_container">
+						<div class="combat_maneuver_bonus_number">
+							{{ character.combat_maneuver_bonus }}
+						</div>
+					</div>
+					= 
+					<div class="combat_maneuver_bonus_etc_container">
+						<div class="combat_maneuver_bonus_etc_name">
+							BAB
+						</div>
+						<div class="combat_maneuver_bonus_etc_number">
+							{{ character.base_attack_bonus_1 }}
+						</div>
+					</div>
+					<div class="combat_maneuver_bonus_etc_container">
+						<span>+</span>
+					</div>
+					<div class="combat_maneuver_bonus_etc_container">
+						<div class="combat_maneuver_bonus_etc_name">
+							Str
+						</div>
+						<div class="combat_maneuver_bonus_etc_number">
+							{{ character.ability_str_mod }}
+						</div>
+					</div>
+					<div class="combat_maneuver_bonus_etc_container">
+						<span>+</span>
+					</div>
+					<div class="combat_maneuver_bonus_etc_container">
+						<div class="combat_maneuver_bonus_etc_name">
+							Misc 
+						</div>
+						<div class="combat_maneuver_bonus_etc_number">
+							{{ character.base_attack_bonus_misc }}
+						</div>
+					</div>
+				</div>
+				<div class="combat_maneuver_defense_container">
+					<h4>Combat Maneuver Defense</h4>
+					<div class="combat_maneuver_defense_total_container">
+						<div class="combat_maneuver_defense_number">
+							{{ character.combat_maneuver_defense }}
+						</div>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						= <span class="big_10">10</span> +
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<div class="combat_maneuver_defense_etc_name">
+							BAB
+						</div>
+						<div class="combat_maneuver_defense_etc_number">
+							{{ character.base_attack_bonus_1 }}
+						</div>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<span>+</span>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<div class="combat_maneuver_defense_etc_name">
+							Str
+						</div>
+						<div class="combat_maneuver_defense_etc_number">
+							{{ character.ability_str_mod }}
+						</div>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<span>+</span>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<div class="combat_maneuver_defense_etc_name">
+							Dex
+						</div>
+						<div class="combat_maneuver_defense_etc_number">
+							{{ character.ability_dex_mod }}
+						</div>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<span>+</span>
+					</div>
+					<div class="combat_maneuver_defense_etc_container">
+						<div class="combat_maneuver_defense_etc_name">
+							Misc
+						</div>
+						<div class="combat_maneuver_defense_etc_number">
+							{{ character.combat_maneuver_defense_misc }}
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="saves_container">
+				<h4>Saves</h4>
+				<div class="save_container fortitude_container">
+					<h5>Fortitude</h5>
+					<div class="save_total_container fortitude_total">
+						{{ character.fortitude_save_total }}
+					</div>
+					<span>=</span>
+					<div class="save_etc_container">
+						<div class="save_etc_name">
+							Con
+						</div>
+						<div class="foritude_etc_number">
+							{{ character.ability_con_mod }}
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="save_etc_name">
+							Base
+						</div>
+						<div class="foritude_etc_number">
+							{{ character.fortitude_save_base }}
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="save_etc_name">
+							Misc
+						</div>
+						<div class="foritude_etc_number">
+							{{ character.fortitude_save_misc }}
+						</div>
+					</div>
+				</div>
+				<div class="save_container reflex_container">
+					<h5>Reflex</h5>
+					<div class="save_total_container reflex_total">
+						{{ character.reflex_save_total }}
+					</div>
+					<span>=</span>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.ability_dex_mod }}
+						</div>
+						<div class="save_etc_name">
+							Dex
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.reflex_save_base }}
+						</div>
+						<div class="save_etc_name">
+							Base
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.reflex_save_misc }}
+						</div>
+						<div class="save_etc_name">
+							Misc
+						</div>
+					</div>
+				</div>
+				<div class="save_container willpower_container">
+					<h5>Willpower</h5>
+					<div class="save_total_container willpower_total">
+						{{ character.willpower_save_total }}
+					</div>
+					<span>=</span>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.ability_wis_mod }}
+						</div>
+						<div class="save_etc_name">
+							Wis
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.willpower_save_base }}
+						</div>
+						<div class="save_etc_name">
+							Base
+						</div>
+					</div>
+					<div class="save_etc_container">+</div>
+					<div class="save_etc_container">
+						<div class="foritude_etc_number">
+							{{ character.willpower_save_misc }}
+						</div>
+						<div class="save_etc_name">
+							Misc
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+		<form class="edit_character_form">
+				{% csrf_token %}
+			{{ EditCharacter_Combatstats_Form }}
+			<button type="submit" class="form_save" name="combatstats_tab">save</button>
+		</form>

@@ -40,7 +40,7 @@ class Character(models.Model):
 	alignment = models.CharField(default="-", max_length = 20)
 	race = models.CharField(default="-", max_length = 20 )
 	deity = models.CharField(default="-", max_length = 20 )
-	size = models.CharField(default="-" , max_length = 20)
+	size = models.CharField(default="Medium" , max_length = 20)
 	size_mod = models.IntegerField(default=0)
 	gender = models.CharField(default="-" , max_length = 20)
 	age = models.IntegerField(default=0 )
@@ -48,6 +48,7 @@ class Character(models.Model):
 	weight = models.IntegerField(default=0 )
 	hair = models.CharField(default="-", max_length=20 )
 	eyes = models.CharField(default="-", max_length=20)
+	discription = models.CharField(default="-", max_length=1000)
 
 	#misc
 	hd = models.CharField(max_length=10, default="1d6")
@@ -85,32 +86,80 @@ class Character(models.Model):
 	ability_cha_mod = models.IntegerField(default=0)
 	ability_cha_temp = models.PositiveIntegerField(default=0)
 
-	speed_normal = models.IntegerField(default=0)
+
+	#combat tab
+	initiative_total = models.IntegerField(default=0)
+	initiative_misc = models.IntegerField(default=0)
+
+	base_attack_bonus_1 = models.IntegerField(default=0)
+	base_attack_bonus_2 = models.IntegerField(default=0)
+	base_attack_bonus_3 = models.IntegerField(default=0)
+	base_attack_bonus_4 = models.IntegerField(default=0)
+	melee_attack_bonus_1 = models.IntegerField(default=0)
+	melee_attack_bonus_2 = models.IntegerField(default=0)
+	melee_attack_bonus_3 = models.IntegerField(default=0)
+	melee_attack_bonus_4 = models.IntegerField(default=0)
+	melee_attack_bonus_str_or_dex = models.CharField(max_length=3, default="str")
+	ranged_attack_bonus_1 = models.IntegerField(default=0)
+	ranged_attack_bonus_2 = models.IntegerField(default=0)
+	ranged_attack_bonus_3 = models.IntegerField(default=0)
+	ranged_attack_bonus_4 = models.IntegerField(default=0)
+	base_attack_bonus_misc = models.IntegerField(default=0) 
+
+	fortitude_save_total = models.IntegerField(default=0)
+	fortitude_save_base = models.IntegerField(default=0)
+	fortitude_save_temp = models.IntegerField(default=0)
+	fortitude_save_racial = models.IntegerField(default=0)
+	fortitude_save_equip = models.IntegerField(default=0)
+	fortitude_save_feat = models.IntegerField(default=0)
+	fortitude_save_misc = models.IntegerField(default=0)
+	fortitude_save_misc_total = models.IntegerField(default=0)
+	reflex_save_total = models.IntegerField(default=0)
+	reflex_save_base = models.IntegerField(default=0)
+	reflex_save_temp = models.IntegerField(default=0)
+	reflex_save_racial = models.IntegerField(default=0)
+	reflex_save_equip = models.IntegerField(default=0)
+	reflex_save_feat = models.IntegerField(default=0)
+	reflex_save_misc = models.IntegerField(default=0)
+	reflex_save_misc_total = models.IntegerField(default=0)
+	willpower_save_total = models.IntegerField(default=0)
+	willpower_save_base = models.IntegerField(default=0)
+	willpower_save_temp = models.IntegerField(default=0)
+	willpower_save_racial = models.IntegerField(default=0)
+	willpower_save_equip = models.IntegerField(default=0)
+	willpower_save_feat = models.IntegerField(default=0)
+	willpower_save_misc = models.IntegerField(default=0)
+	willpower_save_misc_total = models.IntegerField(default=0)
+
+	speed_base = models.IntegerField(default=0)
 	speed_armor = models.IntegerField(default=0)
 	speed_fly = models.IntegerField(default=0)
 	speed_swim = models.IntegerField(default=0)
 	speed_climb = models.IntegerField(default=0)
 
-	#combat tab
-	initiative = models.IntegerField(default=0)
-	initiative_misc = models.IntegerField(default=0)
-
-	bab = models.IntegerField(default=0)
 	spell_resistance = models.IntegerField(default=0)
-
-	ac = models.IntegerField(default=0)
+	ac_total = models.IntegerField(default=0)
+	ac_touch_total = models.IntegerField(default=0)
+	ac_ff_total = models.IntegerField(default=0)
 	ac_natural = models.IntegerField(default=0)
+	ac_misc_total = models.IntegerField(default=0)
 	ac_misc = models.IntegerField(default=0)
+	ac_armor_total = models.IntegerField(default=0)
 	ac_armor = models.IntegerField(default=0)
 	ac_shield = models.IntegerField(default=0)
+	ac_dodge = models.IntegerField(default=0)
+	ac_deflection = models.IntegerField(default=0)
 	
 	armor_check_penalty = models.PositiveIntegerField(default=0)
 
-	hp = models.IntegerField(default=1)
+	total_hp = models.IntegerField(default=1)
 	current_hp = models.IntegerField(default=1)
+	nonlethal_damage = models.IntegerField(default=0)
 
-	cmb = models.IntegerField(default=0)
-	
+	combat_maneuver_bonus = models.IntegerField(default=0)
+	combat_maneuver_bonus_misc = models.IntegerField(default=0)
+	combat_maneuver_defense = models.IntegerField(default=0)
+	combat_maneuver_defense_misc = models.IntegerField(default=0)
 
 	#skills tab
 	total_ranks = models.IntegerField(default=0)
@@ -302,8 +351,20 @@ class MultiSkill(models.Model):
 		unique_together = (("character","sk_domain"),)
 
 class BaseClass(models.Model):
+	class_belongs_to = models.ForeignKey(Character, null=True, blank=True, default=None)
 	class_name = models.CharField(max_length=30, default="Barbarian")
 	class_levels = models.IntegerField(max_length=30, default=1)
+	class_is_favored = models.BooleanField(default=False)
+	class_base_attack_bonus_1 = models.IntegerField(default=0)
+	class_base_attack_bonus_2 = models.IntegerField(default=0)
+	class_base_attack_bonus_3 = models.IntegerField(default=0)
+	class_base_attack_bonus_4 = models.IntegerField(default=0)
+	class_base_fortitude_save = models.IntegerField(default=0)
+	class_base_reflex_save = models.IntegerField(default=0)
+	class_base_willpower_save = models.IntegerField(default=0)
+
+	class Meta:
+		unique_together = (("class_belongs_to","class_name"),)
 
 class Item(models.Model):
 	owner = models.ForeignKey(Character, null=True, blank=True, default= None)

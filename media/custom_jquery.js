@@ -8,12 +8,38 @@ $(document).ready(function() {
 		localStorage.setItem('lastTab', $(this).attr('href'));
         })
 	//Posts character edits 
-	bind_jquery_to_form()
-
-	//Skill Magic
-	skill_magic()
+	bind_jquery_submit_logic()
+	bind_other_jquery_magic()
 });
-function bind_jquery_to_form(){
+function bind_jquery_submit_logic(){
+	$(".add_base_class_form").on("submit", function(e){
+		e.preventDefault()
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/add_base_class/';
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+	})
+	$(".edit_details_form").on("submit", function(e) {
+		e.preventDefault()
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_details/';
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+
+	})
+	$(".edit_base_class_form").on("submit", function(e){
+		e.preventDefault();
+		var form_data = $(this).serialize();
+		var url = '/character/' + slug + '/edit_base_class/'
+		var class_name = $(this).closest(".modal").attr("data-type")
+		form_data += "&class_name=" + class_name;
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})
+	})
+
 	$(".edit_character_form").on("submit", function(e){
 		e.preventDefault();
 		var form_data = $(this).serialize();
@@ -31,9 +57,9 @@ function bind_jquery_to_form(){
 	$(".edit_character_modal_form").on("submit", function(e){
 		e.preventDefault();	
 	})
-	$(".modal_form_save_button").on("click", function(e){
+	$(".skill_modal_form_save_button").on("click", function(e){
 		e.preventDefault();
-		var form_data = $(this).closest(".edit_character_modal_form").serialize();
+		var form_data = $(this).closest("form").serialize();
 		var skill_modal = $(this).closest(".modal")
 		var this_modal = skill_modal.attr("data-type")
 		if (this_modal == "edit_craft_or_profession"){
@@ -58,11 +84,19 @@ function bind_jquery_to_form(){
 	})
 	$(".edit_max_ranks_button").on("click", function(e){
 		e.preventDefault();
-		alert("fuck you robocop")
 		var url = '/character/' + slug + '/edit_skills/';
 		var form_data = $(this).closest(".edit_max_ranks_form").serialize();
 		form_data += "&which_form=max_ranks_form";
 		submit_form.call(this, form_data, url) 	
+	})
+	$(".base_class_delete").on("click", function(e){
+		e.preventDefault();
+		var class_name = $(this).closest(".modal").attr("data-type")
+		var url = '/character/' + slug + '/delete_base_class/'
+		var form_data = "&class_name=" + encodeURIComponent(class_name);
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			submit_form(form_data, url);
+		})	
 	})
 	$(".craft_or_profession_delete").on("click", function(e){
 		e.preventDefault();
@@ -103,7 +137,37 @@ function submit_form(form_data, url){
  
 
 }
-function skill_magic(){
+function bind_other_jquery_magic(){
+	$(".open_add_base_class_modal").on("click", function(e){
+		e.preventDefault();
+		$("#add_base_class_modal").modal()
+	})
+	$(".base_class_container").on("click", function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var which_class = $(this).attr("data-modal")
+		var which_class_modal = "#" + which_class + "_modal"
+		$(which_class_modal).modal()
+	})
+	$(".character_description_main_container").on("click", function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#edit_details_modal").modal()
+
+	})
+	$(".base_class_attack_bonus_modal_container").on("click", function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var which_class = $(this).attr("data-modal")
+		var which_class_modal = "#" + which_class + "_modal"
+		console.log(which_class_modal)
+		$('.modal.in').modal('hide').on("hidden.bs.modal", function(){
+			$(which_class_modal).modal()
+		})
+	})
+	$(".base_attack_container").on("click", function(){
+		$("#attack_bonus_modal").modal()
+	})
 
 	$(".skill_housing")
 		//sexy rollover colors
@@ -182,8 +246,8 @@ function skill_magic(){
 $(document).on("pjax:success", function(){
 	console.log("pjax has succeeded")
 	//redo bindings after pseudo page refresh
-	bind_jquery_to_form()
-	skill_magic()
+	bind_jquery_submit_logic()
+	bind_other_jquery_magic()
 
 
 	//Then return to correct tab

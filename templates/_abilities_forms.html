@@ -1,0 +1,66 @@
+
+<div class="modal fade" id="edit_details_modal" data-type="edit_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Character Details</h4>
+			</div>
+			<form class="edit_details_form">
+				<div class="modal-body">
+					{% csrf_token %}
+					{{ EditCharacter_Details_Form.as_p }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" action="submit" class="btn btn-primary modal_form_save_button">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="add_base_class_modal" data-type="add_base_class_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Add Base Class</h4>
+			</div>
+			<form class="add_base_class_form">
+				<div class="modal-body">
+					{% csrf_token %}
+					{{ add_base_class_form }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" action="submit" class="btn btn-primary modal_form_save_button">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% if base_classes %}
+{% for base_class in base_classes %}
+<div class="modal fade" id="class{{ base_class.class_number }}_modal" data-type="{{ base_class.class_name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Edit Base Class {{ base_class.class_name }}</h4>
+			</div>
+			<form class="edit_base_class_form">
+				<div class="modal-body">
+					{% csrf_token %}
+					{{ base_class.form.as_p }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default base_class_delete">Delete</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" action="submit" class="btn btn-primary modal_form_save_button">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endif %}

@@ -51,8 +51,428 @@ body {
 	padding: 0px 8px;
 }
 
+/* HOME */
+.home_container{
+}
+
+.ability_container {
+	font-size:0;
+	width:325px;
+	display:inline-block;
+}
+.ability_housing {
+	padding:10px;
+	font-size:X-large;
+/*	font-family:"Menlo", "Monaco", "Consolas", "Courier New", monospace;  */
+	display:block;
+	margin:0;
+}
+.ability_operator {
+	color:white;
+}
+
+.ability_mod {
+	display:inline-block;
+	background-color:white;
+	padding:5px;
+	font-weight:bold;
+}
+.ability_name {
+	display:inline-block;
+	color: white;
+	padding:5px;
+}
+.ability_name_container {
+	display:inline-block;
+
+}
+.ability_score {
+	display:inline-block;
+	color:white;
+	padding:5px;
+
+}
+
+.ability_base {
+	display:inline-block;
+	color:white;
+	padding:5px;
+
+}
+
+.ability_temp {
+	display:inline-block;
+	color:white;
+	padding:5px;
+
+}
+.str_housing {
+	background-color:#CE1836;
+	color:#CE1836;
+}
+.dex_housing {
+	background-color:#A3A948;
+	color:#A3A948;
+}
+.con_housing {
+	background-color:#EDB92E;
+	color:#EDB92E;
+}
+.int_housing {
+	background-color:#009989;
+	color:#009989;
+}
+.wis_housing {
+	background-color:#BC31F8;
+	color:#BC31F8;
+}
+.cha_housing {
+	background-color:#F85931;
+	color:#F85931;
+}
+.base_classes_container {
+	display:inline-block;
+	vertical-align:top;
+	margin-left:20px;
+}
+.character_description_main_container {
+	display:inline-block;
+	vertical-align:top;
+	margin-left:20px;
+}
+
+
+/* COMBATSTATS */
+.other_combat_stats {
+	font-size:0;
+}
+.other_combat_stats div{
+}
+.other_combat_stats h4 {
+	margin:0 0 10px 0;
+}
+.ac_container {
+	background-color:#8A8780;
+	display:block;
+	color:white;
+	font-size:small;
+	padding:10px;
+	height:270px;
+	text-align:center;
+}
+.big_10 {
+	font-size:large;
+	margin:0 5px 0 5px;
+}
+.ac_total_container {
+	display:inline-block;
+}
+.ac_total_container div {
+	display:inline-block;
+}
+.ac_total_number {
+	background-color:white;
+	font-size:x-large;
+	color:#8A8780;
+	padding:5px;
+	font-weight:bold;
+}
+.ac_container .ac_etc_container {
+	display:inline-block;
+	vertical-align:bottom;
+}
+.ac_container .ac_etc_container div {
+	display:block;
+	font-size:small;
+}
+.ac_container .ac_etc_container .ac_etc_number {
+	text-align:center;
+}
+.other_ac_total_container {
+	display:inline-block;
+}
+.ac_set_container h5 {
+	margin-top:20px;
+}
+.other_ac_total_number {
+	font-size:large;
+	background-color:white;
+	color:#8A8780;
+	padding:5px;
+	display:inline-block;
+	font-weight:bold;
+}
+.combat_container_1 {
+	width:360px;
+	display:inline-block;
+}
+.combat_container_2 {
+	display:inline-block;
+	vertical-align:top;
+}
+.combat_container_3 {
+	display:inline-block;
+	vertical-align:top;
+
+}
+.health_container {
+	background-color:#E47267;
+	display:inline-block;
+	color:white;
+	font-size:medium;
+	padding:10px;
+	vertical-align:bottom;
+	width:230px;
+	height:200px;
+	text-align:center;
+}
+.current_total_hp_container {
+	text-align:left;
+	display:inline-block;
+}
+.current_hp_container {
+}
+.current_hp_container div {
+}
+.current_hp_number {
+	font-size:x-large;
+	color:#E47267;
+	background-color:white;
+	padding:5px;
+	font-weight:bold;
+	margin-right:3px;
+	display:inline-block;
+}
+.current_hp_name {
+	font-size:small;
+	display:inline-block;
+}
+.total_hp_container {
+}
+.total_hp_container div {
+	display:inline-block;
+}
+.total_hp_number {
+	font-size:x-large;
+	padding:5px;
+	font-weight:bold;
+	border-top-style:solid;
+	margin-top:8px;
+	margin-right:3px;
+}
+.total_hp_name {
+	font-size:small;
+}
+.nonlethal_damage_container {
+	margin-top:6px;
+	font-size:small;
+	text-align:center;
+}
+.nonlethal_damage_number {
+}
+
+.initiative_container {
+	background-color:#2C3B63;
+	display:inline-block;
+	color:white;
+	font-size:medium;
+	padding:10px;
+	display:inline-block;
+	vertical-align:bottom;
+	width:130px;
+	height:200px;
+	text-align:center;
+}
+.initiative_total {
+	font-size:x-large;
+	font-weight:bold;
+	padding:5px;
+	background-color:white;
+	color:#2C3B63;
+	display:inline-block;
+	vertical-align:middle;
+}
+.initiative_etc_container {
+	display:inline-block;
+	font-size:small;
+	text-align:center;
+}
+.initiative_etc_container_container {
+	display:block;
+	margin-top:6px;
+	vertical-align:bottom;
+}
+.saves_container{
+	background-color:#FCCA55;
+	display:inline-block;
+	color:white;
+	font-size:medium;
+	padding:10px 0 0 0;
+	vertical-align:bottom;
+	text-align:center;
+	width:280px;
+	height:270px;
+}
+.saves_container h4 {
+	margin-left:10px;
+}
+.save_container {
+	padding:10px;
+}
+.save_container h5 {
+	margin:0 0 5px 0px;
+}
+.save_total_container {
+	font-size:large;
+	background-color:white;
+	padding:5px;
+	font-weight:bold;
+	display:inline-block;
+}
+.fortitude_total {
+	color:#FF714B
+}
+.reflex_total {
+	color:#C60052
+}
+.willpower_total {
+	color:#540045
+}
+.fortitude_container {
+	color:white;
+}
+.reflex_container {
+	color:white;
+}
+.willpower_container {
+	color:white;
+}
+.save_etc_container {
+	display:inline-block;
+	font-size:small;
+	text-align:center;
+	vertical-align:bottom;
+}
+.base_attack_container {
+	background-color:#D6D1AF;
+	display:inline-block;
+	color:white;
+	font-size:medium;
+	padding:10px;
+	vertical-align:bottom;
+	width:280px;
+	height:270px;
+	text-align:center;
+}
+.attack_bonus_number {
+	color: #D6D1AF;
+	background-color:white;
+	font-size:large;
+	padding:5px;
+	display:inline-block;
+}
+.attack_bonus_etc_number {
+	
+	color: #D6D1AF;
+	background-color:white;
+	font-size:medium;
+	padding:5px;
+	display:inline-block;
+}
+.speed_container {
+	background-color:#B39980;
+	color:white;
+	font-size:medium;
+	padding:10px;
+	vertical-align:bottom;
+	text-align:center;
+	height:200px;
+	width:280px;
+}
+.speed_base_container {
+	display:inline-block;
+}
+.speed_etc_container{
+	display:inline-block;
+	margin:2px 10px 2px 10px;
+}
+.speed_number {
+	color:#B39980;
+	background-color:white;
+	font-size:large;
+	padding:5px;
+	display:inline-block;
+	font-weight:bold;
+	margin:5px;
+}
+.speed_etc_number {
+	color:#B39980;
+	background-color:white;
+	text-size:medium;
+	padding:5px;
+	display:inline-block;
+	font-weight:bold;
+	margin:5px;
+}
+.combat_maneuvers_container {
+	background-color:#D9CC8C;
+	color:white;
+	width:280px;
+	height:200px;
+	font-size:small;
+	padding:10px;
+	vertical-align:bottom;
+	text-align:center;
+}
+.combat_maneuver_bonus_total_container {
+	display:inline-block;
+	vertical-align:bottom;
+}
+.combat_maneuver_bonus_number {
+	color:#D9CC8C;
+	background-color:white;
+	font-size:x-large;
+	padding:5px;
+	display:inline-block;
+	font-weight:bold;
+}
+.combat_maneuver_bonus_etc_container{
+	display:inline-block;
+}
+.combat_maneuver_defense_container {
+	margin-top:10px;
+}
+.combat_maneuver_defense_total_container {
+	display:inline-block;
+}
+.combat_maneuver_defense_etc_container {
+	display:inline-block;
+	vertical-align:bottom;
+}
+.combat_maneuver_defense_number {
+	color:#D9CC8C;
+	background-color:white;
+	font-size:x-large;
+	padding:5px;
+	display:inline-block;
+	font-weight:bold;
+}
 
 /* SKILLS */
+.skills_header {
+}
+
+.skills_title {
+	display:inline-block;
+}
+
+.ranks_total {
+	display:inline-block;
+	float:right;
+	vertical-align:bottom;
+}
+
+
 .skill_housing {
 	padding:0px;
 	margin-top:5px;
@@ -79,8 +499,8 @@ body {
 
 .skill_main{
 	width:200px;
-	border-color:black;
-	border:2px solid;
+/*	border-color:black;
+	border:2px solid;   */
 	height:100%;
 	text-align:center;
 }

@@ -1,240 +1,31 @@
-import pdb
-import re
-from django import forms
-from django.db.models import Q
-from django.contrib.auth.models import User
-from main.models import *
-
-class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
-
-	class Meta:
-		model = User
-		fields = ('username','email','password')
-
-class UserProfileForm(forms.ModelForm):
-
-	class Meta:
-		model = UserProfile
-		fields = ()
-
-class CreateGameForm(forms.ModelForm):
-	name = forms.CharField(max_length=128)
-	class Meta:
-		model = Game
-		fields = ('name',)
-
-class EditGameForm(forms.Form):
-	character_to_add = forms.ModelChoiceField(queryset = Character.objects.filter(current_game=None))
-	
-	def clean_chracter_to_add(self):
-		character_name = self.cleaned_data['character_to_add']
-		character = Character.objects.get(name=character_name)
-		return character
-
-	class Meta:
-		fields = ('characters',)
-
-class CreateCharacterForm(forms.ModelForm):
-	
-	class Meta:
-		model = Character
-		fields = ('name', 'avatar', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','total_hp')
-
-class EditCharacter_Details_Form(forms.ModelForm):
-	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
-
-	class Meta:
-		model = Character
-		fields = ("alignment","race","deity","size","gender","age","height","weight","hair","eyes")
-
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCharacter_Details_Form, self).save(commit=False)
-		if commit:
-			size_mod_update(instance)
-			instance.save()
-		return instance
-
-class EditCharacter_Abilities_Form(forms.ModelForm):
-
-	class Meta:
-		model = Character
-		fields = ('ability_str_base', 'ability_dex_base', 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base')
-
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCharacter_Abilities_Form, self).save(commit=False)
-		if commit:
-			set_abilities(instance)
-			set_combatstats(instance)
-			set_skills(instance)
-			instance.save()
-		return instance
-
-class EditCharacter_Combatstats_Form(forms.ModelForm):
-
-	class Meta:
-		model = Character
-		fields = ('current_hp','ac_natural','ac_misc','initiative_misc','armor_check_penalty')
-
-	def __init__(self, *args, **kwargs):
-		instance = super(EditCharacter_Combatstats_Form, self).__init__(*args, **kwargs)
-
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCharacter_Combatstats_Form, self).save(commit=False)
-		if commit:
-			set_combatstats(instance)
-			set_skills(instance)
-			instance.save()
-		return instance
-
-class EditCharacter_Skills_Form(forms.ModelForm):
-
-	class Meta:
-		model = Character
-		fields = (
-			"sk_acrobatics_ranks","sk_acrobatics_misc", "sk_acrobatics_class",
-			"sk_appraise_ranks","sk_appraise_misc","sk_appraise_class"
-		)
-	
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCharacter_Skills_Form, self).save(commit=False)
-		if commit:
-			craft_and_profession_skills = MultiSkill.objects.filter(character=instance)
-			for value in craft_and_profession_skills:
-				value.sk_total = skill(instance.ability_int_mod, value.sk_ranks, value.sk_misc, value.sk_class)
-				value.save()
-
-			set_skills(instance)
-			instance.save()
-		return instance
-
-class AddCraftOrProfessionForm(forms.ModelForm):
-	sk_craft_or_profession = forms.ChoiceField(choices=(("Craft","Craft"),("Profession","Profession"),))
-
-	class Meta:
-		model = MultiSkill 
-		fields = ("sk_craft_or_profession","sk_domain","sk_ranks","sk_misc","sk_class")
-
-
-class EditCraftOrProfessionForm(forms.ModelForm):
-
-	class Meta:
-		model = MultiSkill
-		fields = ("sk_domain","sk_ranks","sk_misc","sk_class")
-
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditCraftOrProfessionForm, self).save(commit=False)
-		if commit:
-			set_skills(instance.character)
-			instance.character.save()
-			instance.sk_total = skill(instance.character.ability_int_mod, instance.sk_ranks, instance.sk_misc, instance.sk_class)
-			instance.save()
-		return instance
-
-class EditMaxRanksForm(forms.ModelForm):
-
-	class Meta:
-		model = Character
-		fields = ("max_ranks",)
-
-class WhatToCreateForm(forms.Form):
-	types_of_item = (
-		("Weapon", "Weapon"),
-		("Armor", "Armor"),
-	)
-
-	what = forms.ChoiceField(choices=types_of_item)
-
-	class Meta:
-		fields = ("what",)
-class AddBaseClassForm(forms.ModelForm):
-	base_attack_bonus = forms.CharField(max_length=20, initial="+0")
-
-	class Meta:
-		model = BaseClass
-		fields = ("class_name", "class_levels", "class_is_favored", "base_attack_bonus","class_base_fortitude_save","class_base_reflex_save", "class_base_willpower_save")
-	
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(AddBaseClassForm, self).save(commit=False)
-		if commit:
-			instance.save()
-			character = Character.objects.get(name=instance.class_belongs_to)
-			set_combatstats(character)
-		return instance
-
-class EditBaseClassForm(forms.ModelForm):
-	base_attack_bonus = forms.CharField(max_length=20)
-
-	class Meta:
-		model = BaseClass
-		fields = ("class_name", "class_levels", "class_is_favored", "base_attack_bonus", "class_base_fortitude_save", "class_base_reflex_save", "class_base_willpower_save")
-
-	def __init__(self, *args, **kwargs):
-		instance = super(EditBaseClassForm, self).__init__(*args, **kwargs)
-		bab_1 = kwargs['instance'].class_base_attack_bonus_1
-		bab_2 = kwargs['instance'].class_base_attack_bonus_2
-		bab_3 = kwargs['instance'].class_base_attack_bonus_3
-		bab_4 = kwargs['instance'].class_base_attack_bonus_4
-		initial_bab = "+" + str(bab_1) 
-		initial_bab += "/+" + str(bab_2) if bab_2 > 0 else "" 
-		initial_bab += "/+" + str(bab_3) if bab_3 > 0 else ""
-		initial_bab += "/+" + str(bab_4) if bab_4 > 0 else ""
-		self.fields['base_attack_bonus'].initial = initial_bab
-
-	def save(self,commit=True, *args, **kwargs):
-		instance = super(EditBaseClassForm, self).save(commit=False)
-		if commit:
-			bab_regex = re.findall(r'\+?(\d+)/?', self.cleaned_data['base_attack_bonus'])
-			instance.class_base_attack_bonus_1 = int(bab_regex[0]) if 0 < len(bab_regex) else 0
-			instance.class_base_attack_bonus_2 = int(bab_regex[1]) if 1 < len(bab_regex) else 0
-			instance.class_base_attack_bonus_3 = int(bab_regex[2]) if 2 < len(bab_regex) else 0
-			instance.class_base_attack_bonus_4 = int(bab_regex[3]) if 3 < len(bab_regex) else 0
-			instance.save()
-			character = Character.objects.get(name=instance.class_belongs_to)
-			set_combatstats(character)
-			print character.base_attack_bonus_3
-			character.save()
-		return instance
+from main.forms import *
+### VIEW LOGIC
+def add_character_edit_data(character):	
+	data = {}
+	data['EditCharacter_Abilities_Form'] = EditCharacter_Abilities_Form(instance=character)
+	data['EditCharacter_Combatstats_Form'] = EditCharacter_Combatstats_Form(instance=character)
+	data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
+	data['add_base_class_form'] = AddBaseClassForm(instance=character)
+	data['add_craft_or_profession_form'] = AddCraftOrProfessionForm()
+	data['EditMaxRanksForm'] = EditMaxRanksForm(instance=character)
+	data['base_classes'] = BaseClass.objects.filter(class_belongs_to=character)
+	for value in list(enumerate(data['base_classes'])):
+		data['base_classes'][value[0]].__dict__.update({"form": EditBaseClassForm(instance=value[1], prefix=value[0]), "class_number":value[0] })
+	data['craft_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="craft")
+	for value in list(enumerate(data['craft_skills'])):   
+		data['craft_skills'][value[0]].__dict__.update({"form": EditCraftOrProfessionForm(instance=value[1]), "skill_order":value[0] })
+		data['craft_skills'][value[0]].save()
+	data['profession_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="profession")
+	for value in list(enumerate(data['profession_skills'])):   
+		data['profession_skills'][value[0]].__dict__.update({"form": EditCraftOrProfessionForm(instance=value[1]), "skill_order":value[0]})
+		data['profession_skills'][value[0]].save()
+	return data
 
 
 
-class EditBaseClassSavesForm(forms.ModelForm):
 
-	class Meta:
-		model = BaseClass
-		fields = ("class_base_fortitude_save","class_base_reflex_save", "class_base_willpower_save")
-
-class CreateItemForm(forms.ModelForm):
-
-	class Meta:
-		model = Item
-		exclude = ("owner","current_game")
-
-class CreateEquipmentForm(CreateItemForm):
-	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
-
-	class Meta(CreateItemForm.Meta):
-		model = Equipment
-		exclude = CreateItemForm.Meta.exclude + ("is_equipped",)
-
-class CreateArmorForm(CreateEquipmentForm):
-	proficiency = forms.ChoiceField(choices=(("Light","Light"),("Medium","Medium"),("Heavy","Heavy"),))
-	is_a = forms.ChoiceField(choices=(("Armor","Armor"),("Shield","Shield"),))
-	class Meta(CreateEquipmentForm.Meta):
-		model = Armor
-
-class CreateWeaponForm(CreateEquipmentForm):
-	is_a = forms.ChoiceField(choices=(("Melee Weapon","Melee Weapon"),("Ranged Weapon","Ranged Weapon"),))
-	damage_type = forms.ChoiceField(choices=(("slashing","slashing"),("piercing","piercing"),("bludgeoning","bludgeoning"),))
-	proficiency = forms.ChoiceField(choices=(("simple","simple"),("martial","martial"),("exotic","exotic"),))
-	weapon_type = forms.ChoiceField(choices=(("Light","Light"),("One-Handed","One-Handed"),("Two-Handed","Two-Handed"),))	
-
-	class Meta(CreateEquipmentForm.Meta):
-		model = Weapon
-		exclude = CreateEquipmentForm.Meta.exclude + ("reach","ranged_increment","quantity")
-
-
-def size_mod_update(instance):
+### CHARACTER LOGIC
+def size_mod_update(instante):
 	if instance.size == "Small":
 		instance.size_mod = 1
 	elif instance.size == "Medium":
