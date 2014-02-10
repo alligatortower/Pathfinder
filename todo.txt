@@ -18,6 +18,7 @@
 -way to trade equipment between characters in a game
 -add spell list / prepared spell list
 -add feats / skills
+-forms that can tell if you fucked up before you submit them or at least some graceful error handling.
 
 #refactor (in the long distant future of maybe never)
 

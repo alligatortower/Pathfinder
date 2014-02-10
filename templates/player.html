@@ -11,7 +11,11 @@
 
 {% block body_block %}
         {% if player_games %}
+		{% if this_player == user %}
                 <h3> Your current games are:</h3>
+		{% else %}
+		<h3> The games the GM are: </h3>
+		{% endif %}
                 <ul>
                         {% for game in player_games %}
                                 <li><a href='/game/{{ game.slug }}/'>{{ game.name }}</a></li>
@@ -19,7 +23,11 @@
                 </ul>
         {% endif %}
         {% if player_characters %}
+		{% if this_player == user %}
                 <h3> Your characters are: </h3>
+		{% else %}
+		<h3> The characters they own are: </h3>
+		{% endif %}
                 <ul>
                         {% for character in player_characters %}
                                 <li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
@@ -27,6 +35,10 @@
                 </ul>
         {% endif %}
         {% if not player_games and not player_characters %}
-                <p> You are logged in but you don't have any active games or characters. Make some! </p>
+		{% if this_player == user %}
+                <p> You don't have any active games or characters. Make some! </p>
+		{% else %}
+		<p> This user isn't GMing any games and doesn't own any characters. Why did they even register? Beats me. </p>
+		{% endif %}
         {% endif %}
 {% endblock %}

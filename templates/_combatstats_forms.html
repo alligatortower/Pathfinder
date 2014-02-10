@@ -57,7 +57,7 @@
 				{% csrf_token %}
 				<div class="modal-body">
 					<div class="modal_initiative_total">
-						{{ character.ac_total }}
+						Total AC: {{ character.ac_total }}
 					</div>
 					<div class="modal_initiative_etc">
 						Dexterity Modifier: {{ character.ability_dex_mod }} + Bonus from feats: {{ EditCharacter_Initiative_Form.initiative_feat }} + Miscellaneous Bonuses: {{ EditCharacter_Initiative_Form.initiative_misc }} =
@@ -109,7 +109,7 @@
 						{% if value.class_number > 0 %}
 							+
 						{% endif %}
-						<div class="modal_base_class_attack_bonus_container" data-modal="class{{ value.class_number }}">
+						<div class="modal_base_class_attack_bonus_container generic_stats_container" data-modal="class{{ value.class_number }}">
 							{{ value.class_name }}({{ value.class_levels }}): +{{ value.class_base_attack_bonus_1}}{% if value.class_base_attack_bonus_2 > 0 %}/+{{ value.class_base_attack_bonus_2 }}{% endif %}{% if value.class_base_attack_bonus_3 > 0 %}/+{{ value.class_base_attack_bonus_3 }}{% endif %}{% if value.class_base_attack_bonus_4 > 0 %}/+{{ value.class_base_attack_bonus_4 }}{% endif %}
 						</div>
 					{% endfor %}
@@ -143,3 +143,49 @@
 	</div>
 </div>
 
+<div class="modal fade" id="combat_maneuvers_modal" data-type="speed_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Combat Maneuvers</h4>
+			</div>
+			<form class="edit_combat_maneuver_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="modal_speed_container">
+						Miscellaneous Bonus to Combat Maneuvers: {{ EditCharacter_CombatManeuver_Form.combat_maneuver_bonus_misc }}
+						Miscellaneous Bonus to Combat Maneuver Defense: {{ EditCharacter_CombatManeuver_Form.combat_maneuver_defense_misc }}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="saves_modal" data-type="speed_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Saves</h4>
+			</div>
+			<form class="edit_saves_modal_form">
+				{% csrf_token %}
+				<div class="modal-body">
+					<div class="modal_speed_container">
+						{{ EditCharacter_Saves_Form.as_p }}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary modal_form_save_button"  value="save" name="skills_tab">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

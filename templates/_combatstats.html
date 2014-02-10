@@ -1,4 +1,5 @@
-<h3>Combat</h3>
+<div class="tab_container">
+	<h3>Combat</h3>
 	{% if weapons or armors %}
 	<div class="attack_and_defense">
 		<div class="weapons_container">
@@ -337,7 +338,7 @@
 							Misc 
 						</div>
 						<div class="combat_maneuver_bonus_etc_number">
-							{{ character.base_attack_bonus_misc }}
+							{{ character.combat_maneuver_bonus_misc }}
 						</div>
 					</div>
 				</div>
@@ -500,3 +501,4 @@
 			</div>
 		</div>
 	</div>
+</div>

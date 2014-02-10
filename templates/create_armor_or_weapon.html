@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body_block %}
+	<p>This is not fully implemented  yet</p>
 	<form id='create_weapon_or_armor' method='POST' action='/' enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ item_to_create.as_p }}

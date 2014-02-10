@@ -1,4 +1,4 @@
-<div class="home_container">
+<div class="tab_container">
 	<div class="ability_container">
 		<h3>Abilities</h3>
 		<div class="ability_housing str_housing">
@@ -7,7 +7,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Str
+					<span>Str</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -28,7 +28,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Dex
+					<span>Dex</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -49,7 +49,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Con
+					<span>Con</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -70,7 +70,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Int
+					<span>Int</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -91,7 +91,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Wis
+					<span>Wis</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -112,7 +112,7 @@
 			</div>
 			<div class="ability_name_container">
 				<div class="ability_name">
-					Cha
+					<span>Cha</span>
 				</div>
 			</div>
 			<div class="ability_score">
@@ -131,56 +131,60 @@
 	</div>
 	<div class="base_classes_container">
 		<h3>Classes</h3>
-		{% if base_classes %}
-		{% for base_class in base_classes %}
-		<div class="base_class_container" data-modal="class{{ base_class.class_number}}">
-			{{ base_class.class_name }} - {{ base_class.class_levels }}
-		</div>
-		{% endfor %}
-		{% else %}
-		You have no base classes 
+			{% if base_classes %}
+			{% for base_class in base_classes %}
+			<div class="base_class_container generic_stats_container" data-modal="class{{ base_class.class_number}}">
+				{{ base_class.class_name }} - {{ base_class.class_levels }}
+			</div>
+			{% endfor %}
+			{% elif user == character.play %}
+			You have no base classes 
+			<br />
+			{% else %}
+			{{ character.name }} has no classes
+			{% endif %}
+		{% if user == character.player %}
+		<button class="open_add_base_class_modal">Add a Base Class</button>
 		{% endif %}
-	<button class="open_add_base_class_modal">Add a Base Class</button>
 	</div>
 	<div class="character_description_main_container">
 		<h3>Details</h3>
-		<div class="character_description_avatar">
-			
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Alignment: </span><span class="character_description_detail">{{ character.alignment }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Race: </span><span class="character_description_detail">{{ character.race }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Deity: </span><span class="character_description_detail">{{ character.deity }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Gender: </span><span class="character_description_detail">{{ character.gender }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Size: </span><span class="character_description_detail">{{ character.size }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Eyes: </span><span class="character_description_detail">{{ character.eyes }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Hair: </span><span class="character_description_detail">{{ character.hair }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Age: </span><span class="character_description_detail">{{ character.age }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Height: </span><span class="character_description_detail">{{ character.height }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Weight: </span><span class="character_description_detail">{{ character.weight }}
-		</div>
-		<div class="character_description_etc_container">
-			<span="character_description_title">Alignment: </span>
-			<div class="character_description">
-				{{ character.description }}
+		<div class="generic_stats_container character_description_container"> 
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Alignment: </div><span class="character_description_detail">{{ character.alignment }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Race: </div><span class="character_description_detail">{{ character.race }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Deity: </div><span class="character_description_detail">{{ character.deity }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Gender: </div><span class="character_description_detail">{{ character.gender }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Size: </div><span class="character_description_detail">{{ character.size }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Eyes: </div><span class="character_description_detail">{{ character.eyes }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Hair: </div><span class="character_description_detail">{{ character.hair }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Age: </div><span class="character_description_detail">{{ character.age }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Height: </div><span class="character_description_detail">{{ character.height }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Weight: </div><span class="character_description_detail">{{ character.weight }}
+			</div>
+			<div class="character_description_etc_container">
+				<div class="character_description_title">Description: </div>
+				<div class="character_description">
+					{{ character.description }}
+				</div>
 			</div>
 		</div>
 	</div>

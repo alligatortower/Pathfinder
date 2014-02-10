@@ -21,7 +21,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="/media/bootstrap/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/media/jquery.pjax.js"></script>
-	<script type="text/javascript" src="/media/custom_jquery.js"></script>
+	<!--	<script type="text/javascript" src="/media/custom_jquery.js"></script> -->
 	{% block additional_scripts %}
 
 	{% endblock %}
@@ -41,7 +41,7 @@
 		{% endblock %}
 	</div>
 	<br /> <br />
-	<div id="footer">
+	<div id="content">
 		<div class="footer_account_details">
 			{% if user.is_authenticated %}
 				<a href='/logout/'>Logout</a>
@@ -57,11 +57,13 @@
 			{% endif %}
 	
 		</div>
+		<!--
 		{% if user.is_authenticated %}
 		<span class="footer_create_links">
 			<p>Create: <a href="/create_game/">Game</a> | <a href="/create_character/">Character</a></p>
 		</span>
 		{% endif %}
+		-->
 		{% if general_games or general_characters %}
 		<div class="general_activity_feed">
 			<div class="general_game_feed">

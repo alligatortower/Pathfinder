@@ -36,10 +36,11 @@ class EditGameForm(forms.Form):
 		fields = ('characters',)
 
 class CreateCharacterForm(forms.ModelForm):
+	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
 	
 	class Meta:
 		model = Character
-		fields = ('name', 'avatar', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','total_hp')
+		fields = ('name', 'ability_str_base', "ability_dex_base", 'ability_con_base', 'ability_wis_base', 'ability_int_base','ability_cha_base','size','race','gender','age','alignment')
 
 class EditCharacter_Details_Form(forms.ModelForm):
 	size = forms.ChoiceField(choices=(("Small","Small"),("Medium","Medium"),("Large","Large"),))
@@ -99,7 +100,38 @@ class EditCharacter_Skills_Form(forms.ModelForm):
 		model = Character
 		fields = (
 			"sk_acrobatics_ranks","sk_acrobatics_misc", "sk_acrobatics_class",
-			"sk_appraise_ranks","sk_appraise_misc","sk_appraise_class"
+			"sk_appraise_ranks","sk_appraise_misc","sk_appraise_class",
+			"sk_bluff_ranks","sk_bluff_misc","sk_bluff_class",
+			"sk_climb_ranks","sk_climb_misc","sk_climb_class",
+			"sk_diplomacy_ranks","sk_diplomacy_misc","sk_diplomacy_class",
+			"sk_disable_device_ranks","sk_disable_device_misc","sk_disable_device_class",
+			"sk_disguise_ranks","sk_disguise_misc","sk_disguise_class",
+			"sk_escape_artist_ranks","sk_escape_artist_misc","sk_escape_artist_class",
+			"sk_fly_ranks","sk_fly_misc","sk_fly_class",
+			"sk_handle_animal_ranks","sk_handle_animal_misc","sk_handle_animal_class",
+			"sk_heal_ranks","sk_heal_misc","sk_heal_class",
+			"sk_intimidate_ranks","sk_intimidate_misc","sk_intimidate_class",
+			"sk_linguistics_ranks","sk_linguistics_misc","sk_linguistics_class",
+			"sk_perception_ranks","sk_perception_misc","sk_perception_class",
+			"sk_perform_ranks","sk_perform_misc","sk_perform_class",
+			"sk_ride_ranks","sk_ride_misc","sk_ride_class",
+			"sk_sense_motive_ranks","sk_sense_motive_misc","sk_sense_motive_class",
+			"sk_sleight_of_hand_ranks","sk_sleight_of_hand_misc","sk_sleight_of_hand_class",
+			"sk_spellcraft_ranks","sk_spellcraft_misc","sk_spellcraft_class",
+			"sk_stealth_ranks","sk_stealth_misc","sk_stealth_class",
+			"sk_survival_ranks","sk_survival_misc","sk_survival_class",
+			"sk_swim_ranks","sk_swim_misc","sk_swim_class",
+			"sk_use_magical_device_ranks","sk_use_magical_device_misc","sk_use_magical_device_class",
+			"sk_knowledge_arcana_ranks","sk_knowledge_arcana_misc","sk_knowledge_arcana_class",
+			"sk_knowledge_dungeoneering_ranks","sk_knowledge_dungeoneering_misc","sk_knowledge_dungeoneering_class",
+			"sk_knowledge_engineering_ranks","sk_knowledge_engineering_misc","sk_knowledge_engineering_class",
+			"sk_knowledge_geography_ranks","sk_knowledge_geography_misc","sk_knowledge_geography_class",
+			"sk_knowledge_history_ranks","sk_knowledge_history_misc","sk_knowledge_history_class",
+			"sk_knowledge_local_ranks","sk_knowledge_local_misc","sk_knowledge_local_class",
+			"sk_knowledge_nature_ranks","sk_knowledge_nature_misc","sk_knowledge_nature_class",
+			"sk_knowledge_nobility_ranks","sk_knowledge_nobility_misc","sk_knowledge_nobility_class",
+			"sk_knowledge_planes_ranks","sk_knowledge_planes_misc","sk_knowledge_planes_class",
+			"sk_knowledge_religion_ranks","sk_knowledge_religion_misc","sk_knowledge_religion_class",
 		)
 	
 	def save(self,commit=True, *args, **kwargs):
@@ -158,7 +190,7 @@ class AddBaseClassForm(forms.ModelForm):
 
 	class Meta:
 		model = BaseClass
-		fields = ("class_name", "class_levels", "class_is_favored", "base_attack_bonus","class_base_fortitude_save","class_base_reflex_save", "class_base_willpower_save")
+		fields = ("class_name", "class_levels", "class_is_favored","class_hit_die", "base_attack_bonus","class_base_fortitude_save","class_base_reflex_save", "class_base_willpower_save")
 	
 	def save(self,commit=True, *args, **kwargs):
 		instance = super(AddBaseClassForm, self).save(commit=False)
@@ -173,7 +205,7 @@ class EditBaseClassForm(forms.ModelForm):
 
 	class Meta:
 		model = BaseClass
-		fields = ("class_name", "class_levels", "class_is_favored", "base_attack_bonus", "class_base_fortitude_save", "class_base_reflex_save", "class_base_willpower_save")
+		fields = ("class_name", "class_levels", "class_is_favored", "class_hit_die","base_attack_bonus", "class_base_fortitude_save", "class_base_reflex_save", "class_base_willpower_save")
 
 	def __init__(self, *args, **kwargs):
 		instance = super(EditBaseClassForm, self).__init__(*args, **kwargs)
@@ -226,7 +258,7 @@ class EditCharacter_AC_Form(forms.ModelForm):
 
 	class Meta:
 		model = Character
-		fields = ("ac_total",)
+		fields = ("ac_dodge","ac_deflection","ac_misc",)
 
 class EditCharacter_Speed_Form(forms.ModelForm):
 
@@ -240,6 +272,20 @@ class EditCharacter_BaseAttack_Form(forms.ModelForm):
 	class Meta:
 		model = Character
 		fields = ("melee_attack_bonus_str_or_dex", "base_attack_bonus_misc")
+
+class EditCharacter_CombatManeuver_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("combat_maneuver_bonus_misc","combat_maneuver_defense_misc",)
+
+class EditCharacter_Saves_Form(forms.ModelForm):
+
+	class Meta:
+		model = Character
+		fields = ("fortitude_save_temp","fortitude_save_racial","fortitude_save_equip","fortitude_save_feat","fortitude_save_misc",
+			"reflex_save_temp","reflex_save_racial","reflex_save_equip","reflex_save_feat","reflex_save_misc",
+			"willpower_save_temp","willpower_save_racial","willpower_save_equip","willpower_save_feat","willpower_save_misc",)
 
 class CreateItemForm(forms.ModelForm):
 
@@ -305,9 +351,11 @@ def set_abilities(instance):
 	instance.ability_cha_mod = (instance.ability_cha_score - 10) / 2
 
 def set_combatstats(instance):
-	instance.initiative_total = instance.ability_dex_mod + instance.initiative_misc
-	instance.ac = instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc + instance.size_mod
-	instance.cmb =  instance.ability_str_mod + instance.size_mod
+	instance.initiative_total = instance.ability_dex_mod + instance.initiative_misc + instance.initiative_feat
+
+	instance.ac_total = 10 + instance.ability_dex_mod + instance.ac_armor + instance.ac_shield + instance.ac_natural + instance.ac_misc + instance.size_mod + instance.ac_dodge + instance.ac_deflection
+	instance.ac_touch_total = 10 + instance.ability_dex_mod + instance.size_mod + instance.ac_dodge + instance.ac_deflection
+	instance.ac_ff_total = 10 + instance.ac_armor + instance.ac_shield + instance.ac_natural
 
 	base_attack_bonus_1_total = 0
 	base_attack_bonus_2_total = 0
@@ -327,10 +375,16 @@ def set_combatstats(instance):
 			base_fortitude_save_total += base_class.class_base_fortitude_save
 			base_reflex_save_total += base_class.class_base_reflex_save
 			base_willpower_save_total += base_class.class_base_willpower_save
-	instance.base_attack_bonus_1 = base_attack_bonus_1_total
+	instance.base_attack_bonus_1 = base_attack_bonus_1_total + instance.base_attack_bonus_misc
 	instance.base_attack_bonus_2 = base_attack_bonus_2_total
 	instance.base_attack_bonus_3 = base_attack_bonus_3_total
 	instance.base_attack_bonus_4 = base_attack_bonus_4_total
+	if instance.base_attack_bonus_2 > 0:
+		instance.base_attack_bonus_2 += instance.base_attack_bonus_misc
+	if instance.base_attack_bonus_3 > 0:
+		instance.base_attack_bonus_3 += instance.base_attack_bonus_misc
+	if instance.base_attack_bonus_4 > 0:
+		instance.base_attack_bonus_4 += instance.base_attack_bonus_misc
 
 	instance.fortitude_save_base = base_fortitude_save_total
 	instance.reflex_save_base = base_reflex_save_total
@@ -349,6 +403,9 @@ def set_combatstats(instance):
 	instance.ranged_attack_bonus_2 = instance.ability_dex_mod + instance.base_attack_bonus_2
 	instance.ranged_attack_bonus_3 = instance.ability_dex_mod + instance.base_attack_bonus_3
 	instance.ranged_attack_bonus_4 = instance.ability_dex_mod + instance.base_attack_bonus_4
+
+	instance.combat_maneuver_bonus =  instance.ability_str_mod + instance.base_attack_bonus_1 + instance.combat_maneuver_bonus_misc
+	instance.combat_maneuver_defense =  instance.ability_str_mod + instance.ability_dex_mod + instance.size_mod + instance.base_attack_bonus_1 + instance.combat_maneuver_defense_misc + 10
 
 	instance.fortitude_save_total = instance.ability_con_mod + instance.fortitude_save_base + instance.fortitude_save_temp
 	instance.reflex_save_total = instance.ability_dex_mod + instance.reflex_save_base + instance.reflex_save_temp

@@ -373,6 +373,7 @@ class BaseClass(models.Model):
 	class_belongs_to = models.ForeignKey(Character, null=True, blank=True, default=None)
 	class_name = models.CharField(max_length=30, default="Barbarian")
 	class_levels = models.IntegerField(max_length=30, default=1)
+	class_hit_die = models.CharField(max_length=10,default="1d6")
 	class_is_favored = models.BooleanField(default=False)
 	class_base_attack_bonus_1 = models.IntegerField(default=0)
 	class_base_attack_bonus_2 = models.IntegerField(default=0)

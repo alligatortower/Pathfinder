@@ -1,576 +1,505 @@
-<div class="skills_header">
-	<div class="skills_title">
-		<h3>Skills</h3>
-	</div>
-	<div class="ranks_total">
-		<span>Total Skill Ranks: {{ character.total_ranks }} / {{ character.max_ranks }}</span>
-	</div>
-</div>
-<div class="max_ranks_form_popover">
-	<form class="edit_max_ranks_form">
-		{{ EditMaxRanksForm }}
+<div class="tab_container">
+	<div class="skills_header">
+		<div class="skills_title">
+			<h3>Skills</h3>
+		</div>
 		<br />
-		<button type="button" class="btn btn-default" data-dismiss="popover">Close</button>
-		<button type="submit" class="btn btn-primary edit_max_ranks_button"  value="save" name="skills_tab">Save</button>
-	</form>
-		
-</div>
-<div class="skill_boxes_container">
-	<div class="skill_housing armor_penalty dex_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Acrobatics</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_acrobatics }}
+		<div class="generic_stats_container ranks_total">
+			<span>Total Skill Ranks: {{ character.total_ranks }} / {{ character.max_ranks }}</span>
+		</div>
+	</div>
+	<div class="skill_boxes_container">
+		<div class="skill_housing armor_penalty dex_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Acrobatics</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_acrobatics }}
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
-	<div class="skill_housing int_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Appraise</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_appraise }}
-				</div>
-			</div>
 		</div>
-	</div>
-	<div class="skill_housing cha_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Bluff</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_bluff }}
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="skill_housing str_skill">
-		<div class="skill_housing_section armor_penalty">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Climb</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_climb }}
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="skill_housing cha_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Diplomacy</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_diplomacy }}
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="skill_housing trained_skill armor_penalty dex_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Disable Device</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_disable_device }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing cha_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Disguise</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_disguise }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing armor_penalty dex_skill">
-		<div class="skill_housing_section">
-		       <div class="skill_main">
-				<div class="skill_name">
-					<span>Escape Artist</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_escape_artist }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing armor_penalty dex_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Fly</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_fly }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained skill cha_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Handle Animal</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_handle_animal }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing wis_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Heal</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_heal }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing cha_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Intimidate</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_intimidate }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Linguistics</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_linguistics }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing wis_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Perception</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_perception }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing cha_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Perform</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_perform }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing armor_penalty dex_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Ride</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_ride }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing wis_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Sense Motive</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_sense_motive }}
-				</div>
-			</div>
-		</div>
-	
-	</div>
-	<div class="skill_housing trained_skill armor_penalty dex_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Sleight of Hand</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_sleight_of_hand }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Spellcraft</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_spellcraft }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing armor_penalty dex_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Stealth</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_stealth }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing wis_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Survival</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_survival }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing armor_penalty str_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Swim</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_swim }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill cha_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_name">
-					<span>Use Magical Device</span>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_use_magical_device }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<h4>Knowledge</h4>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing int_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
 					<div class="skill_name">
-						<span>Arcana</span>
+						<span>Appraise</span>
 					</div>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_arcana }}
+					<div class="skill_total">
+						{{ character.sk_appraise }}
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="skill_housing cha_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Bluff</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_bluff }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing str_skill">
+			<div class="skill_housing_section armor_penalty">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Climb</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_climb }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing cha_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Diplomacy</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_diplomacy }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="skill_housing trained_skill armor_penalty dex_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Disable Device</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_disable_device }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing cha_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Disguise</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_disguise }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing armor_penalty dex_skill">
+			<div class="skill_housing_section">
+			       <div class="skill_main">
+					<div class="skill_name">
+						<span>Escape Artist</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_escape_artist }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing armor_penalty dex_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Fly</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_fly }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained skill cha_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Handle Animal</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_handle_animal }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing wis_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Heal</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_heal }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing cha_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Intimidate</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_intimidate }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Linguistics</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_linguistics }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing wis_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Perception</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_perception }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing cha_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Perform</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_perform }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing armor_penalty dex_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Ride</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_ride }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing wis_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_name">
+						<span>Sense Motive</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_sense_motive }}
+					</div>
+				</div>
+			</div>
 		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		</div>
+		<div class="skill_housing trained_skill armor_penalty dex_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>Dungeoneering</span>
+						<span>Sleight of Hand</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_sleight_of_hand }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_dungeoneering }}
-				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>Engineering</span>
+						<span>Spellcraft</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_spellcraft }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_engineering }}
-				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing armor_penalty dex_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>Geography</span>
+						<span>Stealth</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_stealth }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_geography }}
-				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing wis_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>History</span>
+						<span>Survival</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_survival }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_history }}
-				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing armor_penalty str_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>Local</span>
+						<span>Swim</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_swim }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_local }}
-				</div>
 			</div>
+			
 		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
+		<div class="skill_housing trained_skill cha_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
 					<div class="skill_name">
-						<span>Nature</span>
+						<span>Use Magical Device</span>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_use_magical_device }}
 					</div>
 				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_nature }}
+			</div>
+			
+		</div>
+		<h4>Knowledge</h4>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Arcana</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_arcana }}
+					</div>
 				</div>
 			</div>
+			
 		</div>
-		
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Dungeoneering</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_dungeoneering }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Engineering</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_engineering }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Geography</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_geography }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>History</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_history }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Local</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_local }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Nature</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_nature }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Nobility</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_nobility }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Planes</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_planes }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="skill_housing trained_skill int_skill">
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>Religion</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ character.sk_knowledge_religion }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		{% if craft_skills %}
+		<h4>Craft</h4>
+		{% for value in craft_skills %}	
+		<div class="skill_housing craft_or_profession_housing int_skill" id=craft{{value.skill_order}}>
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>{{ value.sk_domain }}</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ value.sk_total }}
+					</div>
+				</div>
+			</div>
+					</div>
+		{% endfor %}
+		{% endif %}
+		{% if profession_skills %}
+		<h4>Profession</h4>
+		{% for value in profession_skills %}	
+		<div class="skill_housing craft_or_profession_housing trained_skill int_skill" id=profession{{value.skill_order}}>
+			<div class="skill_housing_section">
+				<div class="skill_main">
+					<div class="skill_category_wrapper">
+						<div class="skill_name">
+							<span>{{value.sk_domain}}</span>
+						</div>
+					</div>
+					<div class="skill_total">
+						{{ value.sk_total }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		{% endfor %}
+		{% endif %}
 	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
-					<div class="skill_name">
-						<span>Nobility</span>
-					</div>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_nobility }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
-					<div class="skill_name">
-						<span>Planes</span>
-					</div>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_planes }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="skill_housing trained_skill int_skill">
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
-					<div class="skill_name">
-						<span>Religion</span>
-					</div>
-				</div>
-				<div class="skill_total">
-					{{ character.sk_knowledge_religion }}
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	{% if craft_skills %}
-	<h4>Craft</h4>
-	{% for value in craft_skills %}	
-	<div class="skill_housing craft_or_profession_housing" id=craft{{value.skill_order}}>
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
-					<div class="skill_category">
-						<span>{{ value.sk_craft_or_profession }}</span>
-					</div>
-					<div class="skill_name">
-						<span>({{ value.sk_domain }})</span>
-					</div>
-				</div>
-				<div class="skill_total">
-					{{ value.sk_total }}
-				</div>
-			</div>
-		</div>
-		<div class="skill_housing_section skill_details">
-			<div class="skill_component_container skill_abl">
-				<div class="skill_component_number skill_abl_mod">
-					{{ character.ability_int_mod }}
-				</div>
-				<div class="skill_component_name skill_abl_name">
-					Intelligence
-				</div>
-			</div>
-			+
-			<div class="skill_component_container skill_ranks">
-				<div class="skill_component_number">
-					{{ value.sk_ranks }}
-				</div>
-				<div class="skill_component_name">
-					Ranks
-				</div>
-			</div>
-			+
-			<div class="skill_component_container">
-				<div class="skill_component_number">
-					{{ value.sk_misc }}
-				</div>
-				<div class="skill_component_name">
-					Misc
-				</div>
-			</div>
-			{% if value.sk_class %}
-			<span class="class_skill"></span>
-			{% endif %}
-		</div>
-	</div>
-	{% endfor %}
-	{% endif %}
-	{% if profession_skills %}
-	<h4>Profession</h4>
-	{% for value in profession_skills %}	
-	<div class="skill_housing craft_or_profession_housing trained_skill" id=profession{{value.skill_order}}>
-		<div class="skill_housing_section">
-			<div class="skill_main">
-				<div class="skill_category_wrapper">
-					<div class="skill_category">
-						<span>Profession</span>
-					</div>
-					<div class="skill_name">
-						<span>({{value.sk_domain}})</span>
-					</div>
-				</div>
-				<div class="skill_total">
-					{{ value.sk_total }}
-				</div>
-			</div>
-		</div>
-		<div class="skill_housing_section skill_details">
-			<div class="skill_component_container skill_abl">
-				<div class="skill_component_number skill_abl_mod">
-					{{ character.ability_int_mod }}
-				</div>
-				<div class="skill_component_name skill_abl_name">
-					Intelligence
-				</div>
-			</div>
-			+
-			<div class="skill_component_container skill_ranks">
-				<div class="skill_component_number">
-					{{ value.sk_ranks }}
-				</div>
-				<div class="skill_component_name">
-					Ranks
-				</div>
-			</div>
-			+
-			<div class="skill_component_container">
-				<div class="skill_component_number">
-					{{ value.sk_misc }}
-				</div>
-				<div class="skill_component_name">
-					Misc
-				</div>
-			</div>
-			{% if value.sk_class %}
-			<span class="class_skill"></span>
-			{% endif %}
-		</div>
-	</div>
-	{% endfor %}
-	{% endif %}
-</div>
+	{% if user == character.player %}
 	<br />
 	<br />
 	<div class="add_craft_or_profession">
 		<button class="btn btn-default add_craft_or_profession_button">Add Craft or Profession Skill</button>
 	</div>
+	{% endif %}
+</div>

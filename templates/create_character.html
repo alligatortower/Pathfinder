@@ -1,13 +1,133 @@
 {% extends 'base.html' %}
 
 {% block header_block %}
-<h2> Name your adventure </h2>
+<h2> Create a Character </h2>
 {% endblock %}
 {% block body_block %}
 	<form id='create_character_form' method='POST' action='/create_character/' enctype='multipart/form-data'>
 		{% csrf_token %}
-		{{ create_character_form.as_p }}
+		<div class="create_character_form_container">
+			<h4>What are your starting ability scores?</h4>
+			<div class="create_character_form_question">
+				Strength:
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_str_base }}
+			</div>
+			<div class="create_character_form_question">
+				Dexterity
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_dex_base }}
+			</div>
+			<div class="create_character_form_question">
+				Constitution
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_con_base }}
+			</div>
+			<div class="create_character_form_question">
+				Intelligence
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_int_base }}
+			</div>
+			<div class="create_character_form_question">
+				Wisdom
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_wis_base }}
+			</div>
+			<div class="create_character_form_question">
+				Charisma
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.ability_cha_base }}
+			</div>
+		</div>
+		<div class="create_character_form_container">
+			<h4>And some details about who you are:</h4>
+			<div class="create_character_form_question">
+				What race are you?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.race }}
+			</div>
+			<div class="create_character_form_question">
+				What size is that race?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.size }}
+			</div>
+			<div class="create_character_form_question">
+				How old are you?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.age }}
+			</div>
+			<div class="create_character_form_question">
+				What is your gender?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.gender }}
+			</div>
+			<div class="create_character_form_question">
+				What is your alignment?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.alignment }}
+			</div>
+		</div>
+		<div class="create_character_form_container">
+			<h4>What is your starting class?</h4>
+			<div class="create_character_form_question">
+				Name of the class:
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.class_name }}
+			</div>
+			<div class="create_character_form_question">
+				What is this class' hit die
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.class_hit_die }}
+			</div>
+			<div class="create_character_form_question">
+				Base attack bonus?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.base_attack_bonus }}
+			</div>
+			<div class="create_character_form_question">
+				Base Fortitude save?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.class_base_fortitude_save }}
+			</div>
+			<div class="create_character_form_question">
+				Base Reflex save?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.class_base_reflex_save }}
+			</div>
+			<div class="create_character_form_question">
+				Base Willpower save?
+			</div>
+			<div class="create_character_form_input">
+				{{ create_character_base_class_form.class_base_willpower_save }}
+			</div>
+				{{ create_character_base_class_form.class_levels.as_hidden }}
+		</div>
 		<br />
-		<input type='submit' name='submit' value='create' />
+		<div class="create_character_form_submit">
+			<br />
+			<h4>And finally, what is your name?</h4>
+			<div class="create_character_form_input">
+				{{ create_character_main_form.name }}
+			</div>
+			<br />
+			<br />
+			<input type='submit' name='submit' value='create' />
+		</div>
 	</form>
 {% endblock %}

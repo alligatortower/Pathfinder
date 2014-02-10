@@ -14,11 +14,10 @@ from datetime import datetime
 from djpjax import pjax
 
 def home(request):
-	context = RequestContext(request)	
-	context_dict=	{'general_games' : Game.objects.all().order_by("-last_updated")[:5],
-			'general_characters' : Character.objects.all().order_by("-created")[:5]}
+	data =	{'general_games' : Game.objects.all().order_by("-last_updated")[:5],
+		'general_characters' : Character.objects.all().order_by("-last_updated")[:5]}
 
-	return render_to_response("home.html", context_dict, context)
+	return render(request, "home.html", data)
 
 def user_login(request):
 	context = RequestContext(request)
@@ -131,21 +130,42 @@ def game(request, game_url):
 
 @login_required
 def create_character(request):
-	context = RequestContext(request)
+
 	if request.method == 'POST':
-		create_character_form = CreateCharacterForm(data=request.POST)
-		
-		if create_character_form.is_valid():
-			new_character = create_character_form.save(commit=False)
-			new_character.player = request.user
-			new_character.save()
-			return HttpResponseRedirect('/')
+		create_character_main_form = CreateCharacterForm(data=request.POST)
+		create_character_base_class_form = AddBaseClassForm(data=request.POST)
+		if create_character_main_form.is_valid() and create_character_base_class_form.is_valid():
+			character = create_character_main_form.save(commit=False)
+			character.player = request.user
+			character.save()
+
+			form_attack_bonus = create_character_base_class_form.cleaned_data['base_attack_bonus']
+			bab_regex = re.findall(r'\+?(\d+)/?', form_attack_bonus)
+			create_character_base_class_form = create_character_base_class_form.save(commit=False)
+			create_character_base_class_form.class_base_attack_bonus_1 = int(bab_regex[0]) if 0 < len(bab_regex) else 0
+			create_character_base_class_form.class_base_attack_bonus_2 = int(bab_regex[1]) if 1 < len(bab_regex) else 0
+			create_character_base_class_form.class_base_attack_bonus_3 = int(bab_regex[2]) if 2 < len(bab_regex) else 0
+			create_character_base_class_form.class_base_attack_bonus_4 = int(bab_regex[3]) if 3 < len(bab_regex) else 0
+			create_character_base_class_form.class_belongs_to = character
+			create_character_base_class_form.class_favored = True
+			create_character_base_class_form.class_levels = 1
+			create_character_base_class_form.save()
+
+			set_combatstats(character)
+			set_abilities(character)
+			set_skills(character)
+			character.save()
+			url = "/character/" + character.slug + "/"
+			return HttpResponseRedirect(url)
 		else:
-			print create_character_form.errors
+			print create_character_main_form.errors
+			print create_character_base_class_form.errors
 	else:
-		create_character_form = CreateCharacterForm()
-	return render_to_response(
-		'create_character.html',{'create_character_form':create_character_form}, context)
+		data = {
+			'create_character_main_form':CreateCharacterForm(),
+			'create_character_base_class_form':AddBaseClassForm()
+		}
+	return render(request,'create_character.html', data)
 
 def add_character_edit_data(character):	
 	data = {}
@@ -157,6 +177,8 @@ def add_character_edit_data(character):
 	data['EditCharacter_AC_Form'] = EditCharacter_AC_Form(instance=character)
 	data['EditCharacter_Speed_Form'] = EditCharacter_Speed_Form(instance=character)
 	data['EditCharacter_BaseAttack_Form'] = EditCharacter_BaseAttack_Form(instance=character)
+	data['EditCharacter_CombatManeuver_Form'] = EditCharacter_CombatManeuver_Form(instance=character)
+	data['EditCharacter_Saves_Form'] = EditCharacter_Saves_Form(instance=character)
 	data['EditCharacter_Skills_Form'] = EditCharacter_Skills_Form(instance=character)
 	data['add_base_class_form'] = AddBaseClassForm(instance=character)
 	data['add_craft_or_profession_form'] = AddCraftOrProfessionForm()
@@ -174,22 +196,24 @@ def add_character_edit_data(character):
 		data['profession_skills'][value[0]].save()
 	return data
 	
+def add_normal_character_data(character):
+	data = {}
+	data['base_classes'] = BaseClass.objects.filter(class_belongs_to=character)
+	data['craft_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="craft")
+	data['profession_skills'] = MultiSkill.objects.filter(character=character, sk_craft_or_profession="profession")
+
+	return data
 
 @pjax("edit_character_pjax.html")
 def character(request, character_url):
-
 	this_character = get_object_or_404(Character, slug=character_url) 
 	data = { "character" : this_character }
 	if request.method == 'GET' and request.user == this_character.player:
-		template = 'edit_character.html'
 		data.update(add_character_edit_data(this_character))
-
 	elif request.method == "GET":
-		template = 'character.html'
-	else:
-		return HttpResponse("shit all fucked up")
+		data.update(add_normal_character_data(this_character))
 
-	return TemplateResponse(request, template, data)
+	return TemplateResponse(request, "character.html", data)
 
 @pjax("edit_character_pjax.html")
 def add_base_class(request, character_url):
@@ -202,12 +226,13 @@ def add_base_class(request, character_url):
 			bab_regex = re.findall(r'\+?(\d+)/?', form_attack_bonus)
 			form = form.save(commit=False)
 			form.class_base_attack_bonus_1 = int(bab_regex[0]) if 0 < len(bab_regex) else 0
-			form.class_base_attack_bonus_2 = int(bab_regex[1]) if 1 < len(bab_regex) else 0								
+			form.class_base_attack_bonus_2 = int(bab_regex[1]) if 1 < len(bab_regex) else 0		
 			form.class_base_attack_bonus_3 = int(bab_regex[2]) if 2 < len(bab_regex) else 0
 			form.class_base_attack_bonus_4 = int(bab_regex[3]) if 3 < len(bab_regex) else 0
 			form.class_belongs_to = this_character
 			form.save()
 			set_combatstats(this_character)
+			this_character.save()
 			data.update(add_character_edit_data(this_character))
 			return TemplateResponse(request, "character.html", data)
 
@@ -272,6 +297,7 @@ def edit_initiative(request, character_url):
 		if form.is_valid():
 			form.save()
 			set_combatstats(this_character)
+			this_character.save()
 			data.update(add_character_edit_data(this_character))
 			return TemplateResponse(request, "character.html", data)
 
@@ -312,6 +338,30 @@ def edit_base_attack(request, character_url):
 
 
 @pjax("edit_character_pjax.html")
+def edit_combat_maneuvers(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_CombatManeuver_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			set_combatstats(this_character)
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
+def edit_saves(request, character_url):
+	this_character = get_object_or_404(Character, slug=character_url)
+	data = {"character":this_character}
+	if request.method == "POST" and request.user == this_character.player:
+		form = EditCharacter_Saves_Form(data=request.POST, instance=this_character)
+		if form.is_valid():
+			form.save()
+			set_combatstats(this_character)
+			data.update(add_character_edit_data(this_character))
+			return TemplateResponse(request, "character.html", data)
+
+@pjax("edit_character_pjax.html")
 def add_multiskill(request, character_url):
 	this_character = get_object_or_404(Character, slug=character_url)
 	data = {"character":this_character}
@@ -337,7 +387,6 @@ def edit_multiskill(request, character_url):
 	data = {"character":this_character}
 	if request.method == "POST" and request.user == this_character.player:
 		skill_domain = request.POST['skill_domain']
-		skill_type = request.POST['skill_type']
 		skill = MultiSkill.objects.get(character=this_character, sk_domain=skill_domain)
 		form = EditCraftOrProfessionForm(data=request.POST, instance=skill)
 		if form.is_valid():
@@ -363,6 +412,7 @@ def delete_multiskill(request, character_url):
 
 @pjax("edit_character_pjax.html")
 def edit_abilities(request, character_url):
+	print "view is here"
 	this_character = get_object_or_404(Character, slug=character_url)
 	data = {"character":this_character}
 	if request.method == "POST" and request.user == this_character.player:

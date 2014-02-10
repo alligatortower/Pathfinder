@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
 
 {% block header_block %} 
-<h2> Welcome to Some Site Involving Pathfinder I Guess </h2>
+<h2>Welcome to my yet-to-be-named pathfinder character sheet site</h2>
 {% endblock %}
 
 {% block body_block %}
 {% if not user.is_authenticated %}
-<p> This project was created for me to learn Django and because I want to create a tool to help my Pathfinder campaign. And also because all of the online character sheets I've found are retarded and I think I can do better </p>
-{% else %}
+<p>This project was created for me to learn Django and because I want to create a tool to help my Pathfinder campaign. And also because all of the online character sheets I've found are retarded and I think maybe I can do better</p>
+<p>To see all of the interesting stuff you need to register an account and create a character</p>
+{% else  %}
+	{% if user.is_authenticated %}
+                <span class="footer_create_links">
+			<p>Create: <a href="/create_game/">Game</a> | <a href="/create_character/">Character</a><br /> 
+			Or <a href="/player/{{ user.username }}/">see all your stuff</a></p>
+		</span>
+	{% endif %}
+
+<div class="intro_panels">
+	<div class="intro_panel">
+		<h4>1. Create a Character</h4>
+		<p>Keep all of your character sheets on this website so I can find some way to sell your data and become a big shot like that facebook guy</p>
+	</div>
+	<div class="intro_panel">
+		<h4>2. Join a game</h4>
+		<p>(This part doesn't really work yet, the GM has to invite you to the game)</p>
+	</div>
+	<div class="intro_panel">
+		<h4>And Beyond</h4>
+		<p>Start your own games, create more characters, learn to paint I don't know fuck it's your life man</p>
+	</div>
+</div>
+<div class="recent_games_and_characters">
 	{% if general_games %}
-		<h4>Recently updated games:</h4>
+		<h5>Recently updated games:</h5>
                 <ul>
                 	{% for game in general_games %}
                                         <li><a href="/game/{{ game.slug }}/">{{ game.name }}</a></li>
@@ -17,14 +40,14 @@
                 </ul>
 	{% endif %}
 	{% if general_characters %}
-		<h4> Characters created recently:</h4>
+		<h5>Recently updated characters:</h5>
                 <ul>
                 	{% for character in general_characters %}
                                         <li><a href="/character/{{ character.slug }}/">{{ character.name }}</a></li>
                         {% endfor %}
                 </ul>
 	{% endif %}
-
+</div>
 
 
 {% endif %}

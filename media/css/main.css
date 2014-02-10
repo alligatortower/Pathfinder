@@ -1,27 +1,61 @@
 
-
-
-
-
 body {
-	background-color: #EEFCFF;
+	background-color:#9FA2A6;
 	padding: 40px;
+	color:#22251F;
 }
-#main h1 {
+a {
+	color:#9D5C82;
+}
+a:hover {
+	color:#664559;
+}
+h3 {
+	margin:0px;
 }
 
 #header {
-	background-color: #CCEBF1;
 	padding:0px 20px;
 	display: inline-block;
 	margin-bottom:10px;
 }
 
 #content {
-	background-color: #FFFFFF;
+	background-color: #F7F7F6;
 	padding: 8px 20px;
+	max-width:1000px;
 }
-
+.modal-content {
+	color:#22251F;
+	background-color: #F7F7F6;
+}
+.modal input {
+	display:block;
+	margin-left:10px;
+	padding-left:5px;
+}
+/* HOME */
+.recent_games_and_characters {
+		
+}
+.intro_panel {
+	display:inline-block;
+	margin:10px;
+	padding:20px;
+	width:270px;
+	vertical-align:top;
+	color:black;
+	height:170px;
+	background-color:#E2E3E3;
+}
+.create_character_form_container {
+	display:inline-block;
+	margin-right:20px;
+	vertical-align:top;
+}
+.create_character_form_question {
+	margin-top:7px;
+}
 /* Input buttons */
 
 #remove_player {
@@ -38,26 +72,38 @@ body {
 	display:inline-block;
 }
 .footer_create_links {
-	margin-left:200px;
 	padding:0px;
 	display:inline-block;
 	vertical-align: top;
 	 
 
 }
-.general_activity_feed {
-	background-color: #F3C786;
-	float:right;
-	padding: 0px 8px;
+div.moused_over {
+	opacity:.75; 
+	cursor:pointer;
 }
 
-/* HOME */
+/* CHARACTER */
 .home_container{
 }
 
+#character_nav {
+	margin-left:-20px;
+	margin-top:-8px;
+}
+.tab_container {
+	padding-top:20px;
+}
+.generic_stats_container {
+	padding:8px;
+	background-color:#E2E3E3;
+}
+.character_description_detail {
+	margin-left:12px;
+
+}
 .ability_container {
 	font-size:0;
-	width:325px;
 	display:inline-block;
 }
 .ability_housing {
@@ -65,7 +111,8 @@ body {
 	font-size:X-large;
 /*	font-family:"Menlo", "Monaco", "Consolas", "Courier New", monospace;  */
 	display:block;
-	margin:0;
+
+	margin-bottom:4px;
 }
 .ability_operator {
 	color:white;
@@ -107,40 +154,53 @@ body {
 
 }
 .str_housing {
-	background-color:#CE1836;
-	color:#CE1836;
+	background-color:#1892d7;
+	color:#1892d7;
 }
 .dex_housing {
-	background-color:#A3A948;
-	color:#A3A948;
+	background-color:#206c98;
+	color:#206c98;
 }
 .con_housing {
-	background-color:#EDB92E;
-	color:#EDB92E;
+	background-color:#19425a;
+	color:#19425a;
 }
 .int_housing {
-	background-color:#009989;
-	color:#009989;
+	background-color:#b33d72;
+	color:#b33d72;
 }
 .wis_housing {
-	background-color:#BC31F8;
-	color:#BC31F8;
+	background-color:#7d2a50;
+	color:#7d2a50;
 }
 .cha_housing {
-	background-color:#F85931;
-	color:#F85931;
+	background-color:#4d1e33;
+	color:#4d1e33;
 }
 .base_classes_container {
 	display:inline-block;
 	vertical-align:top;
 	margin-left:20px;
 }
+.base_class_container {
+	margin-bottom:4px;
+	font-weight:bold;
+}
+
 .character_description_main_container {
 	display:inline-block;
 	vertical-align:top;
 	margin-left:20px;
 }
+.character_description_title {
+	font-weight:bold;
+}
 
+.character_description_etc_container:not(:first-child) {
+	margin-top:8px;
+}
+.character_description_etc_container {
+}
 
 /* COMBATSTATS */
 .combat_mouseover {
@@ -153,6 +213,10 @@ body {
 }
 .other_combat_stats h4 {
 	margin:0 0 10px 0;
+}
+
+.combatstat_container {
+	margin:0 2px 4px 2px;
 }
 .ac_container {
 	background-color:#8A8780;
@@ -225,7 +289,7 @@ body {
 	font-size:medium;
 	padding:10px;
 	vertical-align:bottom;
-	width:230px;
+	width:222px;
 	height:200px;
 	text-align:center;
 }
@@ -471,8 +535,8 @@ body {
 
 .ranks_total {
 	display:inline-block;
-	float:right;
 	vertical-align:bottom;
+	margin-bottom:8px;
 }
 
 
@@ -546,19 +610,19 @@ body {
 	font-size:small;
 }
 .str_skill {
-	background-color:#CE1836;
+	background-color:#1892d7;
 }
 .dex_skill {
-	background-color:#A3A948;
+	background-color:#206c98;
 }
 .int_skill {
-	background-color:#009989;
+	background-color:#b33d72;
 }
 .wis_skill {
-	background-color:#BC31F8;
+	background-color:#7d2a50;
 }
 .cha_skill {
-	background-color:#F85931;
+	background-color:#4d1e33;
 }
 .skill_title_box {
 	background-color:white;
@@ -574,36 +638,66 @@ body {
 
 
 
-
 .popover {
 	width:auto;
 	max-width:800px;
 }
 .modal_ability_container {
 	padding:10px;
-	color:white;
+	color:#22251F;
+	text-align:center;
+}
+.base_class_delete {
+	float:left;
+	color:#CE1836;
+}
+.multiskill_delete_button {
+	float:left;
+	color:#CE1836;
 }
 .modal_ability_container input {
 	width:40px;
 }
+.modal_ability_details {
+	display:inline-block;
+	vertical-align:top;
+	margin 0 3px;
+	text-align:left;
+}
+.modal_ability_misc_container {
+	display:inline-block;
+}
+.modal_ability_misc_etc {
+	font-size:small;
+}
+.total_ability_score_modal {
+	text-align:center;
+}
 .modal_str {
-	background-color:#CE1836;
+	background-color:#1892d7;
+	color:white;
 }
 .modal_dex {
-	background-color:#A3A948;
+	background-color:#206c98;
+	color:white;
 }
 .modal_con {
-	background-color:#EDB92E;
+	background-color:#19425a;
+	color:white;
 }
 .modal_int {
-	background-color:#009989;
+	background-color:#b33d72;
+	color:white;
 }
 .modal_wis {
-	background-color:#BC31F8;
+	background-color:#7d2a50;
+	color:white;
 }
 .modal_cha {
-	background-color:#F85931;
+	background-color:#4d1e33;
+	color:white;
 }
+
 .modal_base_class_attack_bonus_container {
 	display:inline-block;
 	padding:10px;
@@ -623,10 +717,11 @@ body {
 	text-align:center;
 }
 .modal_initiative_total {
-	font-size:x-large;
+	font-size:large;
 }
 #initiative_modal input {
 	width:40px;
+	display:inline-block;
 
 }
 .modal_speed_container input {
